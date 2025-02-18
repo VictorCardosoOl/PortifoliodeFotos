@@ -4,96 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Fotográfico</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Cursor Personalizado -->
-  <div class="custom-cursor"></div>
+    <header>
+        <h1>Portfólio Fotográfico</h1>
+        <nav>
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Modal da Galeria -->
-  <div class="gallery-modal">
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <div class="slider-container"></div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <h1>Portfólio Fotográfico</h1>
-    <nav>
-      <ul>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#portfolio">Portfólio</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Capturando Momentos Únicos</h2>
-      <p>Bem-vindo ao meu mundo de imagens e histórias.</p>
-    </div>
-    <div class="hero-image">
-      <img src="https://images.pexels.com/photos/6384783/pexels-photo-6384783.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" 
-           alt="Imagem de Destaque"
-           loading="lazy"
-           class="protected-image">
-    </div>
-  </section>
-
-  <!-- Seção Sobre -->
-  <section id="sobre" class="sobre">
-    <div class="sobre-content">
-      <h2>Sobre Mim</h2>
-      <p>Olá! Sou um fotógrafo apaixonado por capturar momentos que contam histórias...</p>
-    </div>
-  </section>
-
-  <!-- Seção Portfólio -->
-  <section id="portfolio" class="portfolio">
-    <h2>Portfólio</h2>
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="https://images.pexels.com/photos/2765210/pexels-photo-2765210.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-             alt="Imagem 1"
-             loading="lazy"
-             class="protected-image">
-        <div class="overlay">
-          <p>Descrição da Imagem 1</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Capturando Momentos Únicos</h2>
+            <p>Bem-vindo ao meu mundo de imagens e histórias.</p>
         </div>
-      </div>
-      <!-- Adicione mais itens conforme necessário -->
-    </div>
-  </section>
+        <div class="hero-image" id="hero-image">
+            <canvas id="hero-canvas"></canvas>
+            <div id="hero-fallback" style="background-image: url('https://images.pexels.com/photos/6384783/pexels-photo-6384783.jpeg')"></div>
+        </div>
+    </section>
 
-  <!-- Seção Contato -->
-  <section id="contato" class="contato">
-    <h2>Contato</h2>
-    <form action="#" method="POST">
-      <label for="nome">Nome:</label>
-      <input id="nome" type="text" placeholder="Seu Nome" required>
-      
-      <label for="email">E-mail:</label>
-      <input id="email" type="email" placeholder="Seu E-mail" required>
-      
-      <label for="mensagem">Mensagem:</label>
-      <textarea id="mensagem" placeholder="Sua Mensagem" required></textarea>
-      
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2023 Portfólio Fotográfico. Todos os direitos reservados.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-  <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.0.4/pixi.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
