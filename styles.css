@@ -91,11 +91,3 @@ nav a:hover {
   height: 100%;
   display: block;
 }
-
-#hero-fallback {
-  display: none;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}

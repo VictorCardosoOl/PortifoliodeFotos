@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Verifica se o Pixi.js está carregado
     if (!PIXI) {
         console.error('Pixi.js não carregado.');
-        activateFallback();
         return;
     }
 
@@ -11,16 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
         width: window.innerWidth,
         height: window.innerHeight,
         transparent: true,
+        view: document.getElementById('hero-canvas') // Usa o canvas diretamente
     });
 
-    const heroCanvas = document.getElementById('hero-canvas');
-    if (!heroCanvas) {
-        console.error('Elemento canvas não encontrado.');
-        activateFallback();
-        return;
-    }
-
-    heroCanvas.appendChild(app.view);
+    // Ajusta o tamanho do renderer quando a janela é redimensionada
+    window.addEventListener('resize', () => {
+        app.renderer.resize(window.innerWidth, window.innerHeight);
+        image.width = app.screen.width;
+        image.height = app.screen.height;
+        displacementSprite.width = app.screen.width;
+        displacementSprite.height = app.screen.height;
+    });
 
     // Carrega a imagem de fundo
     const texture = PIXI.Texture.from('https://images.pexels.com/photos/6384783/pexels-photo-6384783.jpeg');
@@ -29,41 +29,43 @@ document.addEventListener('DOMContentLoaded', function () {
     image.height = app.screen.height;
     app.stage.addChild(image);
 
-    // Carrega o mapa de deslocamento
-    const displacementTexture = PIXI.Texture.from('https://pixijs.io/examples/examples/assets/displacement_map_repeat.jpg');
+    // Carrega o mapa de deslocamento (substitua pelo seu mapa)
+    const displacementTexture = PIXI.Texture.from('https://pixijs.io/examples/examples/assets/displacement_map_repeat.jpg'); // Exemplo
     const displacementSprite = new PIXI.Sprite(displacementTexture);
-    displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+    displacementSprite.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT; // Ou não, dependendo do seu mapa
+    displacementSprite.anchor.set(0.5); // Centraliza o mapa de deslocamento
+    displacementSprite.scale.set(2);  // Ajuste a escala conforme necessário
+    app.stage.addChild(displacementSprite);
+    displacementSprite.position.set(app.screen.width / 2, app.screen.height / 2);
 
     const displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
-    displacementFilter.scale.x = 50;
-    displacementFilter.scale.y = 50;
+    displacementFilter.scale.x = 0; // Começa com escala zero
+    displacementFilter.scale.y = 0;
+    image.filters = [displacementFilter];
 
-    app.stage.addChild(displacementSprite);
-    app.stage.filters = [displacementFilter];
-
-    // Atualiza a distorção com base no movimento do mouse
-    app.ticker.add(() => {
-        displacementSprite.x += 1;
-        displacementSprite.y += 1;
-    });
-
+    // Efeito de "bolha" com o mouse
     window.addEventListener('mousemove', (e) => {
-        displacementFilter.scale.x = (window.innerWidth / 2 - e.clientX) / 20;
-        displacementFilter.scale.y = (window.innerHeight / 2 - e.clientY) / 20;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        // Calcula a distância entre o mouse e o centro da tela
+        const distX = mouseX - app.screen.width / 2;
+        const distY = mouseY - app.screen.height / 2;
+        const distance = Math.sqrt(distX * distX + distY * distY);
+
+        // Define a escala do filtro com base na distância (ajuste os valores)
+        const maxDistance = 200; // Raio da "bolha"
+        const maxScale = 50;  // Intensidade da distorção
+
+        if (distance < maxDistance) {
+            displacementFilter.scale.x = (maxDistance - distance) / maxDistance * maxScale;
+            displacementFilter.scale.y = (maxDistance - distance) / maxDistance * maxScale;
+
+            displacementSprite.x = mouseX;
+            displacementSprite.y = mouseY;
+        } else {
+            displacementFilter.scale.x = 0;
+            displacementFilter.scale.y = 0;
+        }
     });
-
-    // Fallback para dispositivos móveis
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-        activateFallback();
-    }
-
-    function activateFallback() {
-        const fallback = document.getElementById('hero-fallback');
-        if (fallback) {
-            fallback.style.display = 'block';
-        }
-        if (app) {
-            app.destroy(true);
-        }
-    }
 });
