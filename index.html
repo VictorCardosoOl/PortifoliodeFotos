@@ -3,33 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio Fotográfico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Portfólio Pessoal</title>
+    <meta name="description" content="Portfólio de um fotógrafo apaixonado por capturar momentos únicos.">
+    <meta name="keywords" content="fotografia, portfólio, momentos únicos, projetos">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header com navegação -->
     <header>
-        <h1>Portfólio Fotográfico</h1>
+        <h1>Seu Nome</h1>
         <nav>
             <ul>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#projetos">Projetos</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Capturando Momentos Únicos</h2>
-            <p>Bem-vindo ao meu mundo de imagens e histórias.</p>
-        </div>
-        <div class="hero-image">
-            <canvas id="hero-canvas"></canvas>
+    <!-- Seção Hero com efeito de distorção -->
+    <section id="home">
+        <div id="heroContainer">
+            <img id="heroImage" src="https://images.pexels.com/photos/2765210/pexels-photo-2765210.jpeg" alt="Imagem de Portfólio">
+            <div id="heroOverlay">
+                <h1>Meu Portfólio</h1>
+                <p>Um fotógrafo apaixonado por capturar momentos únicos.</p>
+                <a href="#projetos">Veja meus projetos</a>
+            </div>
         </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.0.4/pixi.min.js"></script>
+    <!-- Seção de Projetos com galeria -->
+    <section id="projetos">
+        <h2>Projetos</h2>
+        <div class="gallery">
+            <figure>
+                <img src="https://images.pexels.com/photos/163036/pexels-photo-163036.jpeg" alt="Projeto 1">
+                <figcaption>Projeto 1</figcaption>
+            </figure>
+            <figure>
+                <img src="https://images.pexels.com/photos/119442/pexels-photo-119442.jpeg" alt="Projeto 2">
+                <figcaption>Projeto 2</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Seu Nome. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
