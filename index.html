@@ -10,8 +10,10 @@
 </head>
 <body>
     <!-- Header com navegação -->
-    <header>
-        <h1>Seu Nome</h1>
+    <header class="blur-nav">
+        <div class="logo">
+            <h1>Seu Nome</h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -23,17 +25,13 @@
     </header>
 
     <!-- Seção Hero com efeito de distorção -->
-    <section id="home">
-        <div id="heroContainer">
-            <img id="heroImage" src="https://images.pexels.com/photos/2765210/pexels-photo-2765210.jpeg" alt="Imagem de Portfólio">
-            <div id="heroOverlay">
-                <h1>Meu Portfólio</h1>
-                <p>Um fotógrafo apaixonado por capturar momentos únicos.</p>
-                <a href="#projetos">Veja meus projetos</a>
-            </div>
+    <div id="hero">
+        <div id="imageContainer">
+            <canvas id="canvas"></canvas>
+            <img id="heroImage" src="https://images.unsplash.com/photo-1739992115892-36453a241b5e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D" alt="Hero Image">
         </div>
-    </section>
-
+    </div>
+    
     <!-- Seção de Projetos com galeria -->
     <section id="projetos">
         <h2>Projetos</h2>
@@ -51,7 +49,14 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Seu Nome. Todos os direitos reservados.</p>
+        <div class="footer-content">
+            <p>© 2025 Seu Nome. Todos os direitos reservados.</p>
+            <ul class="social-links">
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">GitHub</a></li>
+            </ul>
+        </div>
     </footer>
 
     <!-- Scripts -->

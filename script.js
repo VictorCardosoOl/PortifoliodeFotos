@@ -7,91 +7,152 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Efeito de distorção no hover (Three.js)
-const heroContainer = document.getElementById('heroContainer');
-const heroImage = document.getElementById('heroImage');
+// variables
+const imageContainer = document.getElementById("imageContainer");
+const canvas = document.getElementById("canvas");
+const heroImage = document.getElementById("heroImage");
 
+let easeFactor = 0.1; // Aumentado para maior fluidez
 let scene, camera, renderer, planeMesh;
 let mousePosition = { x: 0.5, y: 0.5 };
 let targetMousePosition = { x: 0.5, y: 0.5 };
 let aberrationIntensity = 0.0;
+let lastPosition = { x: 0.5, y: 0.5 };
+let prevPosition = { x: 0.5, y: 0.5 };
 
-// Shaders
+// shaders
 const vertexShader = `
     varying vec2 vUv;
     void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
 `;
 
 const fragmentShader = `
     varying vec2 vUv;
-    uniform sampler2D u_texture;
+    uniform sampler2D u_texture;    
     uniform vec2 u_mouse;
+    uniform vec2 u_prevMouse;
     uniform float u_aberrationIntensity;
 
     void main() {
-        vec2 uv = vUv;
-        vec2 mouseDirection = u_mouse - vec2(0.5, 0.5);
-        uv += mouseDirection * 0.1 * u_aberrationIntensity;
+        vec2 mouseDirection = u_mouse - u_prevMouse;
+        
+        vec2 pixelToMouseDirection = vUv - u_mouse;
+        float pixelDistanceToMouse = length(pixelToMouseDirection);
+        float strength = smoothstep(0.3, 0.0, pixelDistanceToMouse);
+ 
+        vec2 uvOffset = strength * -mouseDirection * 0.2; // Ajustado para maior suavidade
+        vec2 uv = vUv - uvOffset;
 
-        vec4 colorR = texture2D(u_texture, uv + vec2(u_aberrationIntensity * 0.01, 0.0));
+        vec4 colorR = texture2D(u_texture, uv + vec2(strength * u_aberrationIntensity * 0.01, 0.0));
         vec4 colorG = texture2D(u_texture, uv);
-        vec4 colorB = texture2D(u_texture, uv - vec2(u_aberrationIntensity * 0.01, 0.0));
+        vec4 colorB = texture2D(u_texture, uv - vec2(strength * u_aberrationIntensity * 0.01, 0.0));
 
         gl_FragColor = vec4(colorR.r, colorG.g, colorB.b, 1.0);
     }
 `;
 
-// Inicializar Three.js
-function initThreeJS() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, heroContainer.offsetWidth / heroContainer.offsetHeight, 0.1, 1000);
-    camera.position.z = 1;
+function initializeScene(texture) {
+  // scene creation
+  scene = new THREE.Scene();
 
-    const texture = new THREE.TextureLoader().load(heroImage.src);
-    const uniforms = {
-        u_texture: { value: texture },
-        u_mouse: { value: new THREE.Vector2() },
-        u_aberrationIntensity: { value: 0.0 }
-    };
+  // camera setup
+  camera = new THREE.PerspectiveCamera(
+    80,
+    window.innerWidth / window.innerHeight,
+    0.01,
+    10
+  );
+  camera.position.z = 1;
 
-    planeMesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(2, 2),
-        new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms })
-    );
-    scene.add(planeMesh);
+  // uniforms
+  let shaderUniforms = {
+    u_mouse: { type: "v2", value: new THREE.Vector2() },
+    u_prevMouse: { type: "v2", value: new THREE.Vector2() },
+    u_aberrationIntensity: { type: "f", value: 0.0 },
+    u_texture: { type: "t", value: texture }
+  };
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(heroContainer.offsetWidth, heroContainer.offsetHeight);
-    heroContainer.appendChild(renderer.domElement);
+  // creating a plane mesh with materials
+  planeMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.ShaderMaterial({
+      uniforms: shaderUniforms,
+      vertexShader,
+      fragmentShader
+    })
+  );
+
+  // add mesh to scene
+  scene.add(planeMesh);
+
+  // render
+  renderer = new THREE.WebGLRenderer({ canvas });
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// Animar a cena
-function animate() {
-    requestAnimationFrame(animate);
-    mousePosition.x += (targetMousePosition.x - mousePosition.x) * 0.05;
-    mousePosition.y += (targetMousePosition.y - mousePosition.y) * 0.05;
+// use the existing image from html in the canvas
+initializeScene(new THREE.TextureLoader().load(heroImage.src));
 
-    planeMesh.material.uniforms.u_mouse.value.set(mousePosition.x, 1.0 - mousePosition.y);
-    planeMesh.material.uniforms.u_aberrationIntensity.value = aberrationIntensity;
+animateScene();
 
-    renderer.render(scene, camera);
+function animateScene() {
+  requestAnimationFrame(animateScene);
+
+  mousePosition.x += (targetMousePosition.x - mousePosition.x) * easeFactor;
+  mousePosition.y += (targetMousePosition.y - mousePosition.y) * easeFactor;
+
+  planeMesh.material.uniforms.u_mouse.value.set(
+    mousePosition.x,
+    1.0 - mousePosition.y
+  );
+
+  planeMesh.material.uniforms.u_prevMouse.value.set(
+    prevPosition.x,
+    1.0 - prevPosition.y
+  );
+
+  aberrationIntensity = Math.max(0.0, aberrationIntensity - 0.01); // Reduzido para suavizar
+
+  planeMesh.material.uniforms.u_aberrationIntensity.value = aberrationIntensity;
+
+  renderer.render(scene, camera);
 }
 
-// Event listeners
-heroContainer.addEventListener('mousemove', (e) => {
-    const rect = heroContainer.getBoundingClientRect();
-    targetMousePosition.x = (e.clientX - rect.left) / rect.width;
-    targetMousePosition.y = (e.clientY - rect.top) / rect.height;
-    aberrationIntensity = 1.0;
-});
+// event listeners
+imageContainer.addEventListener("mousemove", handleMouseMove);
+imageContainer.addEventListener("mouseenter", handleMouseEnter);
+imageContainer.addEventListener("mouseleave", handleMouseLeave);
 
-heroContainer.addEventListener('mouseleave', () => {
-    aberrationIntensity = 0.0;
-});
+function handleMouseMove(event) {
+  easeFactor = 0.1; // Aumentado para maior fluidez
+  let rect = imageContainer.getBoundingClientRect();
+  prevPosition = { ...targetMousePosition };
 
-// Inicializar
-initThreeJS();
-animate();
+  targetMousePosition.x = (event.clientX - rect.left) / rect.width;
+  targetMousePosition.y = (event.clientY - rect.top) / rect.height;
+
+  aberrationIntensity = 1.5; // Aumentado para maior intensidade
+}
+
+function handleMouseEnter(event) {
+  easeFactor = 0.1; // Aumentado para maior fluidez
+  let rect = imageContainer.getBoundingClientRect();
+
+  mousePosition.x = targetMousePosition.x = (event.clientX - rect.left) / rect.width;
+  mousePosition.y = targetMousePosition.y = (event.clientY - rect.top) / rect.height;
+}
+
+function handleMouseLeave() {
+  easeFactor = 0.1; // Aumentado para maior fluidez
+  targetMousePosition = { ...prevPosition };
+}
+
+// Resize handler
+window.addEventListener("resize", () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});

@@ -27,3 +27,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initGallery();
 });
+
+https://codepen.io/Juxtopposed/pen/MWZWpVQ
