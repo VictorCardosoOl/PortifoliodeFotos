@@ -79,9 +79,9 @@ canvas {
 
 /* Seção de Projetos */
 #projetos {
-  padding: 100px 20px;
+  padding: 50px 20px; /* Reduzido o padding superior */
   background-color: #111215;
-  margin-top: 100vh; /* Garante que a seção fique abaixo do hero */
+  margin-top: 0; /* Removido o margin-top */
 }
 
 .gallery {

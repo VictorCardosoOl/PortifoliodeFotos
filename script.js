@@ -12,13 +12,14 @@ const imageContainer = document.getElementById("imageContainer");
 const canvas = document.getElementById("canvas");
 const heroImage = document.getElementById("heroImage");
 
-let easeFactor = 0.1; // Aumentado para maior fluidez
+let easeFactor = 0.05; // Aumentado para maior fluidez
 let scene, camera, renderer, planeMesh;
 let mousePosition = { x: 0.5, y: 0.5 };
 let targetMousePosition = { x: 0.5, y: 0.5 };
 let aberrationIntensity = 0.0;
 let lastPosition = { x: 0.5, y: 0.5 };
 let prevPosition = { x: 0.5, y: 0.5 };
+let imageAspect = 1; // Proporção da imagem
 
 // shaders
 const vertexShader = `
@@ -43,12 +44,12 @@ const fragmentShader = `
         float pixelDistanceToMouse = length(pixelToMouseDirection);
         float strength = smoothstep(0.3, 0.0, pixelDistanceToMouse);
  
-        vec2 uvOffset = strength * -mouseDirection * 0.2; // Ajustado para maior suavidade
+        vec2 uvOffset = strength * -mouseDirection * 0.1; // Ajustado para maior suavidade
         vec2 uv = vUv - uvOffset;
 
-        vec4 colorR = texture2D(u_texture, uv + vec2(strength * u_aberrationIntensity * 0.01, 0.0));
+        vec4 colorR = texture2D(u_texture, uv + vec2(strength * u_aberrationIntensity * 0.005, 0.0));
         vec4 colorG = texture2D(u_texture, uv);
-        vec4 colorB = texture2D(u_texture, uv - vec2(strength * u_aberrationIntensity * 0.01, 0.0));
+        vec4 colorB = texture2D(u_texture, uv - vec2(strength * u_aberrationIntensity * 0.005, 0.0));
 
         gl_FragColor = vec4(colorR.r, colorG.g, colorB.b, 1.0);
     }
@@ -93,8 +94,36 @@ function initializeScene(texture) {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// use the existing image from html in the canvas
-initializeScene(new THREE.TextureLoader().load(heroImage.src));
+// Carrega a imagem e calcula a proporção
+const img = new Image();
+img.src = heroImage.src;
+img.onload = () => {
+  imageAspect = img.width / img.height; // Calcula a proporção da imagem
+  initializeScene(new THREE.TextureLoader().load(img.src));
+  resizeCanvas(); // Ajusta o canvas após carregar a imagem
+};
+
+// Função para redimensionar o canvas
+function resizeCanvas() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  renderer.setSize(width, height);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  // Ajusta a escala do plano para manter a proporção da imagem
+  const canvasAspect = width / height;
+
+  if (canvasAspect > imageAspect) {
+    planeMesh.scale.set(canvasAspect / imageAspect, 1, 1);
+  } else {
+    planeMesh.scale.set(1, imageAspect / canvasAspect, 1);
+  }
+}
+
+// Redimensiona o canvas ao mudar o tamanho da janela
+window.addEventListener("resize", resizeCanvas);
 
 animateScene();
 
@@ -127,18 +156,18 @@ imageContainer.addEventListener("mouseenter", handleMouseEnter);
 imageContainer.addEventListener("mouseleave", handleMouseLeave);
 
 function handleMouseMove(event) {
-  easeFactor = 0.1; // Aumentado para maior fluidez
+  easeFactor = 0.05; // Aumentado para maior fluidez
   let rect = imageContainer.getBoundingClientRect();
   prevPosition = { ...targetMousePosition };
 
   targetMousePosition.x = (event.clientX - rect.left) / rect.width;
   targetMousePosition.y = (event.clientY - rect.top) / rect.height;
 
-  aberrationIntensity = 1.5; // Aumentado para maior intensidade
+  aberrationIntensity = 1.0; // Aumentado para maior intensidade
 }
 
 function handleMouseEnter(event) {
-  easeFactor = 0.1; // Aumentado para maior fluidez
+  easeFactor = 0.05; // Aumentado para maior fluidez
   let rect = imageContainer.getBoundingClientRect();
 
   mousePosition.x = targetMousePosition.x = (event.clientX - rect.left) / rect.width;
@@ -146,13 +175,6 @@ function handleMouseEnter(event) {
 }
 
 function handleMouseLeave() {
-  easeFactor = 0.1; // Aumentado para maior fluidez
+  easeFactor = 0.05; // Aumentado para maior fluidez
   targetMousePosition = { ...prevPosition };
 }
-
-// Resize handler
-window.addEventListener("resize", () => {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-});
