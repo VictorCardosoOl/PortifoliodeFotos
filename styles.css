@@ -79,16 +79,15 @@ canvas {
 
 /* Seção de Projetos */
 #projetos {
-  padding: 50px 20px; /* Reduzido o padding superior */
+  padding: 20px; /* Reduzido o padding */
   background-color: #111215;
-  margin-top: 0; /* Removido o margin-top */
 }
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  margin-top: 30px;
+  margin-top: 20px; /* Reduzido o margin-top */
 }
 
 .gallery figure {
@@ -121,7 +120,7 @@ canvas {
 /* Footer */
 footer {
   text-align: center;
-  padding: 40px 20px;
+  padding: 20px;
   border-top: 1px solid #333;
   background-color: #111215;
 }
