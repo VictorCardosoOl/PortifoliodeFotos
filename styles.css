@@ -1,10 +1,14 @@
 /* styles.css */
 :root {
-    --primary-color: #1a1a1a; /* Preto mais suave */
-    --secondary-color: #f8f9fa; /* Cinza claro */
-    --accent-color: #ff6b6b; /* Vermelho coral para detalhes */
+    --primary-color: #1a1a1a;
+    --secondary-color: #f8f9fa;
+    --accent-color: #ff6b6b;
     --font-primary: 'Playfair Display', serif;
     --font-secondary: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body, html {
@@ -102,7 +106,7 @@ nav.scrolled {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay escuro */
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
@@ -292,6 +296,12 @@ nav.scrolled {
 
 .thumbnail-container img:hover {
     opacity: 1;
+}
+
+.caption {
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 10px;
 }
 
 /* Sobre o Fotógrafo */

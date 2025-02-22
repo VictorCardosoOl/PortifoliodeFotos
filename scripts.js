@@ -37,8 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Abrir Galeria
     function openGallery(galleryId) {
+        console.log(`Abrindo galeria: ${galleryId}`); // Depuração
         const galleryMasonry = document.getElementById('gallery-masonry');
-        galleryMasonry.innerHTML = ''; // Limpa o conteúdo anterior
+        limparElemento(galleryMasonry);
+
+        if (!galleries[galleryId]) {
+            console.error(`Galeria ${galleryId} não encontrada.`); // Depuração
+            return;
+        }
 
         galleries[galleryId].forEach((image, index) => {
             const imgElement = document.createElement('img');
@@ -49,23 +55,35 @@ document.addEventListener('DOMContentLoaded', function() {
             galleryMasonry.appendChild(imgElement);
         });
 
-        document.getElementById('gallery-popup').style.display = 'block';
+        // Exibe o pop-up da galeria
+        const galleryPopup = document.getElementById('gallery-popup');
+        galleryPopup.style.display = 'block';
+        console.log('Galeria aberta com sucesso.'); // Depuração
     }
 
     // Fechar Galeria
     function closeGallery() {
-        document.getElementById('gallery-popup').style.display = 'none';
+        const galleryPopup = document.getElementById('gallery-popup');
+        galleryPopup.style.display = 'none';
+        console.log('Galeria fechada.'); // Depuração
     }
 
     // Abrir Visualizador de Fotos
     function openPhotoViewer(galleryId, index) {
         const photoViewer = document.getElementById('photo-viewer');
         const viewerImage = document.getElementById('viewer-image');
+        const viewerCaption = document.getElementById('viewer-caption');
         const thumbnailContainer = document.querySelector('.thumbnail-container');
-        thumbnailContainer.innerHTML = ''; // Limpa o conteúdo anterior
+        limparElemento(thumbnailContainer);
 
         const gallery = galleries[galleryId];
+        if (!gallery || !gallery[index]) {
+            console.error(`Imagem não encontrada na galeria ${galleryId}.`); // Depuração
+            return;
+        }
+
         viewerImage.src = gallery[index].src;
+        viewerCaption.textContent = gallery[index].caption;
 
         gallery.forEach((image, i) => {
             const thumbnail = document.createElement('img');
@@ -73,67 +91,26 @@ document.addEventListener('DOMContentLoaded', function() {
             thumbnail.alt = `Foto ${i + 1}`;
             thumbnail.addEventListener('click', () => {
                 viewerImage.src = image.src;
+                viewerCaption.textContent = image.caption;
             });
             thumbnailContainer.appendChild(thumbnail);
         });
 
         photoViewer.style.display = 'block';
+        console.log('Visualizador de fotos aberto.'); // Depuração
     }
 
     // Fechar Visualizador de Fotos
     function closePhotoViewer() {
-        document.getElementById('photo-viewer').style.display = 'none';
+        const photoViewer = document.getElementById('photo-viewer');
+        photoViewer.style.display = 'none';
+        console.log('Visualizador de fotos fechado.'); // Depuração
     }
 
-    // Proteção de Direitos Autorais
-    document.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        const copyright = document.createElement('div');
-        copyright.textContent = '© 2023 Fotógrafo. Todos os direitos reservados.';
-        copyright.style.position = 'fixed';
-        copyright.style.top = `${e.clientY}px`;
-        copyright.style.left = `${e.clientX}px`;
-        copyright.style.color = 'white';
-        copyright.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-        copyright.style.padding = '10px';
-        copyright.style.borderRadius = '5px';
-        copyright.style.zIndex = '10000';
-        document.body.appendChild(copyright);
-        setTimeout(() => document.body.removeChild(copyright), 2000);
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-            e.preventDefault();
-            const copyright = document.createElement('div');
-            copyright.textContent = '© 2023 Fotógrafo. Todos os direitos reservados.';
-            copyright.style.position = 'fixed';
-            copyright.style.top = '50%';
-            copyright.style.left = '50%';
-            copyright.style.transform = 'translate(-50%, -50%)';
-            copyright.style.color = 'white';
-            copyright.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            copyright.style.padding = '10px';
-            copyright.style.borderRadius = '5px';
-            copyright.style.zIndex = '10000';
-            document.body.appendChild(copyright);
-            setTimeout(() => document.body.removeChild(copyright), 2000);
+    // Limpar Elemento
+    function limparElemento(elemento) {
+        while (elemento.firstChild) {
+            elemento.removeChild(elemento.firstChild);
         }
-        if (e.key === 'F12') {
-            e.preventDefault();
-            const copyright = document.createElement('div');
-            copyright.textContent = '© 2023 Fotógrafo. Todos os direitos reservados.';
-            copyright.style.position = 'fixed';
-            copyright.style.top = '50%';
-            copyright.style.left = '50%';
-            copyright.style.transform = 'translate(-50%, -50%)';
-            copyright.style.color = 'white';
-            copyright.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            copyright.style.padding = '10px';
-            copyright.style.borderRadius = '5px';
-            copyright.style.zIndex = '10000';
-            document.body.appendChild(copyright);
-            setTimeout(() => document.body.removeChild(copyright), 2000);
-        }
-    });
+    }
 });
