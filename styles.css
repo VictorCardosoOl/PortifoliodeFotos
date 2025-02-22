@@ -9,11 +9,11 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body, html {
-    margin: 0;
-    padding: 0;
     font-family: var(--font-secondary);
     scroll-behavior: smooth;
     background-color: #ffffff;
@@ -90,7 +90,7 @@ nav.scrolled {
 /* Hero Section */
 #hero {
     height: 100vh;
-    background: url('https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+    background: url('https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,6 +227,11 @@ nav.scrolled {
     color: white;
     font-size: 40px;
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.popup .close:hover {
+    color: var(--accent-color);
 }
 
 .gallery-masonry {
@@ -268,6 +273,11 @@ nav.scrolled {
     color: white;
     font-size: 40px;
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.photo-viewer .close:hover {
+    color: var(--accent-color);
 }
 
 #viewer-image {
@@ -302,6 +312,22 @@ nav.scrolled {
     color: white;
     font-size: 1.2rem;
     margin-top: 10px;
+}
+
+/* Botão Compartilhar */
+.share-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.share-button:hover {
+    background-color: #ff4c4c;
 }
 
 /* Sobre o Fotógrafo */
