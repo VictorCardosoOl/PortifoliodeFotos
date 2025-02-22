@@ -42,11 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
             { src: 'https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg', caption: 'Cidade 1, 2023' },
             { src: 'https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg', caption: 'Cidade 2, 2023' },
             { src: 'https://images.pexels.com/photos/3023211/pexels-photo-3023211.jpeg', caption: 'Cidade 3, 2023' },
+            { src: 'https://images.pexels.com/photos/19739301/pexels-photo-19739301/free-photo-of-tent-among-hills-in-snow.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
+            { src: 'https://images.pexels.com/photos/30413960/pexels-photo-30413960/free-photo-of-charming-blue-alley-in-chefchaouen-morocco.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
+            { src: 'https://images.pexels.com/photos/30133114/pexels-photo-30133114/free-photo-of-portrait-of-elderly-nomad-in-mhamid-desert-morocco.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
         ],
         gallery2: [
             { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
             { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
-            { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 6, 2023' },
+            { src: 'https://images.pexels.com/photos/30739091/pexels-photo-30739091/free-photo-of-elegant-red-velvet-cake-and-roses-on-table.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
+            { src: 'https://images.pexels.com/photos/30777373/pexels-photo-30777373/free-photo-of-whimsical-abstract-of-swirling-white-flowers.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
+            { src: 'https://images.pexels.com/photos/28588346/pexels-photo-28588346/free-photo-of-dramatic-coastal-landscape-of-el-golfo-beach.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
+            { src: 'https://images.pexels.com/photos/30648973/pexels-photo-30648973/free-photo-of-delicious-chocolate-glazed-donut-top-view.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
         ],
     };
 
