@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             imgElement.src = image.src;
             imgElement.alt = `Foto ${index + 1}`;
             imgElement.setAttribute('data-caption', image.caption); // Adiciona a legenda
+            imgElement.classList.add('lazy-load'); // Adiciona classe para lazy loading
 
             const captionElement = document.createElement('div');
             captionElement.classList.add('caption');
@@ -106,6 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const galleryPopup = document.getElementById('gallery-popup');
         galleryPopup.style.display = 'block';
         console.log('Galeria aberta com sucesso.'); // Depuração
+
+        // Inicializa o lazy loading
+        initLazyLoading();
     }
 
     // ==================================================
@@ -185,7 +189,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==================================================
-    // 10. FUNÇÕES AUXILIARES
+    // 10. LAZY LOADING
+    // ==================================================
+
+    function initLazyLoading() {
+        const lazyImages = document.querySelectorAll('.lazy-load');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        lazyImages.forEach(img => observer.observe(img));
+    }
+
+    // ==================================================
+    // 11. FUNÇÕES AUXILIARES
     // ==================================================
 
     // Função para limpar o conteúdo de um elemento
