@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio fotográfico profissional com foco em retratos, casamentos e eventos.">
+    <meta name="keywords" content="fotografia, portfólio, retratos, casamentos, eventos">
+    <meta name="author" content="Seu Nome">
     <title>Portfólio Fotográfico</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -48,8 +51,8 @@
                     <h3>Álbum 1: Retratos</h3>
                     <p>Uma coleção de retratos que capturam a essência das pessoas.</p>
                 </div>
-                <div class="album-cover" onclick="openGallery('gallery1')">
-                    <img src="https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Capa do Álbum 1">
+                <div class="album-cover" data-gallery="gallery1">
+                    <img src="https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg" alt="Capa do Álbum 1">
                 </div>
             </div>
             <div class="album reverse">
@@ -57,8 +60,8 @@
                     <h3>Álbum 2: Casamentos</h3>
                     <p>Momentos especiais de cerimônias e festas de casamento.</p>
                 </div>
-                <div class="album-cover" onclick="openGallery('gallery2')">
-                    <img src="https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Capa do Álbum 2">
+                <div class="album-cover" data-gallery="gallery2">
+                    <img src="https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg" alt="Capa do Álbum 2">
                 </div>
             </div>
         </div>
@@ -66,7 +69,7 @@
 
     <!-- Pop-up da Galeria -->
     <div id="gallery-popup" class="popup">
-        <span class="close" onclick="closeGallery()">&times;</span>
+        <span class="close" id="close-gallery">&times;</span>
         <div class="gallery-masonry" id="gallery-masonry">
             <!-- Imagens serão adicionadas dinamicamente via JavaScript -->
         </div>
@@ -74,7 +77,7 @@
 
     <!-- Visualizador de Fotos -->
     <div id="photo-viewer" class="photo-viewer">
-        <span class="close" onclick="closePhotoViewer()">&times;</span>
+        <span class="close" id="close-photo-viewer">&times;</span>
         <img id="viewer-image" src="" alt="Foto">
         <div class="caption" id="viewer-caption"></div>
         <div class="thumbnail-container">

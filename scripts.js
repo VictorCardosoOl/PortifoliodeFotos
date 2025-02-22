@@ -35,7 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
         ],
     };
 
-    // Abrir Galeria
+    // Adiciona event listeners para abrir a galeria
+    const albumCovers = document.querySelectorAll('.album-cover');
+    albumCovers.forEach(cover => {
+        cover.addEventListener('click', () => {
+            const galleryId = cover.getAttribute('data-gallery');
+            openGallery(galleryId);
+        });
+    });
+
+    // Função para abrir a galeria
     function openGallery(galleryId) {
         console.log(`Abrindo galeria: ${galleryId}`); // Depuração
         const galleryMasonry = document.getElementById('gallery-masonry');
@@ -62,13 +71,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Fechar Galeria
+    const closeGalleryButton = document.getElementById('close-gallery');
+    closeGalleryButton.addEventListener('click', closeGallery);
+
     function closeGallery() {
         const galleryPopup = document.getElementById('gallery-popup');
         galleryPopup.style.display = 'none';
         console.log('Galeria fechada.'); // Depuração
     }
 
-    // Abrir Visualizador de Fotos
+    // Função para abrir o visualizador de fotos
     function openPhotoViewer(galleryId, index) {
         const photoViewer = document.getElementById('photo-viewer');
         const viewerImage = document.getElementById('viewer-image');
@@ -101,13 +113,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Fechar Visualizador de Fotos
+    const closePhotoViewerButton = document.getElementById('close-photo-viewer');
+    closePhotoViewerButton.addEventListener('click', closePhotoViewer);
+
     function closePhotoViewer() {
         const photoViewer = document.getElementById('photo-viewer');
         photoViewer.style.display = 'none';
         console.log('Visualizador de fotos fechado.'); // Depuração
     }
 
-    // Limpar Elemento
+    // Função para limpar um elemento
     function limparElemento(elemento) {
         while (elemento.firstChild) {
             elemento.removeChild(elemento.firstChild);
