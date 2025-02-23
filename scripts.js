@@ -46,21 +46,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setInterval(nextSlide, 5000); // Troca de slide a cada 5 segundos
 
-    // Lightbox
-    lightbox.option({
-        'resizeDuration': 200,
-        'wrapAround': true,
-        'alwaysShowNavOnTouchDevices': true,
-    });
-
     // Scroll suave
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-            });
+
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    left: 0,
+                    behavior: 'smooth' // Mantém o scroll suave
+                });
+            }
         });
     });
 
@@ -219,4 +219,12 @@ document.getElementById('photo-viewer').addEventListener('click', (e) => {
     if (e.target === document.getElementById('photo-viewer')) {
         document.getElementById('photo-viewer').style.display = 'none';
     }
+});
+
+// Abrir galeria ao clicar nos álbuns
+document.querySelectorAll('.album-cover').forEach(albumCover => {
+    albumCover.addEventListener('click', () => {
+        const galleryId = albumCover.getAttribute('data-gallery');
+        openGallery(galleryId);
+    });
 });

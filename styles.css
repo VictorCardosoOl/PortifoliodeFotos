@@ -25,7 +25,6 @@
 
 body, html {
     font-family: var(--font-secondary);
-    scroll-behavior: smooth;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -53,7 +52,6 @@ nav.scrolled {
 
 /* ... (restante do CSS permanece igual) ... */
 
-/* ... (restante do CSS permanece igual) ... */
 
 .navbar-container {
     display: flex;
