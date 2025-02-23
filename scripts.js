@@ -1,220 +1,222 @@
-// scripts.js
-
-// ==================================================
-// 1. INICIALIZAÇÃO E CONFIGURAÇÕES GERAIS
-// ==================================================
-
+// Configurações gerais
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializa AOS (Animate On Scroll) para animações ao rolar a página
-    AOS.init();
+    // Inicializa AOS (Animate On Scroll)
+    AOS.init({
+        duration: 800, // Duração mais lenta para harmonizar com o scroll
+    });
 
-    // ==================================================
-    // 2. NAVBAR SCROLL
-    // ==================================================
-
+    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.classList.add('scrolled'); // Adiciona classe ao rolar a página
+            navbar.classList.add('scrolled');
         } else {
-            navbar.classList.remove('scrolled'); // Remove classe ao voltar ao topo
+            navbar.classList.remove('scrolled');
         }
     });
 
-    // ==================================================
-    // 3. MENU MOBILE
-    // ==================================================
-
+    // Menu mobile
     const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-
+    const navLinks = document.getElementById('nav-links');
     mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('active'); // Alterna a visibilidade do menu mobile
+        navLinks.classList.toggle('active');
     });
 
-    // ==================================================
-    // 4. GALERIAS DE ÁLBUNS
-    // ==================================================
+    // Fechar menu mobile ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
 
-    // Dados das galerias (imagens e legendas)
-    const galleries = {
-        gallery1: [
-            { src: 'https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg', caption: 'Cidade 1, 2023' },
-            { src: 'https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg', caption: 'Cidade 2, 2023' },
-            { src: 'https://images.pexels.com/photos/3023211/pexels-photo-3023211.jpeg', caption: 'Cidade 3, 2023' },
-            { src: 'https://images.pexels.com/photos/19739301/pexels-photo-19739301/free-photo-of-tent-among-hills-in-snow.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-            { src: 'https://images.pexels.com/photos/30413960/pexels-photo-30413960/free-photo-of-charming-blue-alley-in-chefchaouen-morocco.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-            { src: 'https://images.pexels.com/photos/30133114/pexels-photo-30133114/free-photo-of-portrait-of-elderly-nomad-in-mhamid-desert-morocco.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-        ],
-        gallery2: [
-            { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
-            { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
-            { src: 'https://images.pexels.com/photos/30739091/pexels-photo-30739091/free-photo-of-elegant-red-velvet-cake-and-roses-on-table.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-            { src: 'https://images.pexels.com/photos/30777373/pexels-photo-30777373/free-photo-of-whimsical-abstract-of-swirling-white-flowers.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-            { src: 'https://images.pexels.com/photos/28588346/pexels-photo-28588346/free-photo-of-dramatic-coastal-landscape-of-el-golfo-beach.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-            { src: 'https://images.pexels.com/photos/30648973/pexels-photo-30648973/free-photo-of-delicious-chocolate-glazed-donut-top-view.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load', caption: 'Cidade 6, 2023' },
-        ],
+    // Hero Slideshow
+    const slides = document.querySelectorAll('.hero-slideshow .slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000); // Troca de slide a cada 5 segundos
+
+    // Lightbox
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'alwaysShowNavOnTouchDevices': true,
+    });
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        });
+    });
+
+    // Internacionalização (i18n)
+    const translations = {
+        'pt-BR': {
+            home: 'Início',
+            albums: 'Álbuns',
+            about: 'Sobre',
+            contact: 'Contato',
+            heroTitle: 'Capturando Momentos, Criando Memórias',
+            heroSubtitle: 'Bem-vindo ao meu portfólio fotográfico.',
+            exploreAlbums: 'Explorar Álbuns',
+            albumsTitle: 'Álbuns',
+            album1Title: 'Álbum 1: Retratos',
+            album1Description: 'Uma coleção de retratos que capturam a essência das pessoas.',
+            album2Title: 'Álbum 2: Casamentos',
+            album2Description: 'Momentos especiais de cerimônias e festas de casamento.',
+            aboutTitle: 'Sobre Mim',
+            aboutDescription: 'Olá! Sou um fotógrafo profissional com mais de 10 anos de experiência, especializado em retratos, casamentos e eventos. Minha paixão é capturar momentos únicos e transformá-los em memórias eternas.',
+            testimonialsTitle: 'Depoimentos',
+            testimonial1: '"As fotos do nosso casamento foram incríveis! Recomendo muito!"',
+            testimonial1Author: '- Maria e João',
+            testimonial2: '"Adorei o ensaio de retratos. Foi uma experiência maravilhosa!"',
+            testimonial2Author: '- Ana',
+            contactTitle: 'Contato',
+            terms: 'Termos de Uso',
+            privacy: 'Política de Privacidade',
+            rights: 'Todos os direitos reservados.',
+            language: 'Idioma:',
+        },
+        'en': {
+            home: 'Home',
+            albums: 'Albums',
+            about: 'About',
+            contact: 'Contact',
+            heroTitle: 'Capturing Moments, Creating Memories',
+            heroSubtitle: 'Welcome to my photography portfolio.',
+            exploreAlbums: 'Explore Albums',
+            albumsTitle: 'Albums',
+            album1Title: 'Album 1: Portraits',
+            album1Description: 'A collection of portraits that capture the essence of people.',
+            album2Title: 'Album 2: Weddings',
+            album2Description: 'Special moments from wedding ceremonies and parties.',
+            aboutTitle: 'About Me',
+            aboutDescription: 'Hello! I am a professional photographer with over 10 years of experience, specializing in portraits, weddings, and events. My passion is capturing unique moments and turning them into eternal memories.',
+            testimonialsTitle: 'Testimonials',
+            testimonial1: '"The photos from our wedding were amazing! Highly recommended!"',
+            testimonial1Author: '- Maria and João',
+            testimonial2: '"I loved the portrait session. It was a wonderful experience!"',
+            testimonial2Author: '- Ana',
+            contactTitle: 'Contact',
+            terms: 'Terms of Use',
+            privacy: 'Privacy Policy',
+            rights: 'All rights reserved.',
+            language: 'Language:',
+        },
     };
 
-    // ==================================================
-    // 5. ABRIR GALERIA
-    // ==================================================
-
-    // Adiciona event listeners para abrir a galeria ao clicar nos álbuns
-    const albumCovers = document.querySelectorAll('.album-cover');
-    albumCovers.forEach(cover => {
-        cover.addEventListener('click', () => {
-            const galleryId = cover.getAttribute('data-gallery'); // Obtém o ID da galeria
-            openGallery(galleryId); // Abre a galeria correspondente
-        });
+    const languageSwitcher = document.getElementById('language-switcher');
+    languageSwitcher.addEventListener('change', function() {
+        const lang = this.value;
+        updateLanguage(lang);
     });
 
-    // Função para abrir a galeria
-    function openGallery(galleryId) {
-        console.log(`Abrindo galeria: ${galleryId}`); // Depuração
-
-        const galleryMasonry = document.getElementById('gallery-masonry');
-        limparElemento(galleryMasonry); // Limpa o conteúdo anterior da galeria
-
-        if (!galleries[galleryId]) {
-            console.error(`Galeria ${galleryId} não encontrada.`); // Depuração
-            return;
-        }
-
-        // Adiciona as imagens e legendas à galeria
-        galleries[galleryId].forEach((image, index) => {
-            const imgContainer = document.createElement('div');
-            imgContainer.classList.add('gallery-item'); // Contêiner para a imagem e legenda
-
-            const imgElement = document.createElement('img');
-            imgElement.src = image.src;
-            imgElement.alt = `Foto ${index + 1}`;
-            imgElement.setAttribute('data-caption', image.caption); // Adiciona a legenda
-            imgElement.classList.add('lazy-load'); // Adiciona classe para lazy loading
-
-            const captionElement = document.createElement('div');
-            captionElement.classList.add('caption');
-            captionElement.textContent = image.caption; // Texto da legenda
-
-            imgContainer.appendChild(imgElement);
-            imgContainer.appendChild(captionElement);
-            imgContainer.addEventListener('click', () => openPhotoViewer(galleryId, index)); // Abre o visualizador de fotos
-
-            galleryMasonry.appendChild(imgContainer); // Adiciona o contêiner à galeria
+    function updateLanguage(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            element.textContent = translations[lang][key];
         });
-
-        // Exibe o pop-up da galeria
-        const galleryPopup = document.getElementById('gallery-popup');
-        galleryPopup.style.display = 'block';
-        console.log('Galeria aberta com sucesso.'); // Depuração
-
-        // Inicializa o lazy loading
-        initLazyLoading();
     }
 
-    // ==================================================
-    // 6. FECHAR GALERIA
-    // ==================================================
+    // Inicializa com o idioma padrão (pt-BR)
+    updateLanguage('pt-BR');
+});
 
-    const closeGalleryButton = document.getElementById('close-gallery');
-    closeGalleryButton.addEventListener('click', closeGallery);
+// Lógica da galeria e visualizador de fotos
+const galleries = {
+    gallery1: [
+        { src: 'https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg', caption: 'Retrato de uma pessoa sorrindo em um ambiente urbano' },
+        { src: 'https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
+        // Adicione mais imagens aqui
+    ],
+    gallery2: [
+        { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
+        { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
+        // Adicione mais imagens aqui
+    ],
+};
 
-    function closeGallery() {
-        const galleryPopup = document.getElementById('gallery-popup');
-        galleryPopup.style.display = 'none'; // Oculta o pop-up da galeria
-        console.log('Galeria fechada.'); // Depuração
-    }
+function openGallery(galleryId) {
+    const galleryMasonry = document.getElementById('gallery-masonry');
+    galleryMasonry.innerHTML = ''; // Limpa a galeria anterior
 
-    // ==================================================
-    // 7. VISUALIZADOR DE FOTOS
-    // ==================================================
+    galleries[galleryId].forEach((image, index) => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('gallery-item');
 
-    // Função para abrir o visualizador de fotos
-    function openPhotoViewer(galleryId, index) {
-        const photoViewer = document.getElementById('photo-viewer');
-        const viewerImage = document.getElementById('viewer-image');
-        const viewerCaption = document.getElementById('viewer-caption');
-        const thumbnailContainer = document.querySelector('.thumbnail-container');
-        limparElemento(thumbnailContainer); // Limpa as miniaturas anteriores
+        const imgElement = document.createElement('img');
+        imgElement.src = image.src;
+        imgElement.alt = image.caption;
+        imgElement.setAttribute('data-caption', image.caption);
 
-        const gallery = galleries[galleryId];
-        if (!gallery || !gallery[index]) {
-            console.error(`Imagem não encontrada na galeria ${galleryId}.`); // Depuração
-            return;
-        }
+        imgContainer.appendChild(imgElement);
+        imgContainer.addEventListener('click', () => openPhotoViewer(galleryId, index));
 
-        // Exibe a imagem principal no visualizador
-        viewerImage.src = gallery[index].src;
-        viewerCaption.textContent = gallery[index].caption;
-
-        // Adiciona as miniaturas das fotos
-        gallery.forEach((image, i) => {
-            const thumbnail = document.createElement('img');
-            thumbnail.src = image.src;
-            thumbnail.alt = `Foto ${i + 1}`;
-            thumbnail.addEventListener('click', () => {
-                viewerImage.src = image.src; // Atualiza a imagem principal
-                viewerCaption.textContent = image.caption; // Atualiza a legenda
-            });
-            thumbnailContainer.appendChild(thumbnail); // Adiciona a miniatura ao contêiner
-        });
-
-        photoViewer.style.display = 'block'; // Exibe o visualizador de fotos
-        console.log('Visualizador de fotos aberto.'); // Depuração
-    }
-
-    // ==================================================
-    // 8. FECHAR VISUALIZADOR DE FOTOS
-    // ==================================================
-
-    const closePhotoViewerButton = document.getElementById('close-photo-viewer');
-    closePhotoViewerButton.addEventListener('click', closePhotoViewer);
-
-    function closePhotoViewer() {
-        const photoViewer = document.getElementById('photo-viewer');
-        photoViewer.style.display = 'none'; // Oculta o visualizador de fotos
-        console.log('Visualizador de fotos fechado.'); // Depuração
-    }
-
-    // ==================================================
-    // 9. BOTÃO COMPARTILHAR
-    // ==================================================
-
-    const shareButton = document.getElementById('share-button');
-    shareButton.addEventListener('click', () => {
-        const imageUrl = document.getElementById('viewer-image').src;
-        navigator.clipboard.writeText(imageUrl).then(() => {
-            alert('Link da imagem copiado para a área de transferência!');
-        });
+        galleryMasonry.appendChild(imgContainer);
     });
 
-    // ==================================================
-    // 10. LAZY LOADING
-    // ==================================================
+    document.getElementById('gallery-popup').style.display = 'block';
+}
 
-    function initLazyLoading() {
-        const lazyImages = document.querySelectorAll('.lazy-load');
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
-            });
+function openPhotoViewer(galleryId, index) {
+    const photoViewer = document.getElementById('photo-viewer');
+    const viewerImage = document.getElementById('viewer-image');
+    const viewerCaption = document.getElementById('viewer-caption');
+    const thumbnailContainer = document.querySelector('.thumbnail-container');
+    thumbnailContainer.innerHTML = ''; // Limpa as miniaturas anteriores
+
+    const gallery = galleries[galleryId];
+    viewerImage.src = gallery[index].src;
+    viewerCaption.textContent = gallery[index].caption;
+
+    gallery.forEach((image, i) => {
+        const thumbnail = document.createElement('img');
+        thumbnail.src = image.src;
+        thumbnail.alt = image.caption;
+        thumbnail.addEventListener('click', () => {
+            viewerImage.src = image.src;
+            viewerCaption.textContent = image.caption;
         });
-        lazyImages.forEach(img => observer.observe(img));
+        thumbnailContainer.appendChild(thumbnail);
+    });
+
+    photoViewer.style.display = 'block';
+}
+
+// Fechar galeria e visualizador
+document.getElementById('close-gallery').addEventListener('click', () => {
+    document.getElementById('gallery-popup').style.display = 'none';
+});
+
+document.getElementById('close-photo-viewer').addEventListener('click', () => {
+    document.getElementById('photo-viewer').style.display = 'none';
+});
+
+// Fechar galeria ao clicar fora
+document.getElementById('gallery-popup').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('gallery-popup')) {
+        document.getElementById('gallery-popup').style.display = 'none';
     }
+});
 
-    // ==================================================
-    // 11. FUNÇÕES AUXILIARES
-    // ==================================================
-
-    // Função para limpar o conteúdo de um elemento
-    function limparElemento(elemento) {
-        while (elemento.firstChild) {
-            elemento.removeChild(elemento.firstChild); // Remove todos os filhos do elemento
-        }
+// Fechar visualizador de fotos ao clicar fora
+document.getElementById('photo-viewer').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('photo-viewer')) {
+        document.getElementById('photo-viewer').style.display = 'none';
     }
 });

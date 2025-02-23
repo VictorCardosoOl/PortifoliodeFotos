@@ -7,9 +7,10 @@
     <meta name="keywords" content="fotografia, portfólio, retratos, casamentos, eventos">
     <meta name="author" content="Seu Nome">
     <title>Portfólio Fotográfico</title>
-    <link rel="stylesheet" href="styles.css"> <!-- CSS minificado -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 </head>
 <body>
@@ -17,15 +18,15 @@
     <nav id="navbar">
         <div class="navbar-container">
             <div class="logo">
-                <a href="#">Fotógrafo</a>
+                <a href="#" tabindex="0">Fotógrafo</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="#hero">Início</a></li>
-                <li><a href="#albums">Álbuns</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#footer">Contato</a></li>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" tabindex="0" data-i18n="home">Início</a></li>
+                <li><a href="#albums" tabindex="0" data-i18n="albums">Álbuns</a></li>
+                <li><a href="#about" tabindex="0" data-i18n="about">Sobre</a></li>
+                <li><a href="#footer" tabindex="0" data-i18n="contact">Contato</a></li>
             </ul>
-            <div class="menu-toggle" id="mobile-menu">
+            <div class="menu-toggle" id="mobile-menu" tabindex="0">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -35,66 +36,67 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <h1>Capturando Momentos, Criando Memórias</h1>
-            <p>Bem-vindo ao meu portfólio fotográfico.</p>
-            <a href="#albums" class="cta-button">Explorar Álbuns</a>
+        <div class="hero-slideshow">
+            <div class="slide active" style="background-image: url('https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg');"></div>
+            <div class="slide" style="background-image: url('https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg');"></div>
+            <div class="slide" style="background-image: url('https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg');"></div>
+        </div>
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="300">
+            <h1 data-i18n="heroTitle">Capturando Momentos, Criando Memórias</h1>
+            <p data-i18n="heroSubtitle">Bem-vindo ao meu portfólio fotográfico.</p>
+            <a href="#albums" class="cta-button" tabindex="0" data-i18n="exploreAlbums">Explorar Álbuns</a>
         </div>
     </section>
 
     <!-- Seção de Álbuns -->
     <section id="albums">
-        <h2 data-aos="fade-up" data-aos-duration="1000">Álbuns</h2>
-        <div class="album-container" data-aos="fade-up" data-aos-duration="1000">
+        <h2 data-aos="fade-up" data-aos-duration="300" data-i18n="albumsTitle">Álbuns</h2>
+        <div class="album-container" data-aos="fade-up" data-aos-duration="300">
             <div class="album">
                 <div class="album-description">
-                    <h3>Álbum 1: Retratos</h3>
-                    <p>Uma coleção de retratos que capturam a essência das pessoas.</p>
+                    <h3 data-i18n="album1Title">Álbum 1: Retratos</h3>
+                    <p data-i18n="album1Description">Uma coleção de retratos que capturam a essência das pessoas.</p>
                 </div>
-                <div class="album-cover" data-gallery="gallery1">
-                    <img src="https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg" alt="Capa do Álbum 1: Retratos">
+                <div class="album-cover" data-gallery="gallery1" tabindex="0">
+                    <a href="https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg" data-lightbox="gallery1" data-title="Retrato de uma pessoa sorrindo em um ambiente urbano">
+                        <img src="https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg" alt="Retrato de uma pessoa sorrindo em um ambiente urbano">
+                    </a>
                 </div>
             </div>
             <div class="album reverse">
                 <div class="album-description">
-                    <h3>Álbum 2: Casamentos</h3>
-                    <p>Momentos especiais de cerimônias e festas de casamento.</p>
+                    <h3 data-i18n="album2Title">Álbum 2: Casamentos</h3>
+                    <p data-i18n="album2Description">Momentos especiais de cerimônias e festas de casamento.</p>
                 </div>
-                <div class="album-cover" data-gallery="gallery2">
-                    <img src="https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg" alt="Capa do Álbum 2: Casamentos">
+                <div class="album-cover" data-gallery="gallery2" tabindex="0">
+                    <a href="https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg" data-lightbox="gallery2" data-title="Noivos se beijando em uma cerimônia de casamento">
+                        <img src="https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg" alt="Noivos se beijando em uma cerimônia de casamento">
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pop-up da Galeria -->
-    <div id="gallery-popup" class="popup">
-        <span class="close" id="close-gallery">&times;</span>
-        <div class="gallery-masonry" id="gallery-masonry">
-            <!-- Imagens serão adicionadas dinamicamente via JavaScript -->
-        </div>
-    </div>
-
-    <!-- Visualizador de Fotos -->
-    <div id="photo-viewer" class="photo-viewer">
-        <span class="close" id="close-photo-viewer">&times;</span>
-        <img id="viewer-image" src="" alt="Foto">
-        <div class="caption" id="viewer-caption"></div>
-        <div class="thumbnail-container">
-            <!-- Miniaturas serão adicionadas dinamicamente via JavaScript -->
-        </div>
-        <button id="share-button" class="share-button">Compartilhar</button>
-    </div>
-
     <!-- Sobre o Fotógrafo -->
     <section id="about">
-        <div class="about-container" data-aos="fade-up" data-aos-duration="1000">
+        <div class="about-container" data-aos="fade-up" data-aos-duration="300">
             <div class="about-image">
-                <img src="https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fotógrafo">
+                <img src="https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fotógrafo segurando uma câmera profissional">
             </div>
             <div class="about-text">
-                <h2>Sobre Mim</h2>
-                <p>Olá! Sou um fotógrafo profissional com mais de 10 anos de experiência, especializado em retratos, casamentos e eventos. Minha paixão é capturar momentos únicos e transformá-los em memórias eternas.</p>
+                <h2 data-i18n="aboutTitle">Sobre Mim</h2>
+                <p data-i18n="aboutDescription">Olá! Sou um fotógrafo profissional com mais de 10 anos de experiência, especializado em retratos, casamentos e eventos. Minha paixão é capturar momentos únicos e transformá-los em memórias eternas.</p>
+                <div class="testimonials">
+                    <h3 data-i18n="testimonialsTitle">Depoimentos</h3>
+                    <div class="testimonial">
+                        <p data-i18n="testimonial1">"As fotos do nosso casamento foram incríveis! Recomendo muito!"</p>
+                        <span data-i18n="testimonial1Author">- Maria e João</span>
+                    </div>
+                    <div class="testimonial">
+                        <p data-i18n="testimonial2">"Adorei o ensaio de retratos. Foi uma experiência maravilhosa!"</p>
+                        <span data-i18n="testimonial2Author">- Ana</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -103,33 +105,45 @@
     <footer id="footer">
         <div class="footer-container">
             <div class="footer-left">
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
+                <div class="contact-info">
+                    <h3 data-i18n="contactTitle">Contato</h3>
+                    <p>Email: contato@fotografo.com</p>
+                    <p>Telefone: (11) 99999-9999</p>
                 </div>
-                <div class="footer-links">
-                    <a href="termos.html">Termos de Uso</a>
-                    <a href="privacidade.html">Política de Privacidade</a>
+                <div class="social-icons">
+                    <a href="#" tabindex="0"><i class="fab fa-instagram"></i></a>
+                    <a href="#" tabindex="0"><i class="fab fa-facebook"></i></a>
+                    <a href="#" tabindex="0"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <div class="logo">
-                <img src="logo.png" alt="Logo do Site">
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="termos.html" tabindex="0" data-i18n="terms">Termos de Uso</a>
+                    <a href="privacidade.html" tabindex="0" data-i18n="privacy">Política de Privacidade</a>
+                </div>
+                <div class="language-switcher">
+                    <label for="language-switcher" data-i18n="language">Idioma:</label>
+                    <select id="language-switcher">
+                        <option value="pt-BR" selected>Português</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="copyright">
-            &copy; 2023 Fotógrafo. Todos os direitos reservados.
+            &copy; 2023 Fotógrafo. <span data-i18n="rights">Todos os direitos reservados.</span>
         </div>
     </footer>
 
     <!-- Botão de Contato Flutuante -->
     <div class="floating-contact">
-        <a href="https://wa.me/5511999999999" target="_blank">
+        <a href="https://wa.me/5511999999999" target="_blank" tabindex="0">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="scripts.js"></script> <!-- JavaScript minificado -->
+    <script src="scripts.js"></script>
 </body>
 </html>
