@@ -19,4 +19,12 @@ Gostei bastante do footer deste site, também gostei que nele ha um avaliador vi
 https://christmas.agota.studio/
 Site para enviar um carta de natal
 
+https://www.srmg.com/en/home
+Scroll incrivelmente suave
+
+https://seasoned.koto.studio/
+Referencia visual
+
+Gostaria que a navbar ao movimentar o scroll do site saindo do home subisse ou ficasse ouculta, e ao reolar o scroll para subir a nav bar seja apresentada, alem disso eu gostaria que a nava bar fosse totalmente tranparente agora.  
+
 
