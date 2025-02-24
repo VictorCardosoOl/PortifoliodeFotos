@@ -1,11 +1,19 @@
-// Configurações gerais
-document.addEventListener('DOMContentLoaded', function() {
+// ==================================================
+// 1. CONFIGURAÇÕES GERAIS
+// ==================================================
+
+document.addEventListener('DOMContentLoaded', function () {
     // Inicializa AOS (Animate On Scroll)
     AOS.init({
-        duration: 800, // Duração mais lenta para harmonizar com o scroll
+        duration: 800, // Duração das animações
+        easing: 'ease-in-out', // Tipo de easing
+        once: true, // Animações ocorrem apenas uma vez
     });
 
-    // Navbar scroll
+    // ==================================================
+    // 2. NAVBAR SCROLL
+    // ==================================================
+
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -15,9 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Menu mobile
+    // ==================================================
+    // 3. MENU MOBILE
+    // ==================================================
+
     const mobileMenu = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
+
     mobileMenu.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
@@ -29,7 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hero Slideshow
+    // ==================================================
+    // 4. HERO SLIDESHOW
+    // ==================================================
+
     const slides = document.querySelectorAll('.hero-slideshow .slide');
     let currentSlide = 0;
 
@@ -44,27 +59,48 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(currentSlide);
     }
 
-    setInterval(nextSlide, 5000); // Troca de slide a cada 5 segundos
+    // Troca de slide a cada 5 segundos
+    setInterval(nextSlide, 5000);
 
-    // Scroll suave
+    // ==================================================
+    // 5. SCROLL SUAVE PARA LINKS INTERNOS
+    // ==================================================
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-
             const targetId = this.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
 
             if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop,
-                    left: 0,
-                    behavior: 'smooth' // Mantém o scroll suave
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
                 });
             }
         });
     });
 
-    // Internacionalização (i18n)
+    // ==================================================
+    // 6. BARRA DE SCROLL PERSONALIZADA
+    // ==================================================
+
+    // Barra de Scroll Personalizada
+const scrollThumb = document.querySelector('.c-scrollbar_thumb');
+
+window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const thumbHeight = (window.innerHeight / scrollHeight) * 100;
+    const thumbPosition = (scrollTop / scrollHeight) * 100;
+
+    scrollThumb.style.height = `${thumbHeight}%`;
+    scrollThumb.style.transform = `translateY(${thumbPosition}%)`;
+});
+    // ==================================================
+    // 7. INTERNACIONALIZAÇÃO (i18n)
+    // ==================================================
+
     const translations = {
         'pt-BR': {
             home: 'Início',
@@ -121,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const languageSwitcher = document.getElementById('language-switcher');
-    languageSwitcher.addEventListener('change', function() {
+    languageSwitcher.addEventListener('change', function () {
         const lang = this.value;
         updateLanguage(lang);
     });
@@ -135,96 +171,99 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Inicializa com o idioma padrão (pt-BR)
     updateLanguage('pt-BR');
-});
 
-// Lógica da galeria e visualizador de fotos
-const galleries = {
-    gallery1: [
-        { src: 'https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg', caption: 'Retrato de uma pessoa sorrindo em um ambiente urbano' },
-        { src: 'https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
-        // Adicione mais imagens aqui
-    ],
-    gallery2: [
-        { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
-        { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
-        // Adicione mais imagens aqui
-    ],
-};
+    // ==================================================
+    // 8. GALERIA DE FOTOS
+    // ==================================================
 
-function openGallery(galleryId) {
-    const galleryMasonry = document.getElementById('gallery-masonry');
-    galleryMasonry.innerHTML = ''; // Limpa a galeria anterior
+    const galleries = {
+        gallery1: [
+            { src: 'https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg', caption: 'Retrato de uma pessoa sorrindo em um ambiente urbano' },
+            { src: 'https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
+            // Adicione mais imagens aqui
+        ],
+        gallery2: [
+            { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
+            { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
+            // Adicione mais imagens aqui
+        ],
+    };
 
-    galleries[galleryId].forEach((image, index) => {
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('gallery-item');
+    function openGallery(galleryId) {
+        const galleryMasonry = document.getElementById('gallery-masonry');
+        galleryMasonry.innerHTML = ''; // Limpa a galeria anterior
 
-        const imgElement = document.createElement('img');
-        imgElement.src = image.src;
-        imgElement.alt = image.caption;
-        imgElement.setAttribute('data-caption', image.caption);
+        galleries[galleryId].forEach((image, index) => {
+            const imgContainer = document.createElement('div');
+            imgContainer.classList.add('gallery-item');
 
-        imgContainer.appendChild(imgElement);
-        imgContainer.addEventListener('click', () => openPhotoViewer(galleryId, index));
+            const imgElement = document.createElement('img');
+            imgElement.src = image.src;
+            imgElement.alt = image.caption;
+            imgElement.setAttribute('data-caption', image.caption);
 
-        galleryMasonry.appendChild(imgContainer);
-    });
+            imgContainer.appendChild(imgElement);
+            imgContainer.addEventListener('click', () => openPhotoViewer(galleryId, index));
 
-    document.getElementById('gallery-popup').style.display = 'block';
-}
-
-function openPhotoViewer(galleryId, index) {
-    const photoViewer = document.getElementById('photo-viewer');
-    const viewerImage = document.getElementById('viewer-image');
-    const viewerCaption = document.getElementById('viewer-caption');
-    const thumbnailContainer = document.querySelector('.thumbnail-container');
-    thumbnailContainer.innerHTML = ''; // Limpa as miniaturas anteriores
-
-    const gallery = galleries[galleryId];
-    viewerImage.src = gallery[index].src;
-    viewerCaption.textContent = gallery[index].caption;
-
-    gallery.forEach((image, i) => {
-        const thumbnail = document.createElement('img');
-        thumbnail.src = image.src;
-        thumbnail.alt = image.caption;
-        thumbnail.addEventListener('click', () => {
-            viewerImage.src = image.src;
-            viewerCaption.textContent = image.caption;
+            galleryMasonry.appendChild(imgContainer);
         });
-        thumbnailContainer.appendChild(thumbnail);
+
+        document.getElementById('gallery-popup').style.display = 'block';
+    }
+
+    function openPhotoViewer(galleryId, index) {
+        const photoViewer = document.getElementById('photo-viewer');
+        const viewerImage = document.getElementById('viewer-image');
+        const viewerCaption = document.getElementById('viewer-caption');
+        const thumbnailContainer = document.querySelector('.thumbnail-container');
+        thumbnailContainer.innerHTML = ''; // Limpa as miniaturas anteriores
+
+        const gallery = galleries[galleryId];
+        viewerImage.src = gallery[index].src;
+        viewerCaption.textContent = gallery[index].caption;
+
+        gallery.forEach((image, i) => {
+            const thumbnail = document.createElement('img');
+            thumbnail.src = image.src;
+            thumbnail.alt = image.caption;
+            thumbnail.addEventListener('click', () => {
+                viewerImage.src = image.src;
+                viewerCaption.textContent = image.caption;
+            });
+            thumbnailContainer.appendChild(thumbnail);
+        });
+
+        photoViewer.style.display = 'block';
+    }
+
+    // Fechar galeria e visualizador
+    document.getElementById('close-gallery').addEventListener('click', () => {
+        document.getElementById('gallery-popup').style.display = 'none';
     });
 
-    photoViewer.style.display = 'block';
-}
-
-// Fechar galeria e visualizador
-document.getElementById('close-gallery').addEventListener('click', () => {
-    document.getElementById('gallery-popup').style.display = 'none';
-});
-
-document.getElementById('close-photo-viewer').addEventListener('click', () => {
-    document.getElementById('photo-viewer').style.display = 'none';
-});
-
-// Fechar galeria ao clicar fora
-document.getElementById('gallery-popup').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('gallery-popup')) {
-        document.getElementById('gallery-popup').style.display = 'none';
-    }
-});
-
-// Fechar visualizador de fotos ao clicar fora
-document.getElementById('photo-viewer').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('photo-viewer')) {
+    document.getElementById('close-photo-viewer').addEventListener('click', () => {
         document.getElementById('photo-viewer').style.display = 'none';
-    }
-});
+    });
 
-// Abrir galeria ao clicar nos álbuns
-document.querySelectorAll('.album-cover').forEach(albumCover => {
-    albumCover.addEventListener('click', () => {
-        const galleryId = albumCover.getAttribute('data-gallery');
-        openGallery(galleryId);
+    // Fechar galeria ao clicar fora
+    document.getElementById('gallery-popup').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('gallery-popup')) {
+            document.getElementById('gallery-popup').style.display = 'none';
+        }
+    });
+
+    // Fechar visualizador de fotos ao clicar fora
+    document.getElementById('photo-viewer').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('photo-viewer')) {
+            document.getElementById('photo-viewer').style.display = 'none';
+        }
+    });
+
+    // Abrir galeria ao clicar nos álbuns
+    document.querySelectorAll('.album-cover').forEach(albumCover => {
+        albumCover.addEventListener('click', () => {
+            const galleryId = albumCover.getAttribute('data-gallery');
+            openGallery(galleryId);
+        });
     });
 });
