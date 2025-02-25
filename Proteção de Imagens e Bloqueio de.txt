@@ -35,7 +35,8 @@ WebPageTest: Permite testar o desempenho do site em diferentes navegadores e loc
 TinyPNG/JPG: Ferramentas de compressão de imagens.
 Squoosh: Ferramenta de compressão de imagens do Google.
 
-Locomotive Scroll biblioteca de scroll
+chat estou tendo alguns probelmas para implmentar a Locomotive Scroll biblioteca de scroll
+Esse é o resultado da minha analise anterior, pode me ajudar a implmentar o scroll?
 Por que você perde sua barra de rolagem personalizada?
 O Locomotive Scroll, por padrão, assume o controle da rolagem da página, o que significa que ele "esconde" a barra de rolagem nativa do navegador e utiliza sua própria lógica para criar o efeito de rolagem suave. É por isso que sua barra de rolagem personalizada desaparece.
 
