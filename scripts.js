@@ -41,7 +41,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // ==================================================
+    // 4. HERO SLIDESHOW
+    // ==================================================
 
+    const slides = document.querySelectorAll('.hero-slideshow .slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Troca de slide a cada 5 segundos
+    setInterval(nextSlide, 5000);
 
     // ==================================================
     // 5. SCROLL SUAVE PARA LINKS INTERNOS
@@ -159,11 +178,18 @@ window.addEventListener('scroll', () => {
 
     const galleries = {
         gallery1: [
-            { src: 'https://images.pexels.com/photos/4275890/pexels-photo-4275890.jpeg', caption: 'Retrato de uma pessoa sorrindo em um ambiente urbano' },
-            { src: 'https://images.pexels.com/photos/1662298/pexels-photo-1662298.jpeg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
+            { src: './img/Album 1/folder.jpg', caption: 'Retrato de uma pessoa sorrindo em um ambiente urbano' },
+            { src: './img/Album 1/wallp (1).jpg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
+            { src: './img/Album 1/wallp (2).jpg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
+            { src: './img/Album 1/wallp (3).jpg', caption: 'Noivos se beijando em uma cerimônia de casamento' },
             // Adicione mais imagens aqui
         ],
         gallery2: [
+            { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
+            { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
+            // Adicione mais imagens aqui
+        ],
+        gallery3: [
             { src: 'https://images.pexels.com/photos/3389528/pexels-photo-3389528.jpeg', caption: 'Cidade 4, 2023' },
             { src: 'https://images.pexels.com/photos/2217366/pexels-photo-2217366.jpeg', caption: 'Cidade 5, 2023' },
             // Adicione mais imagens aqui

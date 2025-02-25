@@ -160,7 +160,7 @@ nav.scrolled {
 
 #hero {
     height: 100vh;
-    background: url('https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg') no-repeat center center/cover;
+    background: url('/img/wallp.jpg') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
