@@ -27,4 +27,13 @@ Referencia visual
 
 Gostaria que a navbar ao movimentar o scroll do site saindo do home subisse ou ficasse ouculta, e ao reolar o scroll para subir a nav bar seja apresentada, alem disso eu gostaria que a nava bar fosse totalmente tranparente agora.  
 
+Ferramentas Úteis:
+
+Google PageSpeed Insights: Analisa o desempenho do site e fornece sugestões de otimização.
+GTmetrix: Fornece informações detalhadas sobre o desempenho do site, incluindo tempo de carregamento e tamanho dos arquivos.
+WebPageTest: Permite testar o desempenho do site em diferentes navegadores e locais.
+TinyPNG/JPG: Ferramentas de compressão de imagens.
+Squoosh: Ferramenta de compressão de imagens do Google.
+
+Locomotive Scroll biblioteca de scroll
 

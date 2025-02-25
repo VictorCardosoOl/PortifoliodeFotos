@@ -28,10 +28,65 @@ body, html {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    scroll-behavior: smooth; /* Scroll suave */
 }
 
 /* ================================================== */
-/* 3. NAVBAR */
+/* 3. BARRA DE SCROLL PERSONALIZADA */
+/* ================================================== */
+
+/* Esconde a barra de scroll padrão */
+html {
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari e Opera */
+}
+
+/* Barra de Scroll Personalizada */
+.c-scrollbar {
+    position: fixed;
+    right: 24px;
+    bottom: 40px;
+    width: 2px;
+    background-color: #6e6e6e;
+    height: 20vh;
+    transform-origin: center center;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0.1;
+    z-index: 10000;
+}
+
+.c-scrollbar:hover {
+    transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+    opacity: 0.8;
+}
+
+.c-scrollbar_thumb {
+    position: absolute;
+    top: auto;
+    min-height: 30%;
+    background-color: #f8f8f8;
+    opacity: 1;
+    width: 2px;
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+.has-scroll-dragging .c-scrollbar_thumb {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+}
+
+/* ================================================== */
+/* 4. NAVBAR */
 /* ================================================== */
 
 nav {
@@ -50,9 +105,6 @@ nav.scrolled {
     box-shadow: var(--shadow);
 }
 
-/* ... (restante do CSS permanece igual) ... */
-
-
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -66,7 +118,7 @@ nav.scrolled {
     font-size: 1.5rem;
     text-decoration: none;
     font-weight: bold;
-    font-family: var(--font-primary); /* Usa a fonte primária no logo */
+    font-family: var(--font-primary);
 }
 
 .nav-links {
@@ -81,15 +133,15 @@ nav.scrolled {
     color: var(--primary-color);
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.3s ease; /* Transição suave para a cor do texto */
+    transition: color 0.3s ease;
 }
 
 .nav-links li a:hover {
-    color: var(--accent-color); /* Muda a cor ao passar o mouse */
+    color: var(--accent-color);
 }
 
 .menu-toggle {
-    display: none; /* Oculta o menu toggle em telas maiores */
+    display: none;
     flex-direction: column;
     cursor: pointer;
 }
@@ -99,16 +151,16 @@ nav.scrolled {
     height: 3px;
     background-color: var(--primary-color);
     margin: 4px 0;
-    transition: transform 0.3s ease, opacity 0.3s ease; /* Transição suave para o menu mobile */
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* ================================================== */
-/* 4. HERO SECTION */
+/* 5. HERO SECTION */
 /* ================================================== */
 
 #hero {
-    height: 100vh; /* Altura total da tela */
-    background: url('https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg') no-repeat center center/cover; /* Imagem de fundo */
+    height: 100vh;
+    background: url('https://images.pexels.com/photos/4275885/pexels-photo-4275885.jpeg') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,12 +176,12 @@ nav.scrolled {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay escuro sobre a imagem de fundo */
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
     position: relative;
-    z-index: 1; /* Garante que o conteúdo fique acima do overlay */
+    z-index: 1;
 }
 
 .hero-content h1 {
@@ -152,21 +204,21 @@ nav.scrolled {
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .cta-button:hover {
-    background-color: #ff4c4c; /* Muda a cor ao passar o mouse */
-    transform: translateY(-5px); /* Efeito de levantar o botão */
+    background-color: #ff4c4c;
+    transform: translateY(-5px);
 }
 
 /* ================================================== */
-/* 5. SEÇÃO DE ÁLBUNS */
+/* 6. SEÇÃO DE ÁLBUNS */
 /* ================================================== */
 
 #albums {
     padding: 50px 20px;
-    background-color: var(--secondary-color); /* Fundo cinza claro */
+    background-color: var(--secondary-color);
 }
 
 #albums h2 {
@@ -190,7 +242,7 @@ nav.scrolled {
 }
 
 .album.reverse {
-    flex-direction: row-reverse; /* Inverte a ordem dos elementos */
+    flex-direction: row-reverse;
 }
 
 .album-description {
@@ -213,34 +265,34 @@ nav.scrolled {
     cursor: pointer;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease; /* Transição suave */
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
 }
 
 .album-cover:hover {
-    transform: scale(1.05); /* Efeito de escala ao passar o mouse */
+    transform: scale(1.05);
 }
 
 .album-cover img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra o contêiner */
+    object-fit: cover;
 }
 
 /* ================================================== */
-/* 6. POP-UP DA GALERIA */
+/* 7. POP-UP DA GALERIA */
 /* ================================================== */
 
 .popup {
-    display: none; /* Oculta o pop-up por padrão */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro com transparência */
-    z-index: 1001; /* Garante que o pop-up fique acima de outros elementos */
-    overflow-y: auto; /* Permite rolagem vertical */
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1001;
+    overflow-y: auto;
     padding: 20px;
 }
 
@@ -251,15 +303,15 @@ nav.scrolled {
     color: white;
     font-size: 40px;
     cursor: pointer;
-    transition: color 0.3s ease; /* Transição suave para a cor */
+    transition: color 0.3s ease;
 }
 
 .popup .close:hover {
-    color: var(--accent-color); /* Muda a cor ao passar o mouse */
+    color: var(--accent-color);
 }
 
 .gallery-masonry {
-    columns: 3; /* Divide o conteúdo em 3 colunas */
+    columns: 3;
     column-gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -270,26 +322,26 @@ nav.scrolled {
     margin-bottom: 20px;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Transição suave */
+    transition: transform 0.3s ease;
 }
 
 .gallery-masonry img:hover {
-    transform: scale(1.05); /* Efeito de escala ao passar o mouse */
+    transform: scale(1.05);
 }
 
 /* ================================================== */
-/* 7. VISUALIZADOR DE FOTOS */
+/* 8. VISUALIZADOR DE FOTOS */
 /* ================================================== */
 
 .photo-viewer {
-    display: none; /* Oculta o visualizador por padrão */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro com transparência */
-    z-index: 1002; /* Garante que o visualizador fique acima de outros elementos */
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1002;
     text-align: center;
 }
 
@@ -300,11 +352,11 @@ nav.scrolled {
     color: white;
     font-size: 40px;
     cursor: pointer;
-    transition: color 0.3s ease; /* Transição suave para a cor */
+    transition: color 0.3s ease;
 }
 
 .photo-viewer .close:hover {
-    color: var(--accent-color); /* Muda a cor ao passar o mouse */
+    color: var(--accent-color);
 }
 
 #viewer-image {
@@ -327,12 +379,12 @@ nav.scrolled {
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
-    opacity: 0.7; /* Opacidade reduzida */
-    transition: opacity 0.3s ease; /* Transição suave */
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
 }
 
 .thumbnail-container img:hover {
-    opacity: 1; /* Opacidade total ao passar o mouse */
+    opacity: 1;
 }
 
 .caption {
@@ -342,31 +394,12 @@ nav.scrolled {
 }
 
 /* ================================================== */
-/* 8. BOTÃO COMPARTILHAR */
-/* ================================================== */
-
-.share-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: var(--accent-color); /* Fundo vermelho coral */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transição suave */
-}
-
-.share-button:hover {
-    background-color: #ff4c4c; /* Muda a cor ao passar o mouse */
-}
-
-/* ================================================== */
 /* 9. SOBRE O FOTÓGRAFO */
 /* ================================================== */
 
 #about {
     padding: 50px 20px;
-    background-color: #ffffff; /* Fundo branco */
+    background-color: var(--background-color);
 }
 
 .about-container {
@@ -399,7 +432,7 @@ nav.scrolled {
 /* ================================================== */
 
 footer {
-    background-color: var(--primary-color); /* Fundo preto */
+    background-color: var(--primary-color);
     color: white;
     padding: 20px;
     text-align: center;
@@ -423,11 +456,11 @@ footer {
     color: white;
     margin: 0 10px;
     font-size: 1.5rem;
-    transition: color 0.3s ease; /* Transição suave para a cor */
+    transition: color 0.3s ease;
 }
 
 .social-icons a:hover {
-    color: var(--accent-color); /* Muda a cor ao passar o mouse */
+    color: var(--accent-color);
 }
 
 .footer-links {
@@ -442,7 +475,7 @@ footer {
 }
 
 .footer-links a:hover {
-    text-decoration: underline; /* Sublinhado ao passar o mouse */
+    text-decoration: underline;
 }
 
 .logo img {
@@ -462,18 +495,18 @@ footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--accent-color); /* Fundo vermelho coral */
+    background-color: var(--accent-color);
     color: white;
     padding: 15px;
-    border-radius: 50%; /* Formato circular */
+    border-radius: 50%;
     font-size: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    box-shadow: var(--shadow);
     cursor: pointer;
-    transition: transform 0.3s ease; /* Transição suave */
+    transition: transform 0.3s ease;
 }
 
 .floating-contact:hover {
-    transform: scale(1.1); /* Efeito de escala ao passar o mouse */
+    transform: scale(1.1);
 }
 
 /* ================================================== */
@@ -482,15 +515,15 @@ footer {
 
 @media (max-width: 768px) {
     .hero-content h1 {
-        font-size: 2.5rem; /* Reduz o tamanho do título em telas menores */
+        font-size: 2.5rem;
     }
 
     .hero-content p {
-        font-size: 1.2rem; /* Reduz o tamanho do texto em telas menores */
+        font-size: 1.2rem;
     }
 
     .nav-links {
-        display: none; /* Oculta os links em telas menores */
+        display: none;
         flex-direction: column;
         gap: 10px;
         position: absolute;
@@ -498,38 +531,38 @@ footer {
         right: 20px;
         background-color: #ffffff;
         padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow);
     }
 
     .nav-links.active {
-        display: flex; /* Exibe os links ao clicar no menu mobile */
+        display: flex;
     }
 
     .menu-toggle {
-        display: flex; /* Exibe o menu toggle em telas menores */
+        display: flex;
     }
 
     .about-container {
-        flex-direction: column; /* Altera o layout para coluna em telas menores */
+        flex-direction: column;
         text-align: center;
     }
 
     .album {
-        flex-direction: column; /* Altera o layout para coluna em telas menores */
+        flex-direction: column;
         text-align: center;
     }
 
     .album.reverse {
-        flex-direction: column; /* Mantém o layout em coluna */
+        flex-direction: column;
     }
 
     .gallery-masonry {
-        columns: 2; /* Reduz para 2 colunas em telas menores */
+        columns: 2;
     }
 }
 
 @media (max-width: 480px) {
     .gallery-masonry {
-        columns: 1; /* Reduz para 1 coluna em telas muito pequenas */
+        columns: 1;
     }
 }
