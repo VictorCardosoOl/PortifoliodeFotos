@@ -1,3 +1,4 @@
+@import url(/css/utiles.css);
 /* ================================================== */
 /* 1. VARIÁVEIS GLOBAIS */
 /* ================================================== */
@@ -487,82 +488,5 @@ footer {
     font-size: 0.9rem;
 }
 
-/* ================================================== */
-/* 11. BOTÃO DE CONTATO FLUTUANTE */
-/* ================================================== */
 
-.floating-contact {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--accent-color);
-    color: white;
-    padding: 15px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
 
-.floating-contact:hover {
-    transform: scale(1.1);
-}
-
-/* ================================================== */
-/* 12. RESPONSIVIDADE */
-/* ================================================== */
-
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-content p {
-        font-size: 1.2rem;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        gap: 10px;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background-color: #ffffff;
-        padding: 20px;
-        box-shadow: var(--shadow);
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .album {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .album.reverse {
-        flex-direction: column;
-    }
-
-    .gallery-masonry {
-        columns: 2;
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery-masonry {
-        columns: 1;
-    }
-}
