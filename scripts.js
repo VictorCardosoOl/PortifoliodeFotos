@@ -42,46 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ==================================================
-    // 4. HERO SLIDESHOW
-    // ==================================================
-
-    const slides = document.querySelectorAll('.hero-slideshow .slide');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-
-    // Troca de slide a cada 5 segundos
-    setInterval(nextSlide, 5000);
-
-    // ==================================================
-    // 5. SCROLL SUAVE PARA LINKS INTERNOS
-    // ==================================================
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                });
-            }
-        });
-    });
-
-    // ==================================================
     // 6. BARRA DE SCROLL PERSONALIZADA
     // ==================================================
 
@@ -97,80 +57,7 @@ window.addEventListener('scroll', () => {
     scrollThumb.style.height = `${thumbHeight}%`;
     scrollThumb.style.transform = `translateY(${thumbPosition}%)`;
 });
-    // ==================================================
-    // 7. INTERNACIONALIZAÇÃO (i18n)
-    // ==================================================
-
-    const translations = {
-        'pt-BR': {
-            home: 'Início',
-            albums: 'Álbuns',
-            about: 'Sobre',
-            contact: 'Contato',
-            heroTitle: 'Capturando Momentos, Criando Memórias',
-            heroSubtitle: 'Bem-vindo ao meu portfólio fotográfico.',
-            exploreAlbums: 'Explorar Álbuns',
-            albumsTitle: 'Álbuns',
-            album1Title: 'Álbum 1: Retratos',
-            album1Description: 'Uma coleção de retratos que capturam a essência das pessoas.',
-            album2Title: 'Álbum 2: Casamentos',
-            album2Description: 'Momentos especiais de cerimônias e festas de casamento.',
-            aboutTitle: 'Sobre Mim',
-            aboutDescription: 'Olá! Sou um fotógrafo profissional com mais de 10 anos de experiência, especializado em retratos, casamentos e eventos. Minha paixão é capturar momentos únicos e transformá-los em memórias eternas.',
-            testimonialsTitle: 'Depoimentos',
-            testimonial1: '"As fotos do nosso casamento foram incríveis! Recomendo muito!"',
-            testimonial1Author: '- Maria e João',
-            testimonial2: '"Adorei o ensaio de retratos. Foi uma experiência maravilhosa!"',
-            testimonial2Author: '- Ana',
-            contactTitle: 'Contato',
-            terms: 'Termos de Uso',
-            privacy: 'Política de Privacidade',
-            rights: 'Todos os direitos reservados.',
-            language: 'Idioma:',
-        },
-        'en': {
-            home: 'Home',
-            albums: 'Albums',
-            about: 'About',
-            contact: 'Contact',
-            heroTitle: 'Capturing Moments, Creating Memories',
-            heroSubtitle: 'Welcome to my photography portfolio.',
-            exploreAlbums: 'Explore Albums',
-            albumsTitle: 'Albums',
-            album1Title: 'Album 1: Portraits',
-            album1Description: 'A collection of portraits that capture the essence of people.',
-            album2Title: 'Album 2: Weddings',
-            album2Description: 'Special moments from wedding ceremonies and parties.',
-            aboutTitle: 'About Me',
-            aboutDescription: 'Hello! I am a professional photographer with over 10 years of experience, specializing in portraits, weddings, and events. My passion is capturing unique moments and turning them into eternal memories.',
-            testimonialsTitle: 'Testimonials',
-            testimonial1: '"The photos from our wedding were amazing! Highly recommended!"',
-            testimonial1Author: '- Maria and João',
-            testimonial2: '"I loved the portrait session. It was a wonderful experience!"',
-            testimonial2Author: '- Ana',
-            contactTitle: 'Contact',
-            terms: 'Terms of Use',
-            privacy: 'Privacy Policy',
-            rights: 'All rights reserved.',
-            language: 'Language:',
-        },
-    };
-
-    const languageSwitcher = document.getElementById('language-switcher');
-    languageSwitcher.addEventListener('change', function () {
-        const lang = this.value;
-        updateLanguage(lang);
-    });
-
-    function updateLanguage(lang) {
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            element.textContent = translations[lang][key];
-        });
-    }
-
-    // Inicializa com o idioma padrão (pt-BR)
-    updateLanguage('pt-BR');
+    
 
     // ==================================================
     // 8. GALERIA DE FOTOS
