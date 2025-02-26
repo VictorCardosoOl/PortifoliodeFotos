@@ -132,7 +132,7 @@ locoScroll.on('scroll', (event) => {
 Com este passo a passo, você deverá conseguir implementar a rolagem suave com o Locomotive Scroll sem perder sua barra de rolagem personalizada. Se tiver alguma dúvida ou precisar de ajuda adicional, me diga!
 
 
-
+batatinha quando nasce
 
 
 
