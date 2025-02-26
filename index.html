@@ -1,194 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Meta tags para configuração básica do documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio fotográfico profissional com foco em retratos, casamentos e eventos.">
-    <meta name="keywords" content="fotografia, portfólio, retratos, casamentos, eventos">
-    <meta name="author" content="Seu Nome">
-    <meta property="og:image" content="URL_DA_IMAGEM_DE_COMPARTILHAMENTO"> <!-- Adicionado og:image -->
-    <meta name="robots" content="index, follow"> <!-- Adicionado meta tag robots -->
-    <title>Portfólio Fotográfico</title>
-
-    <!-- Links para folhas de estilo e fontes -->
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <title>Portfólio de Fotografia</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Contêiner do Locomotive Scroll -->
-    <div data-scroll-container>
-        <!-- Barra de Scroll Personalizada -->
-        <div class="c-scrollbar">
-            <div class="c-scrollbar_thumb"></div>
+<body data-scroll-container>
+    <!-- Navbar -->
+    <nav class="navbar" data-scroll data-scroll-sticky data-scroll-target="#main-content">
+        <div class="container">
+            <a href="#" class="logo">Meu Portfólio</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <!-- Navbar -->
-        <nav id="navbar">
-            <div class="navbar-container">
-                <div class="logo">
-                    <a href="#" tabindex="0">Fotógrafo</a>
-                </div>
-                <ul class="nav-links" id="nav-links" aria-label="Menu Principal">
-                    <li><a href="#hero" tabindex="0" data-i18n="home">Início</a></li>
-                    <li><a href="#albums" tabindex="0" data-i18n="albums">Álbuns</a></li>
-                    <li><a href="#about" tabindex="0" data-i18n="about">Sobre</a></li>
-                    <li><a href="#contact" tabindex="0" data-i18n="contact">Contato</a></li>
-                </ul>
-                <button class="menu-toggle" id="mobile-menu" aria-expanded="false" aria-controls="nav-links" tabindex="0">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <section id="hero">
-            <div class="hero-slideshow">
-                <div class="slide active" style="background-clip: url('/img/video/5874523-uhd_4096_2160_30fps.mp4');"></div>
-            </div>
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" data-aos-easing="ease-in-out">
-                <h1 data-i18n="heroTitle">Portfólio Fotográfico de [Seu Nome]</h1> <!-- Título principal da página -->
-                <p data-i18n="heroSubtitle">Capturando Momentos, Criando Memórias</p>
-                <a href="#albums" class="cta-button" tabindex="0" data-i18n="exploreAlbums">Explorar Álbuns</a>
-            </div>
-        </section>
-
-        <!-- Seção de Álbuns -->
-        <section id="albums">
-            <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-easing="ease-in-out" data-i18n="albumsTitle">Álbuns</h2>
-            <div class="album-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" data-aos-easing="ease-in-out">
-                <div class="album">
-                    <div class="album-description">
-                        <h3 data-i18n="album1Title">Álbum 1: Retratos</h3>
-                        <p data-i18n="album1Description">Uma coleção de retratos que capturam a essência das pessoas.</p>
-                    </div>
-                    <div class="album-cover" data-gallery="gallery1" tabindex="0">
-                        <img src="/img/Album 1/folder.jpg" alt="Capa do álbum Retratos" loading="lazy">
-                    </div>
-                </div>
-                <div class="album reverse">
-                    <div class="album-description">
-                        <h3 data-i18n="album2Title">Álbum 2: Casamentos</h3>
-                        <p data-i18n="album2Description">Momentos especiais de cerimônias e festas de casamento.</p>
-                    </div>
-                    <div class="album-cover" data-gallery="gallery2" tabindex="0">
-                        <img src="/img/Album 2/folder.jpg" alt="Capa do álbum Casamentos" loading="lazy">
-                    </div>
-                </div>
-                <div class="album">
-                    <div class="album-description">
-                        <h3 data-i18n="album1Title">Álbum 3: Eventos</h3>
-                        <p data-i18n="album1Description">Momentos especiais de eventos e celebrações.</p>
-                    </div>
-                    <div class="album-cover" data-gallery="gallery3" tabindex="0">
-                        <img src="/img/Album 3/folder.jpg" alt="Capa do álbum Eventos" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pop-up da Galeria -->
-        <div id="gallery-popup" class="popup">
-            <span class="close" id="close-gallery">&times;</span>
-            <div class="gallery-masonry" id="gallery-masonry">
-                <!-- Imagens serão adicionadas dinamicamente via JavaScript -->
-            </div>
+    <!-- Hero Section com Vídeo de Fundo -->
+    <section id="hero" class="hero" data-scroll-section>
+        <div class="video-background">
+            <video autoplay muted loop>
+                <source src="/img/13054623_3840_2160_30fps.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
         </div>
-
-        <!-- Visualizador de Fotos -->
-        <div id="photo-viewer" class="photo-viewer">
-            <span class="close" id="close-photo-viewer">&times;</span>
-            <img id="viewer-image" src="" alt="Foto ampliada" loading="lazy">
-            <div class="caption" id="viewer-caption"></div>
-            <div class="thumbnail-container">
-                <!-- Miniaturas serão adicionadas dinamicamente via JavaScript -->
-            </div>
+        <div class="hero-content">
+            <h1 data-scroll data-scroll-speed="2">Bem-vindo ao Meu Portfólio</h1>
+            <p data-scroll data-scroll-speed="1">Capturando momentos, criando memórias.</p>
         </div>
+    </section>
 
-        <!-- Sobre o Fotógrafo -->
-        <section id="about">
-            <div class="about-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" data-aos-easing="ease-in-out">
-                <div class="about-image">
-                    <img src="https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fotógrafo segurando uma câmera profissional" loading="lazy">
-                </div>
-                <div class="about-text">
-                    <h2 data-i18n="aboutTitle">Sobre Mim</h2>
-                    <p data-i18n="aboutDescription">Olá! Sou um fotógrafo profissional com mais de 10 anos de experiência, especializado em retratos, casamentos e eventos. Minha paixão é capturar momentos únicos e transformá-los em memórias eternas.</p>
-                    <div class="testimonials">
-                        <h3 data-i18n="testimonialsTitle">Depoimentos</h3>
-                        <div class="testimonial">
-                            <p data-i18n="testimonial1">"As fotos do nosso casamento foram incríveis! Recomendo muito!"</p>
-                            <span data-i18n="testimonial1Author">- Maria e João</span>
-                        </div>
-                        <div class="testimonial">
-                            <p data-i18n="testimonial2">"Adorei o ensaio de retratos. Foi uma experiência maravilhosa!"</p>
-                            <span data-i18n="testimonial2Author">- Ana</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Seção do Portfólio -->
+    <section id="portfolio" class="portfolio" data-scroll-section>
+        <h2 data-scroll data-scroll-speed="1">Portfólio</h2>
+        <div class="gallery">
+            <img src="/img/Album 1/folder.jpg" alt="Foto 1" data-scroll data-scroll-speed="0.5">
+            <img src="/img/Album 2/wallp (1).png" alt="Foto 2" data-scroll data-scroll-speed="0.5">
+            <img src="/img/Album 3/wallp (3).jpg" alt="Foto 3" data-scroll data-scroll-speed="0.5">
+        </div>
+    </section>
 
-        <!-- Seção de Contato -->
-        <section id="contact">
-            <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-easing="ease-in-out" data-i18n="contactTitle">Contato</h2>
-            <form id="contact-form" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" data-aos-easing="ease-in-out">
-                <div class="form-group">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Mensagem:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="cta-button">Enviar Mensagem</button>
-            </form>
-        </section>
+    <!-- Seção Sobre -->
+    <section id="about" class="about" data-scroll-section>
+        <h2 data-scroll data-scroll-speed="1">Sobre Mim</h2>
+        <p data-scroll data-scroll-speed="0.5">Eu sou um fotógrafo apaixonado por capturar a beleza em cada momento.</p>
+    </section>
 
-        <!-- Footer -->
-        <footer id="footer">
-            <div class="footer-container">
-                <div class="footer-left">
-                    <div class="logo">
-                        <a href="#" tabindex="0">Fotógrafo</a> <!-- Logo como texto -->
-                    </div>
-                </div>
-                <div class="footer-center">
-                    <div class="contact-info">
-                        <h3 data-i18n="contactTitle">Contato</h3>
-                        <p>Email: contato@fotografo.com</p>
-                        <p>Telefone: (11) 99999-9999</p>
-                    </div>
-                </div>
-                <div class="footer-right">
-                    <div class="footer-links">
-                        <a href="termos.html" tabindex="0" data-i18n="terms">Termos de Uso</a>
-                        <a href="privacidade.html" tabindex="0" data-i18n="privacy">Política de Privacidade</a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Fotógrafo. <span data-i18n="rights">Todos os direitos reservados.</span>
-            </div>
-        </footer>
+    <!-- Seção de Contato -->
+    <section id="contact" class="contact" data-scroll-section>
+        <h2 data-scroll data-scroll-speed="1">Contato</h2>
+        <p data-scroll data-scroll-speed="0.5">Entre em contato comigo para mais informações.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" data-scroll-section>
+        <p>&copy; 2023 Meu Portfólio. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scrollbar Personalizada -->
+    <div class="c-scrollbar">
+        <div class="c-scrollbar_thumb"></div>
     </div>
 
-    <!-- Botão de Contato Flutuante -->
-    <a href="https://wa.me/5511977440146" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888; z-index:1000;" target="_blank" id="btnWhatsApp">
-        <i style="margin-top:16px" class="fab fa-whatsapp"></i>
-    </a>
-
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-    <script src="scripts.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
