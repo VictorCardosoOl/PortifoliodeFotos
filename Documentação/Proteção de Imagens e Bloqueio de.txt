@@ -28,6 +28,8 @@ https://www.henriheymans.com/
 Gostei bastante do efeito da imagem ao scrolar na seção reconhecimento e premios
 
 https://by-kin.com/
+https://photoyoshi.com/landscape
+https://lusion.co/
 preciso dissecar este site
 
 Gostaria que a navbar ao movimentar o scroll do site saindo do home subisse ou ficasse ouculta, e ao reolar o scroll para subir a nav bar seja apresentada, alem disso eu gostaria que a nava bar fosse totalmente tranparente agora.  
