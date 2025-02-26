@@ -171,3 +171,37 @@ html::-webkit-scrollbar {
     cursor: -webkit-grabbing;
     cursor: grabbing;
 }
+/* Adicione estas regras no final do arquivo */
+
+/* Correção para o container de scroll */
+html {
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+}
+
+[data-scroll-container] {
+    min-height: 100vh;
+    will-change: transform;
+}
+
+/* Ajustes na scrollbar personalizada */
+.c-scrollbar {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    background-color: rgba(110, 110, 110, 0.3);
+    height: 40vh;
+    z-index: 1000;
+}
+
+.c-scrollbar_thumb {
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    transition: transform 0.2s ease;
+}

@@ -5,7 +5,7 @@ https://www.fontevraud.fr/
 Gostei do Scroll deixo o scroll do site muito tranquila, esta muito mais bonito de moviemntar
 
 https://www.darkalleypictures.com/
-Gostei da estrutura do site
+Gostei da estrutura do menu lateral do site, seria otimo aplicar na parte galeria
 
 https://casavicens.org/
 Gostei desse site
@@ -24,6 +24,11 @@ Scroll incrivelmente suave
 
 https://seasoned.koto.studio/
 Referencia visual
+https://www.henriheymans.com/
+Gostei bastante do efeito da imagem ao scrolar na seção reconhecimento e premios
+
+https://by-kin.com/
+preciso dissecar este site
 
 Gostaria que a navbar ao movimentar o scroll do site saindo do home subisse ou ficasse ouculta, e ao reolar o scroll para subir a nav bar seja apresentada, alem disso eu gostaria que a nava bar fosse totalmente tranparente agora.  
 
