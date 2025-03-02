@@ -6,9 +6,9 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #0A0A0A;
+    color: #F0F0F0;
     overflow-x: hidden;
 }
 
@@ -23,28 +23,34 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(10, 10, 10, 0.9);
     z-index: 1000;
-    padding: 10px 0;
+    padding: 20px 0;
+    transition: background-color 0.3s ease;
 }
 
 .navbar .logo {
     font-size: 24px;
-    font-weight: bold;
-    color: #fff;
+    font-weight: 500;
+    color: #E3B873;
     text-decoration: none;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 .nav-links a {
-    color: #fff;
+    color: #F0F0F0;
     text-decoration: none;
     font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #E3B873;
 }
 
 /* Hero Section */
@@ -80,10 +86,12 @@ body {
 .hero-content h1 {
     font-size: 4rem;
     margin-bottom: 20px;
+    color: #E3B873;
 }
 
 .hero-content p {
     font-size: 1.5rem;
+    color: #F0F0F0;
 }
 
 /* Seções */
@@ -93,101 +101,36 @@ section {
 }
 
 .gallery {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    padding: 20px;
 }
 
-.gallery img {
-    max-width: 100%;
-    height: auto;
+.gallery-item {
+    overflow: hidden;
     border-radius: 10px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
 }
 
 /* Footer */
 .footer {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(10, 10, 10, 0.9);
     padding: 20px 0;
     text-align: center;
 }
-/* Garantindo que elementos animados tenham transições suaves */
-[data-scroll] {
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-    will-change: transform, opacity; /* Melhora a performance */
-}
 
-/* Ajustes para o vídeo de fundo */
-.video-background {
-    transition: transform 0.5s ease-out;
-    will-change: transform;
-}
-/* Esconde a scrollbar padrão */
-html {
-    scrollbar-width: none; /* Para Firefox */
-    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
-}
-
-html::-webkit-scrollbar {
-    display: none; /* Para Chrome, Safari e Opera */
-}
-
-/* Barra de Scroll Personalizada */
-.c-scrollbar {
-    position: fixed;
-    right: 24px;
-    bottom: 40px;
-    width: 2px;
-    background-color: #6e6e6e;
-    height: 20vh;
-    transform-origin: center center;
-    transition: transform 0.3s, opacity 0.3s;
-    opacity: 0.1;
-    z-index: 10000;
-}
-
-.c-scrollbar:hover {
-    transform: scaleX(1.45);
-}
-
-.c-scrollbar:hover,
-.has-scroll-scrolling .c-scrollbar,
-.has-scroll-dragging .c-scrollbar {
-    opacity: 0.8;
-}
-
-.c-scrollbar_thumb {
-    position: absolute;
-    top: auto;
-    min-height: 30%;
-    background-color: #f8f8f8;
-    opacity: 1;
-    width: 2px;
-    cursor: -webkit-grab;
-    cursor: grab;
-}
-
-.has-scroll-dragging .c-scrollbar_thumb {
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
-}
-/* Adicione estas regras no final do arquivo */
-
-/* Correção para o container de scroll */
-html {
-    overflow: hidden;
-}
-
-body {
-    overflow: hidden;
-}
-
-[data-scroll-container] {
-    min-height: 100vh;
-    will-change: transform;
-}
-
-/* Ajustes na scrollbar personalizada */
+/* Scrollbar Personalizada */
 .c-scrollbar {
     position: fixed;
     right: 10px;
@@ -202,6 +145,6 @@ body {
 .c-scrollbar_thumb {
     position: absolute;
     width: 100%;
-    background-color: #fff;
+    background-color: #E3B873;
     transition: transform 0.2s ease;
 }

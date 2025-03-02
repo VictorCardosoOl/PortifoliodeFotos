@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio de Fotografia</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Lora:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body data-scroll-container>
     <!-- Navbar -->
     <nav class="navbar" data-scroll data-scroll-sticky data-scroll-target="#main-content">
         <div class="container">
-            <a href="#" class="logo">Meu Portfólio</a>
+            <a href="#" class="logo" data-scroll data-scroll-speed="1">Meu Portfólio</a>
             <ul class="nav-links">
-                <li><a href="#hero">Início</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#contact">Contato</a></li>
+                <li><a href="#hero" data-scroll data-scroll-speed="1">Início</a></li>
+                <li><a href="#portfolio" data-scroll data-scroll-speed="1">Portfólio</a></li>
+                <li><a href="#about" data-scroll data-scroll-speed="1">Sobre</a></li>
+                <li><a href="#contact" data-scroll data-scroll-speed="1">Contato</a></li>
             </ul>
         </div>
     </nav>
@@ -23,14 +26,14 @@
     <!-- Hero Section com Vídeo de Fundo -->
     <section id="hero" class="hero" data-scroll-section>
         <div class="video-background">
-            <video autoplay muted loop>
-                <source src="/assets/backgroud.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline>
+                <source src="assets/videos/backgroud.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos HTML5.
             </video>
         </div>
         <div class="hero-content">
             <h1 data-scroll data-scroll-speed="2">Bem-vindo ao Meu Portfólio</h1>
-            <p data-scroll data-scroll-speed="1">Capturando momesntos, criando memórias.</p>
+            <p data-scroll data-scroll-speed="1">Capturando momentos, criando memórias.</p>
         </div>
     </section>
 
@@ -38,9 +41,15 @@
     <section id="portfolio" class="portfolio" data-scroll-section>
         <h2 data-scroll data-scroll-speed="1">Portfólio</h2>
         <div class="gallery">
-            <img src="/assets/Galeria/Album 1/a (2).jpg" alt="Foto 1" data-scroll data-scroll-speed="0.5">
-            <img src="/assets/Galeria/Album 1/b (3).jpg" alt="Foto 2" data-scroll data-scroll-speed="0.5">
-            <img src="/assets/Galeria/Album 1/b (6).jpg" alt="Foto 3" data-scroll data-scroll-speed="0.5">
+            <div class="gallery-item" data-scroll data-scroll-speed="0.5">
+                <img src="assets/images/gallery//a (2).jpg" alt="Foto 1" class="hover-zoom">
+            </div>
+            <div class="gallery-item" data-scroll data-scroll-speed="0.5">
+                <img src="assets/images/gallery/b (3).jpg" alt="Foto 2" class="hover-zoom">
+            </div>
+            <div class="gallery-item" data-scroll data-scroll-speed="0.5">
+                <img src="assets/images/gallery/b (6).jpg" alt="Foto 3" class="hover-zoom">
+            </div>
         </div>
     </section>
 
@@ -54,6 +63,12 @@
     <section id="contact" class="contact" data-scroll-section>
         <h2 data-scroll data-scroll-speed="1">Contato</h2>
         <p data-scroll data-scroll-speed="0.5">Entre em contato comigo para mais informações.</p>
+        <form class="contact-form">
+            <input type="text" placeholder="Seu nome" required>
+            <input type="email" placeholder="Seu e-mail" required>
+            <textarea placeholder="Sua mensagem" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
     </section>
 
     <!-- Footer -->
