@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body data-scroll-container>
+<body>
     <!-- Navbar -->
-    <nav class="navbar" data-scroll data-scroll-sticky data-scroll-target="#main-content">
+    <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">Portfólio</a>
             <ul class="nav-links">
@@ -25,69 +25,68 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero" data-scroll-section>
+    <section id="hero" class="hero">
         <div class="video-background">
             <video autoplay muted loop playsinline>
-                <source src="assets/videos/background.mp4" type="video/mp4">
+                <source src="assets/videos/backgroud.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos HTML5.
             </video>
             <div class="overlay"></div>
         </div>
         <div class="hero-content">
-            <h1 data-scroll data-scroll-speed="2">Capturando momentos únicos</h1>
-            <p data-scroll data-scroll-speed="1">Fotografia profissional para momentos especiais</p>
-            <a href="#portfolio" class="cta-button" data-scroll data-scroll-speed="0.5">Explore meu trabalho</a>
+            <h1>Capturando momentos únicos</h1>
+            <p>Fotografia profissional para momentos especiais</p>
+            <a href="#portfolio" class="cta-button">Explore meu trabalho</a>
         </div>
     </section>
 
     <!-- Seção do Portfólio -->
-    <section id="portfolio" class="portfolio" data-scroll-section>
+    <section id="portfolio" class="portfolio">
         <div class="section-header">
             <h2>Portfólio</h2>
             <p>Alguns dos meus melhores trabalhos</p>
         </div>
         <div class="gallery">
-            <div class="gallery-item" data-scroll data-scroll-speed="0.3">
+            <div class="gallery-item">
                 <img src="assets/images/gallery/a (2).jpg" alt="Foto 1">
                 <div class="image-overlay">
                     <h3>Retratos</h3>
                     <p>Coleção 2023</p>
                 </div>
             </div>
-            <div class="gallery-item" data-scroll data-scroll-speed="0.3">
-                <img src="assets/images/gallery/b (3).jpg" alt="Foto 1">
+            <div class="gallery-item">
+                <img src="assets/images/gallery/b (3).jpg" alt="Foto 2">
                 <div class="image-overlay">
-                    <h3>Retratos</h3>
+                    <h3>Paisagens</h3>
                     <p>Coleção 2023</p>
                 </div>
             </div>
-            <div class="gallery-item" data-scroll data-scroll-speed="0.3">
-                <img src="assets/images/gallery/b (6).jpg" alt="Foto 1">
+            <div class="gallery-item">
+                <img src="assets/images/gallery/b (6).jpg" alt="Foto 3">
                 <div class="image-overlay">
-                    <h3>Retratos</h3>
+                    <h3>Eventos</h3>
                     <p>Coleção 2023</p>
                 </div>
             </div>
-            <!-- Repetir para outras imagens -->
         </div>
     </section>
 
     <!-- Seção Sobre -->
-    <section id="about" class="about" data-scroll-section>
+    <section id="about" class="about">
         <div class="container">
             <div class="about-content">
                 <h2>Sobre Mim</h2>
-                <p>Fotógrafo profissional com 10 anos de experiência...</p>
+                <p>Fotógrafo profissional com 10 anos de experiência, especializado em retratos, paisagens e eventos.</p>
                 <a href="#contact" class="cta-button">Agende uma sessão</a>
             </div>
             <div class="about-image">
-                <img src="assets/images/profile.jpg" alt="Fotógrafo">
+                <img src="assets/images/gallery/profile.png" alt="Fotógrafo">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer" data-scroll-section>
+    <footer class="footer">
         <div class="container">
             <div class="footer-column">
                 <h3>Portfólio</h3>
@@ -105,6 +104,13 @@
                     <li><i class="fas fa-envelope"></i> contato@portfolio.com</li>
                     <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
                 </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Avaliações</h4>
+                <div class="google-reviews">
+                    <p>Leia nossas avaliações no Google:</p>
+                    <a href="#" class="cta-button">Ver avaliações</a>
+                </div>
             </div>
         </div>
         <div class="copyright">
