@@ -1,35 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const scrollContainer = document.querySelector('[data-scroll-container]');
+document.addEventListener("DOMContentLoaded", function() {
+    // Inicialização do Locomotive Scroll
     const scroll = new LocomotiveScroll({
-        el: scrollContainer,
+        el: document.querySelector('[data-scroll-container]'),
         smooth: true,
-        lerp: 0.08,
-        multiplier: 0.8,
         smartphone: { smooth: true },
-        tablet: { smooth: true },
+        tablet: { smooth: true }
     });
 
-    const scrollbarThumb = document.querySelector('.c-scrollbar_thumb');
-    const scrollbarTrack = document.querySelector('.c-scrollbar');
+    // Controle da Navbar
+    const navbar = document.querySelector('.navbar');
+    const hero = document.querySelector('#hero');
 
-    const updateScrollbar = (instance) => {
-        const scrollProgress = instance.scroll.y / instance.limit.y;
-        const trackHeight = scrollbarTrack.offsetHeight;
-        const thumbHeight = scrollbarThumb.offsetHeight;
-        const maxScroll = trackHeight - thumbHeight;
-        scrollbarThumb.style.transform = `translateY(${scrollProgress * maxScroll}px)`;
-    };
-
-    scroll.on('scroll', (instance) => {
-        updateScrollbar(instance);
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > hero.offsetHeight * 0.8) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     });
 
-    window.addEventListener('resize', () => {
-        scroll.update();
-        updateScrollbar(scroll);
+    // Animação de Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            scroll.scrollTo(this.getAttribute('href'));
+        });
     });
 
-    setTimeout(() => {
-        scroll.update();
-    }, 1000);
+    // Carregamento Suave de Imagens
+    const lazyLoad = () => {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.src = img.getAttribute('data-src');
+            img.onload = () => img.style.opacity = '1';
+        });
+    }
+    window.addEventListener('load', lazyLoad);
 });

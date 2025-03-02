@@ -5,83 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio de Fotografia</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body data-scroll-container>
     <!-- Navbar -->
     <nav class="navbar" data-scroll data-scroll-sticky data-scroll-target="#main-content">
         <div class="container">
-            <a href="#" class="logo" data-scroll data-scroll-speed="1">Meu Portfólio</a>
+            <a href="#" class="logo">Portfólio</a>
             <ul class="nav-links">
-                <li><a href="#hero" data-scroll data-scroll-speed="1">Início</a></li>
-                <li><a href="#portfolio" data-scroll data-scroll-speed="1">Portfólio</a></li>
-                <li><a href="#about" data-scroll data-scroll-speed="1">Sobre</a></li>
-                <li><a href="#contact" data-scroll data-scroll-speed="1">Contato</a></li>
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section com Vídeo de Fundo -->
+    <!-- Hero Section -->
     <section id="hero" class="hero" data-scroll-section>
         <div class="video-background">
             <video autoplay muted loop playsinline>
-                <source src="assets/videos/backgroud.mp4" type="video/mp4">
+                <source src="assets/videos/background.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos HTML5.
             </video>
+            <div class="overlay"></div>
         </div>
         <div class="hero-content">
-            <h1 data-scroll data-scroll-speed="2">Bem-vindo ao Meu Portfólio</h1>
-            <p data-scroll data-scroll-speed="1">Capturando momentos, criando memórias.</p>
+            <h1 data-scroll data-scroll-speed="2">Capturando momentos únicos</h1>
+            <p data-scroll data-scroll-speed="1">Fotografia profissional para momentos especiais</p>
+            <a href="#portfolio" class="cta-button" data-scroll data-scroll-speed="0.5">Explore meu trabalho</a>
         </div>
     </section>
 
     <!-- Seção do Portfólio -->
     <section id="portfolio" class="portfolio" data-scroll-section>
-        <h2 data-scroll data-scroll-speed="1">Portfólio</h2>
+        <div class="section-header">
+            <h2>Portfólio</h2>
+            <p>Alguns dos meus melhores trabalhos</p>
+        </div>
         <div class="gallery">
-            <div class="gallery-item" data-scroll data-scroll-speed="0.5">
-                <img src="assets/images/gallery//a (2).jpg" alt="Foto 1" class="hover-zoom">
+            <div class="gallery-item" data-scroll data-scroll-speed="0.3">
+                <img src="assets/images/gallery/a (2).jpg" alt="Foto 1">
+                <div class="image-overlay">
+                    <h3>Retratos</h3>
+                    <p>Coleção 2023</p>
+                </div>
             </div>
-            <div class="gallery-item" data-scroll data-scroll-speed="0.5">
-                <img src="assets/images/gallery/b (3).jpg" alt="Foto 2" class="hover-zoom">
+            <div class="gallery-item" data-scroll data-scroll-speed="0.3">
+                <img src="assets/images/gallery/b (3).jpg" alt="Foto 1">
+                <div class="image-overlay">
+                    <h3>Retratos</h3>
+                    <p>Coleção 2023</p>
+                </div>
             </div>
-            <div class="gallery-item" data-scroll data-scroll-speed="0.5">
-                <img src="assets/images/gallery/b (6).jpg" alt="Foto 3" class="hover-zoom">
+            <div class="gallery-item" data-scroll data-scroll-speed="0.3">
+                <img src="assets/images/gallery/b (6).jpg" alt="Foto 1">
+                <div class="image-overlay">
+                    <h3>Retratos</h3>
+                    <p>Coleção 2023</p>
+                </div>
             </div>
+            <!-- Repetir para outras imagens -->
         </div>
     </section>
 
     <!-- Seção Sobre -->
     <section id="about" class="about" data-scroll-section>
-        <h2 data-scroll data-scroll-speed="1">Sobre Mim</h2>
-        <p data-scroll data-scroll-speed="0.5">Eu sou um fotógrafo apaixonado por capturar a beleza em cada momento.</p>
-    </section>
-
-    <!-- Seção de Contato -->
-    <section id="contact" class="contact" data-scroll-section>
-        <h2 data-scroll data-scroll-speed="1">Contato</h2>
-        <p data-scroll data-scroll-speed="0.5">Entre em contato comigo para mais informações.</p>
-        <form class="contact-form">
-            <input type="text" placeholder="Seu nome" required>
-            <input type="email" placeholder="Seu e-mail" required>
-            <textarea placeholder="Sua mensagem" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
+        <div class="container">
+            <div class="about-content">
+                <h2>Sobre Mim</h2>
+                <p>Fotógrafo profissional com 10 anos de experiência...</p>
+                <a href="#contact" class="cta-button">Agende uma sessão</a>
+            </div>
+            <div class="about-image">
+                <img src="assets/images/profile.jpg" alt="Fotógrafo">
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer" data-scroll-section>
-        <p>&copy; 2023 Meu Portfólio. Todos os direitos reservados.</p>
+        <div class="container">
+            <div class="footer-column">
+                <h3>Portfólio</h3>
+                <p>Transformando momentos em memórias eternas</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-behance"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Contato</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> +55 (11) 99999-9999</li>
+                    <li><i class="fas fa-envelope"></i> contato@portfolio.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Portfólio. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
-    <!-- Scrollbar Personalizada -->
-    <div class="c-scrollbar">
-        <div class="c-scrollbar_thumb"></div>
-    </div>
-
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script src="script.js"></script>
 </body>
