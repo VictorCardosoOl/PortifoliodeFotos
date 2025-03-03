@@ -55,7 +55,7 @@ Entendo completamente o seu problema. É frustrante investir tempo e esforço na
 ## Por que você perde sua barra de rolagem personalizada?
 
 O Locomotive Scroll, por padrão, assume o controle da rolagem da página, o que significa que ele "esconde" a barra de rolagem nativa do navegador e utiliza sua própria lógica para criar o efeito de rolagem suave. É por isso que sua barra de rolagem personalizada desaparece.
-
+aushsuausushaushaus
 ## Como resolver esse problema?
 
 A solução é basicamente "dizer" ao Locomotive Scroll para não interferir na sua barra de rolagem personalizada. Para isso, você precisa configurar o Locomotive Scroll para funcionar em conjunto com a sua barra de rolagem, em vez de substituí-la.
