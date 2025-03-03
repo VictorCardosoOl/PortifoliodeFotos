@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Fotografia Profissional - Capturando momentos únicos">
+    <meta name="keywords" content="fotografia, portfólio, retratos, paisagens, eventos">
     <title>Portfólio de Fotografia</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
-<body>
+<body data-scroll-container>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">Portfólio</a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#hero">Início</a></li>
                 <li><a href="#portfolio">Portfólio</a></li>
@@ -26,17 +37,13 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
-        <div class="video-background">
-            <video autoplay muted loop playsinline>
-                <source src="assets/videos/backgroud.mp4" type="video/mp4">
-                Seu navegador não suporta vídeos HTML5.
-            </video>
+        <div class="hero-background">
+            <img src="assets/images/gallery/c (5).webp" alt="Fotografia de um momento especial">
             <div class="overlay"></div>
         </div>
         <div class="hero-content">
-            <h1>Capturando momentos únicos</h1>
-            <p>Fotografia profissional para momentos especiais</p>
-            <a href="#portfolio" class="cta-button">Explore meu trabalho</a>
+            <h1 class="hero-text">Capturando momentos únicos</h1>
+            <p class="hero-subtext">Fotografia profissional para momentos especiais</p>
         </div>
     </section>
 
@@ -46,28 +53,34 @@
             <h2>Portfólio</h2>
             <p>Alguns dos meus melhores trabalhos</p>
         </div>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="assets/images/gallery/a (2).jpg" alt="Foto 1">
-                <div class="image-overlay">
-                    <h3>Retratos</h3>
-                    <p>Coleção 2023</p>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="assets/images/gallery/a (2).webp" alt="Retrato em preto e branco de uma mulher sorrindo em São Paulo - Coleção 2023">
+                    <div class="image-overlay">
+                        <h3>Retratos</h3>
+                        <p>Coleção 2023</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/gallery/b (3).webp" alt="Fotografia panorâmica das montanhas e do mar no Rio de Janeiro - Coleção Paisagens 2023">
+                    <div class="image-overlay">
+                        <h3>Paisagens</h3>
+                        <p>Coleção 2023</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/images/gallery/b (6).webp" alt="Evento corporativo em Belo Horizonte - Coleção Eventos 2023">
+                    <div class="image-overlay">
+                        <h3>Eventos</h3>
+                        <p>Coleção 2023</p>
+                    </div>
                 </div>
             </div>
-            <div class="gallery-item">
-                <img src="assets/images/gallery/b (3).jpg" alt="Foto 2">
-                <div class="image-overlay">
-                    <h3>Paisagens</h3>
-                    <p>Coleção 2023</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="assets/images/gallery/b (6).jpg" alt="Foto 3">
-                <div class="image-overlay">
-                    <h3>Eventos</h3>
-                    <p>Coleção 2023</p>
-                </div>
-            </div>
+            <!-- Adicionar navegação e paginação do Swiper -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     </section>
 
@@ -80,7 +93,7 @@
                 <a href="#contact" class="cta-button">Agende uma sessão</a>
             </div>
             <div class="about-image">
-                <img src="assets/images/gallery/profile.png" alt="Fotógrafo">
+                <img src="assets/images/gallery/profile.webp" alt="Fotógrafo profissional">
             </div>
         </div>
     </section>
@@ -92,9 +105,9 @@
                 <h3>Portfólio</h3>
                 <p>Transformando momentos em memórias eternas</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-behance"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/seuinstagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://behance.net/seubehance" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                    <a href="https://wa.me/5511999999999" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-column">
@@ -109,7 +122,7 @@
                 <h4>Avaliações</h4>
                 <div class="google-reviews">
                     <p>Leia nossas avaliações no Google:</p>
-                    <a href="#" class="cta-button">Ver avaliações</a>
+                    <a href="https://g.page/seu-google-reviews" class="cta-button">Ver avaliações</a>
                 </div>
             </div>
         </div>
@@ -118,7 +131,10 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
