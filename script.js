@@ -57,22 +57,79 @@ document.addEventListener("DOMContentLoaded", function () {
     // Animação do Hero
     const heroContent = document.querySelector(".hero-content");
     const heroText = document.querySelector(".hero-text");
-    const heroSubtext = document.querySelector(".hero-subtext");
 
     if (heroContent) {
         heroContent.classList.add("visible");
     }
 
-    // Inicializa o Swiper
-    const swiper = new Swiper(".swiper-container", {
-        loop: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
+    // Efeito de cursor personalizado
+    const cursor = document.createElement("div");
+    cursor.classList.add("cursor");
+    document.body.appendChild(cursor);
+
+    document.addEventListener("mousemove", (e) => {
+        gsap.to(cursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.5,
+            ease: "power2.out",
+        });
     });
+
+    document.addEventListener("mouseleave", () => {
+        gsap.to(cursor, {
+            scale: 0,
+            duration: 0.5,
+        });
+    });
+
+    document.addEventListener("mouseenter", () => {
+        gsap.to(cursor, {
+            scale: 1,
+            duration: 0.5,
+        });
+    });
+});
+(function () {
+
+    const link = document.querySelectorAll('nav > .hover-this');
+    const cursor = document.querySelector('.cursor');
+
+    const animateit = function (e) {
+          const span = this.querySelector('span');
+          const { offsetX: x, offsetY: y } = e,
+          { offsetWidth: width, offsetHeight: height } = this,
+
+          move = 25,
+          xMove = x / width * (move * 2) - move,
+          yMove = y / height * (move * 2) - move;
+
+          span.style.transform = `translate(${xMove}px, ${yMove}px)`;
+
+          if (e.type === 'mouseleave') span.style.transform = '';
+    };
+
+    const editCursor = e => {
+          const { clientX: x, clientY: y } = e;
+          cursor.style.left = x + 'px';
+          cursor.style.top = y + 'px';
+    };
+
+    link.forEach(b => b.addEventListener('mousemove', animateit));
+    link.forEach(b => b.addEventListener('mouseleave', animateit));
+    window.addEventListener('mousemove', editCursor);
+
+})();
+// Mostrar/ocultar botão do WhatsApp ao rolar a página
+const whatsappButton = document.querySelector('.whatsapp-button');
+
+window.addEventListener('scroll', () => {
+    const portfolioSection = document.getElementById('portfolio');
+    const portfolioPosition = portfolioSection.getBoundingClientRect().top;
+
+    if (portfolioPosition < window.innerHeight / 2) {
+        whatsappButton.classList.add('visible'); // Mostra o botão com animação
+    } else {
+        whatsappButton.classList.remove('visible'); // Oculta o botão com animação
+    }
 });

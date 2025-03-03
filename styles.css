@@ -115,8 +115,9 @@ body::-webkit-scrollbar {
     height: 100vh;
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end; /* Texto no canto inferior */
+    justify-content: flex-start; /* Texto no canto esquerdo */
+    padding: 0 0 5rem 5rem; /* Espaçamento */
 }
 
 .hero-background {
@@ -144,33 +145,44 @@ body::-webkit-scrollbar {
 }
 
 .hero-content {
-    text-align: center;
     z-index: 1;
 }
 
 .hero-text {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: 8rem; /* Fonte grande */
     color: var(--dark-text);
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.hero-subtext {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
-}
-
-.hero-content.visible .hero-text,
-.hero-content.visible .hero-subtext {
+.hero-content.visible .hero-text {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Seção do Portfólio */
+/* Seção Sobre o Projeto */
+.about-project {
+    padding: var(--section-padding);
+    background-color: var(--base-color);
+}
+
+.about-project .container {
+    text-align: center;
+}
+
+.about-project h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.about-project p {
+    font-size: 1.2rem;
+    color: var(--dark-text);
+}
+
+/* Seção Galeria */
 .portfolio {
     padding: var(--section-padding);
     background-color: var(--base-color);
@@ -192,13 +204,13 @@ body::-webkit-scrollbar {
     color: var(--dark-text);
 }
 
-.swiper-container {
-    width: 100%;
-    height: 500px; /* Altura maior para a galeria */
-    margin: 0 auto;
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
 }
 
-.swiper-slide {
+.gallery-item {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
@@ -206,10 +218,15 @@ body::-webkit-scrollbar {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.swiper-slide img {
+.gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
 }
 
 .image-overlay {
@@ -217,55 +234,15 @@ body::-webkit-scrollbar {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--dark-text);
+    height: 50%; /* Gradiente na metade inferior */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    color: var(--light-text);
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
 }
 
-.swiper-slide:hover .image-overlay {
+.gallery-item:hover .image-overlay {
     opacity: 1;
-}
-
-/* Seção Sobre */
-.about {
-    padding: var(--section-padding);
-    background-color: var(--secondary-color);
-}
-
-.about .container {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-
-.about-content {
-    flex: 1;
-}
-
-.about-content h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-.about-content p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    color: var(--dark-text);
-}
-
-.about-image {
-    flex: 1;
-    text-align: center;
-}
-
-.about-image img {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
 }
 
 /* Footer */
@@ -340,23 +317,87 @@ body::-webkit-scrollbar {
         margin-top: 1rem;
     }
 
-    .hero-content {
-        flex-direction: column;
-        align-items: flex-start;
+    .hero {
+        padding: 0 0 2rem 2rem;
     }
 
-    .hero-text,
-    .hero-subtext {
-        font-size: 1.5rem;
+    .hero-text {
+        font-size: 4rem;
     }
 
-    .about .container {
-        flex-direction: column;
-        text-align: center;
+    .about-project .container {
+        text-align: left;
     }
 
     .footer .container {
         flex-direction: column;
         gap: 2rem;
     }
+}
+.cursor {
+    pointer-events: none;
+    position: fixed;
+    padding: 0.3rem;
+    background-color: #fff;
+    border-radius: 50%;
+    mix-blend-mode: difference;
+    transition: transform 0.3s ease;
+}
+
+.hover-this:hover ~ .cursor {
+    transform: translate(-50%, -50%) scale(8);
+}
+
+@media(min-width: 900px) {
+    nav {
+          display: flex;
+          justify-content: space-around;
+    }
+}
+
+@media(max-width: 900px) {
+    nav {
+          top: 30%;
+    }
+
+    .hover-this {
+          width: 100%;
+          padding: 20px 0;
+          display: inline-block;
+    }
+}
+/* ================================================== */
+/* Botão do WhatsApp */
+/* ================================================== */
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo translúcido escuro */
+    backdrop-filter: blur(5px); /* Efeito blur suave */
+    color: #25d366; /* Cor do ícone */
+    border-radius: 50%;
+    text-align: center;
+    font-size: 24px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0; /* Inicialmente invisível */
+    transform: translateY(20px); /* Começa um pouco abaixo */
+    transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo mais escuro ao passar o mouse */
+    transform: scale(1.1) translateY(0); /* Efeito de escala suave */
+}
+
+.whatsapp-button.visible {
+    opacity: 1; /* Torna visível */
+    transform: translateY(0); /* Volta à posição original */
 }
