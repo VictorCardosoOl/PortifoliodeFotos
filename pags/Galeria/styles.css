@@ -13,6 +13,15 @@ body {
     min-height: 100vh;
 }
 
+html {
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari e Opera */
+}
+
 /* Área Lateral */
 #sidebar {
     width: 30%;

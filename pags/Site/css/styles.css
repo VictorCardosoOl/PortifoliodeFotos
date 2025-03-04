@@ -32,10 +32,6 @@ body, html {
     scroll-behavior: smooth; /* Scroll suave */
 }
 
-/* ================================================== */
-/* 3. BARRA DE SCROLL PERSONALIZADA */
-/* ================================================== */
-
 /* Esconde a barra de scroll padrão */
 html {
     scrollbar-width: none; /* Para Firefox */
