@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio fotográfico profissional com foco em retratos, casamentos e eventos.">
+    <meta name="keywords" content="fotografia, portfólio, retratos, casamentos, eventos">
+    <meta name="author" content="Seu Nome">
+    <title>Portfólio Fotográfico</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+<body>
+    
+    <!-- Barra de Scroll Personalizada -->
+<div class="c-scrollbar">
+    <div class="c-scrollbar_thumb"></div>
+</div>
+
+    <!-- Navbar -->
+  <!-- Navbar -->
+<nav id="navbar">
+    <div class="navbar-container">
+        <div class="logo">
+            <a href="#" tabindex="0">Fotógrafo</a>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#hero" tabindex="0" data-i18n="home">Início</a></li>
+            <li><a href="#albums" tabindex="0" data-i18n="albums">Álbuns</a></li>
+            <li><a href="#about" tabindex="0" data-i18n="about">Sobre</a></li>
+            <li><a href="#footer" tabindex="0" data-i18n="contact">Contato</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu" tabindex="0">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-slideshow">
+        
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" data-aos-easing="ease-in-out">
+            <h1 data-i18n="heroTitle">Capturando Momentos, Criando Memórias</h1>
+           
+        </div>
+    </section>
+
+    <!-- Seção de Álbuns -->
+    <section id="albums">
+        <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-easing="ease-in-out" data-i18n="albumsTitle">Álbuns</h2>
+        <div class="album-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" data-aos-easing="ease-in-out">
+            <div class="album">
+                <div class="album-description">
+                    <h3 data-i18n="album1Title">Álbum 1: Retratos</h3>
+                    <p data-i18n="album1Description">Uma coleção de retratos que capturam a essência das pessoas.</p>
+                </div>
+                <div class="album-cover" data-gallery="gallery1" tabindex="0">
+                    <img src="/assets/img/Album 1/folder.jpg" alt="Retrato de uma pessoa sorrindo em um ambiente urbano" loading="lazy">
+                </div>
+            </div>
+            <div class="album reverse">
+                <div class="album-description">
+                    <h3 data-i18n="album2Title">Álbum 2: Casamentos</h3>
+                    <p data-i18n="album2Description">Momentos especiais de cerimônias e festas de casamento.</p>
+                </div>
+                <div class="album-cover" data-gallery="gallery2" tabindex="0">
+                    <img src="/assets/img/Album 2/folder.jpg" alt="Noivos se beijando em uma cerimônia de casamento" loading="lazy">
+                </div>
+            </div>
+            <div class="album">
+                <div class="album-description">
+                    <h3 data-i18n="album1Title">Álbum 3: Casamentos</h3>
+                    <p data-i18n="album1Description">Momentos especiais de cerimônias e festas de casamento.</p>
+                </div>
+                <div class="album-cover" data-gallery="gallery3" tabindex="0">
+                    <img src="/assets/img/Album 3/folder.jpg" alt="Noivos se beijando em uma cerimônia de casamento" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pop-up da Galeria -->
+    <div id="gallery-popup" class="popup">
+        <span class="close" id="close-gallery">&times;</span>
+        <div class="gallery-masonry" id="gallery-masonry">
+            <!-- Imagens serão adicionadas dinamicamente via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Visualizador de Fotos -->
+    <div id="photo-viewer" class="photo-viewer">
+        <span class="close" id="close-photo-viewer">&times;</span>
+        <img id="viewer-image" src="" alt="Foto ampliada" loading="lazy">
+        <div class="caption" id="viewer-caption"></div>
+        <div class="thumbnail-container">
+            <!-- Miniaturas serão adicionadas dinamicamente via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Sobre o Fotógrafo -->
+    <section id="about">
+        <div class="about-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" data-aos-easing="ease-in-out">
+            <div class="about-image">
+                <img src="https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fotógrafo segurando uma câmera profissional" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h2 data-i18n="aboutTitle">Sobre Mim</h2>
+                <p data-i18n="aboutDescription">Olá! Sou um fotógrafo profissional com mais de 10 anos de experiência, especializado em retratos, casamentos e eventos. Minha paixão é capturar momentos únicos e transformá-los em memórias eternas.</p>
+                <div class="testimonials">
+                    <h3 data-i18n="testimonialsTitle">Depoimentos</h3>
+                    <div class="testimonial">
+                        <p data-i18n="testimonial1">"As fotos do nosso casamento foram incríveis! Recomendo muito!"</p>
+                        <span data-i18n="testimonial1Author">- Maria e João</span>
+                    </div>
+                    <div class="testimonial">
+                        <p data-i18n="testimonial2">"Adorei o ensaio de retratos. Foi uma experiência maravilhosa!"</p>
+                        <span data-i18n="testimonial2Author">- Ana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="menu-container">
+                <button class="menu-toggle">☰</button>
+                <div class="menu">
+                    <ul>
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">Sobre</a></li>
+                        <li><a href="#">Projetos</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="portfolio-link">Portfolio</a>
+            </div>
+            <div class="contact-info">
+                <p class="name">Victor Cardoso</p>
+                <p class="location">São Paulo - SP</p>
+                <a class="email" href="mailto:victorcardcunha@gmail.com">seuemail@email.com</a><br>
+                <a class="phone" href="tel:+11977440146">(11) 97744-0146</a>
+                <div class="social-links">
+                    <a href="https://github.com/seugithub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://instagram.com/seuinstagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/in/seulinkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://linkedin.com/in/seulinkedin" aria-label="LinkedIn"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 Victor Cardoso</p>
+            <p>Design por Victor Cardoso</p>
+        </div>
+    </footer>
+    <!-- Botão de Contato Flutuante -->
+    <a href="https://wa.me/5511977440146" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+   
+    <div class="cursor"></div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="javascript/scripts.js" defer></script>
+    <script src="javascript/utiles.js" defer></script>
+</body>
+</html>
