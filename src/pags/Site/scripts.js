@@ -16,6 +16,7 @@ import album1Cover from '../../img/Album 1/folder.jpg';
 import album2Cover from '../../img/Album 2/folder.jpg';
 import album3Cover from '../../img/Album 3/folder.jpg';
 
+
 // Aguarda o carregamento completo do DOM
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona as imagens dos álbuns
@@ -41,18 +42,48 @@ document.addEventListener('DOMContentLoaded', function () {
         once: true, // Animações ocorrem apenas uma vez
     });
 
-    // ==================================================
-    // 2. NAVBAR SCROLL
-    // ==================================================
 
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+ // ==================================================
+// 2. NAVBAR SCROLL (ANIMADO COM GSAP)
+// ==================================================
+
+const navbar = document.getElementById('navbar');
+let navbarFixed = false;
+
+window.addEventListener('scroll', () => {
+    requestAnimationFrame(() => { // Usando requestAnimationFrame para suavizar ainda mais
+        if (window.scrollY > 50 && !navbarFixed) {
+            navbarFixed = true;
+            gsap.to(navbar, {
+                backgroundColor: "rgba(255, 255, 255, 0.95)", // Branco levemente transparente
+                padding: "10px 20px",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)", // Sombra mais sutil
+                duration: 0.9, // Duração ligeiramente menor
+                ease: "power3.out", // Easing power3.out
+                color: "black",
+                y: 0, // Desliza para baixo até a posição original
+                opacity: 1 // Fade-in completo
+            });
+            gsap.to(".logo a", { color: "black", duration: 0.6, ease: "power3.out" }); // Duração e easing ajustados
+            gsap.to(".nav-links li a", { color: "black", duration: 0.6, ease: "power3.out" }); // Duração e easing ajustados
+        } else if (window.scrollY <= 50 && navbarFixed) {
+            navbarFixed = false;
+            gsap.to(navbar, {
+                backgroundColor: "transparent", // Fundo transparente
+                padding: "20px",
+                boxShadow: "none", // Sem sombra
+                duration: 0.4, // Duração ligeiramente menor para o retorno
+                ease: "power3.out", // Easing power3.out
+                color: "var(--primary-color)",
+                y: -10, // Desliza para cima (posição inicial)
+                opacity: 0.95 // Fade-out para transparência inicial
+            });
+            gsap.to(".logo a", { color: "var(--primary-color)", duration: 0.4, ease: "power3.out" }); // Duração e easing ajustados
+            gsap.to(".nav-links li a", { color: "var(--primary-color)", duration: 0.4, ease: "power3.out" }); // Duração e easing ajustados
         }
     });
+});
+
 
     // ==================================================
     // 3. MENU MOBILE

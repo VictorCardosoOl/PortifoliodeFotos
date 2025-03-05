@@ -50,6 +50,18 @@ html::-webkit-scrollbar {
 /* ================================================== */
 /* 4. NAVBAR */
 /* ================================================== */
+#navbar {
+    /* ... seus outros estilos CSS para a navbar (layout, etc.) ... */
+    padding: 20px; /* Padding original */
+    background-color: transparent; /* Fundo transparente inicial */
+    box-shadow: none; /* Sem sombra inicial */
+    color: var(--primary-color); /* Cor do texto original */
+
+    /* Estilos para a animação de deslize e fade */
+    transform: translateY(-10px); /* Inicia um pouco acima */
+    opacity: 0.95; /* Opacidade inicial levemente transparente */
+    
+}
 
 nav {
     background: transparent;
@@ -58,7 +70,6 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
 }
 
 .navbar-container {
