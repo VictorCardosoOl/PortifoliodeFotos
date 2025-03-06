@@ -3,7 +3,6 @@
       "env": {
         "NODE_ENV": "production"
       },
-      "command": "npm run build",
       "output": "dist"
     },
     "routes": [
