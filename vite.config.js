@@ -10,7 +10,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: path.resolve(__dirname, 'src/pags/Site/index.html'), // Ponto de entrada principal
-                galeria: path.resolve(__dirname, 'src/pags/Galeria/galeria.html'), // Ponto de entrada da galeria
+                galeria: path.resolve(__dirname, 'src/pags/Site/Galeria/galeria.html'), // Ponto de entrada da galeria
             },
         },
     },
