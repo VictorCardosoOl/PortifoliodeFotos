@@ -1,6 +1,8 @@
 {
   "name": "meu-projeto",
   "version": "1.0.0",
+  "description": "Portfólio fotográfico profissional com foco em retratos, casamentos e eventos.",
+  "author": "Seu Nome <seuemail@email.com>",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,5 +15,9 @@
   },
   "devDependencies": {
     "vite": "^5.0.0"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
   }
 }
