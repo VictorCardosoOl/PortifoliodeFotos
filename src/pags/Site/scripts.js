@@ -1,5 +1,55 @@
-// Importando GSAP para animações
-import { gsap } from 'gsap';
+// Importações
+import LocomotiveScroll from 'locomotive-scroll'; // Importa Locomotive Scroll
+import { gsap } from 'gsap'; // Importa GSAP para animações
+
+// Aguarda o carregamento completo do DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa o Locomotive Scroll
+    const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'), // Elemento container do scroll
+        smooth: true, // Ativa o scroll suave
+        lerp: 0.1, // Suavização do scroll (quanto menor, mais suave)
+        multiplier: 1.2, // Velocidade do scroll
+        smartphone: {
+            smooth: true, // Ativa o scroll suave em dispositivos móveis
+        },
+        tablet: {
+            smooth: true, // Ativa o scroll suave em tablets
+        },
+    });
+
+    // ==================================================
+    // 2. ANIMAÇÕES DURANTE O SCROLL
+    // ==================================================
+
+    // Seleciona elementos que devem ser animados durante o scroll
+    const animatedElements = document.querySelectorAll('[data-scroll-animate]');
+
+    animatedElements.forEach(element => {
+        scroll.on('scroll', (args) => {
+            const elementTop = element.getBoundingClientRect().top; // Posição do elemento em relação à viewport
+            const viewportHeight = window.innerHeight; // Altura da viewport
+
+            // Verifica se o elemento está visível na tela
+            if (elementTop < viewportHeight * 0.8) {
+                gsap.to(element, {
+                    opacity: 1, // Torna o elemento visível
+                    y: 0, // Remove o deslocamento Y
+                    duration: 1, // Duração da animação
+                    ease: 'power2.out', // Easing da animação
+                });
+            }
+        });
+    });
+
+    // ==================================================
+    // 3. ATUALIZAÇÃO DO SCROLL AO REDIMENSIONAR A JANELA
+    // ==================================================
+
+    window.addEventListener('resize', () => {
+        scroll.update(); // Atualiza o scroll ao redimensionar a janela
+    });
+});
 
 // Aguarda o carregamento completo do DOM
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,13 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.2,
     });
 });
-// Importando as imagens dos álbuns
-import album1Cover from '../../img/Album 1/folder.jpg';
-import album2Cover from '../../img/Album 2/folder.jpg';
-import album3Cover from '../../img/Album 3/folder.jpg';
 
 
-// Aguarda o carregamento completo do DOM
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona as imagens dos álbuns
     const album1Img = document.querySelector('.album-card:nth-child(1) img');
@@ -25,10 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const album3Img = document.querySelector('.album-card:nth-child(3) img');
 
     // Atribui as imagens aos elementos
-    album1Img.src = album1Cover;
-    album2Img.src = album2Cover;
-    album3Img.src = album3Cover;
+    album1Img.src = '/img/Album 1/folder.jpg';
+    album2Img.src = '/img/Album 2/folder.jpg';
+    album3Img.src = '/img/Album 3/folder.jpg';
+
+    // Selecionar o elemento <img> no HTML
+    const profileImgElement = document.querySelector('.about-image img');
+    if (profileImgElement) {
+        profileImgElement.src = '/img/A/profile.jpg';
+    } else {
+        console.error("Elemento <img> com seletor '.about-image img' não encontrado no HTML.");
+    }
 });
+
+
 
 // ==================================================
 // 1. CONFIGURAÇÕES GERAIS
@@ -43,47 +98,69 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
- // ==================================================
-// 2. NAVBAR SCROLL (ANIMADO COM GSAP)
-// ==================================================
+    // ==================================================
+    // 2. NAVBAR SCROLL (ANIMADO COM GSAP)
+    // ==================================================
 
-const navbar = document.getElementById('navbar');
-let navbarFixed = false;
+    const navbar = document.getElementById('navbar');
 
-window.addEventListener('scroll', () => {
-    requestAnimationFrame(() => { // Usando requestAnimationFrame para suavizar ainda mais
+    let navbarFixed = false; // Variável para controlar o estado da navbar
+
+
+
+    window.addEventListener('scroll', () => {
+
         if (window.scrollY > 50 && !navbarFixed) {
-            navbarFixed = true;
-            gsap.to(navbar, {
-                backgroundColor: "rgba(255, 255, 255, 0.95)", // Branco levemente transparente
-                padding: "10px 20px",
-                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)", // Sombra mais sutil
-                duration: 0.9, // Duração ligeiramente menor
-                ease: "power3.out", // Easing power3.out
-                color: "black",
-                y: 0, // Desliza para baixo até a posição original
-                opacity: 1 // Fade-in completo
-            });
-            gsap.to(".logo a", { color: "black", duration: 0.6, ease: "power3.out" }); // Duração e easing ajustados
-            gsap.to(".nav-links li a", { color: "black", duration: 0.6, ease: "power3.out" }); // Duração e easing ajustados
-        } else if (window.scrollY <= 50 && navbarFixed) {
-            navbarFixed = false;
-            gsap.to(navbar, {
-                backgroundColor: "transparent", // Fundo transparente
-                padding: "20px",
-                boxShadow: "none", // Sem sombra
-                duration: 0.4, // Duração ligeiramente menor para o retorno
-                ease: "power3.out", // Easing power3.out
-                color: "var(--primary-color)",
-                y: -10, // Desliza para cima (posição inicial)
-                opacity: 0.95 // Fade-out para transparência inicial
-            });
-            gsap.to(".logo a", { color: "var(--primary-color)", duration: 0.4, ease: "power3.out" }); // Duração e easing ajustados
-            gsap.to(".nav-links li a", { color: "var(--primary-color)", duration: 0.4, ease: "power3.out" }); // Duração e easing ajustados
-        }
-    });
-});
 
+            navbarFixed = true;
+
+            gsap.to(navbar, {
+
+                backgroundColor: "white", // Cor de fundo sólida ao fixar
+
+                padding: "10px 20px", // Padding menor ao fixar
+
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)", // Sombra suave
+
+                duration: 0.6, // Duração da animação
+
+                ease: "easeOut", // Easing (suavização) da animação
+
+                color: "black", // Cor do texto escura ao fixar (se necessário)
+
+            });
+
+            gsap.to(".logo a", { color: "black", duration: 0.5, ease: "easeOut" }); // Anima cor do logo
+
+            gsap.to(".nav-links li a", { color: "black", duration: 0.5, ease: "easeOut" }); // Anima cor dos links
+
+        } else if (window.scrollY <= 50 && navbarFixed) {
+
+            navbarFixed = false;
+
+            gsap.to(navbar, {
+
+                backgroundColor: "transparent", // Fundo transparente ao retornar ao topo
+
+                padding: "20px", // Padding original
+
+                boxShadow: "none", // Remove sombra
+
+                duration: 0.5,
+
+                ease: "easeOut",
+
+                color: "var(--primary-color)", // Cor do texto original
+
+            });
+
+            gsap.to(".logo a", { color: "var(--primary-color)", duration: 0.5, ease: "easeOut" }); // Anima cor do logo original
+
+            gsap.to(".nav-links li a", { color: "var(--primary-color)", duration: 0.5, ease: "easeOut" }); // Anima cor dos links originais
+
+        }
+
+    });
 
     // ==================================================
     // 3. MENU MOBILE
@@ -159,4 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
     link.forEach((b) => b.addEventListener('mouseleave', animateit));
     window.addEventListener('mousemove', editCursor);
 })();
+
+
 
