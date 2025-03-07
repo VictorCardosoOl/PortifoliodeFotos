@@ -2,13 +2,13 @@
 /* 1. VARIÁVEIS GLOBAIS */
 /* ================================================== */
 :root {
-    --primary-color: #000000; /* Preto */
-    --secondary-color: #F5F5F5; /* Cinza claro */
-    --accent-color: #D4AF37; /* Dourado */
-    --font-primary: 'Poppins', sans-serif; /* Fonte moderna para títulos */
-    --font-secondary: 'Inter', sans-serif; /* Fonte legível para textos */
+    --primary-color: #001E38; /* Azul escuro */
+    --secondary-color: #FFFFFF; /* Branco */
+    --accent-color: #007BFF; /* Azul claro */
+    --font-primary: 'Playfair Display', serif; /* Fonte moderna para títulos */
+    --font-secondary: 'Playfair Display', serif; /* Fonte legível para textos */
     --text-color: #333; /* Cor do texto principal */
-    --background-color: #FFFFFF; /* Cor de fundo do site */
+    --background-color: #F5F5F5; /* Cor de fundo do site */
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra padrão */
 }
 
@@ -131,7 +131,7 @@ nav {
 }
 
 .btn-explore:hover {
-    background-color: #b89c30;
+    background-color: #0056b3;
 }
 
 /* ================================================== */
@@ -216,62 +216,224 @@ nav {
 }
 
 .btn-view:hover {
-    background-color: #b89c30;
+    background-color: #0056b3;
 }
 
 /* ================================================== */
-/* 6. FOOTER */
+/* 10. FOOTER */
 /* ================================================== */
+
+/* Footer */
 .footer {
     width: 100%;
+    height: 70vh;
     background-color: #1a1a1a;
     color: #fff;
     font-family: sans-serif;
-    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .footer-content {
     display: flex;
     justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 30px; /* Aumentei o padding */
 }
 
 .portfolio-link {
-    font-size: 2rem;
+    font-size: 6.5em; /* Aumentei o tamanho */
     color: #fff;
     text-decoration: none;
+    margin-top: 20px;
 }
 
 .contact-info {
-    text-align: right;
+    text-align: left; /* Justificado à esquerda */
+    padding: 20px;
 }
 
 .contact-info a {
+    font-size: 1.1em; /* Aumentei o tamanho */
+    margin-bottom: 10px;
     color: #fff;
     text-decoration: none;
-    display: block;
-    margin-bottom: 10px;
 }
 
 .social-links {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem; /* Aumentei o espaço */
     margin-top: 15px;
 }
 
 .social-links a {
     color: #fff;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
+    font-size: 1.5rem; /* Aumentei o tamanho */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .social-links a:hover {
     color: #ccc;
+    transform: scale(1.1);
 }
 
 .copyright {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem; /* Aumentei o tamanho */
+}
+
+
+
+
+
+/* Seção Galeria */
+.galeria {
+    padding: 4rem 1.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.cabecalho-galeria {
     text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.titulo-galeria {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.75rem;
+    margin: 2rem 0 0.5rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+}
+
+.grid-dinamico {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    padding: 1rem;
+}
+
+.item-arte {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--cor-destaque);
+}
+
+.item-arte:hover {
+    transform: translateY(-8px);
+}
+
+.imagem-container {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+}
+
+.imagem-arte {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.info-obra {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+    color: white;
+}
+
+.titulo-obra {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin: 0 0 0.25rem;
+}
+
+.preco-obra {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.container-principal {
+    display: flex; /* Container principal para título grande, imagem e texto */
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    padding: 40px;
+    margin-bottom: 20px; /* Espaço abaixo do container principal */
+}
+
+.titulo-grande-container {
+    flex: 1; /* Título grande ocupa um pouco de espaço à esquerda */
+    padding-right: 20px;
+    align-self: stretch; /* Estender verticalmente para alinhar com a altura da imagem e texto */
+    display: flex;
+    flex-direction: column; /* Para alinhar o título verticalmente */
+    justify-content: flex-start; /* Alinhar o título ao topo */
+}
+
+.titulo-grande {
+    font-size: 3em; /* Tamanho maior para o título principal */
+    font-weight: bold;
+    color: #222;
+    line-height: 1; /* Ajustar a altura da linha para o título grande */
+}
+
+.conteudo-principal {
+    flex: 3; /* Imagem e texto descritivo ocupam mais espaço */
+    display: flex; /* Flex container para imagem e texto lado a lado */
+}
+
+
+.sobre-mim-imagem {
+    flex: 1.5; /* A imagem ocupa mais espaço */
+    padding-right: 30px;
+}
+
+.sobre-mim-imagem img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.sobre-mim-texto {
+    flex: 2; /* Texto descritivo ocupa espaço à direita */
+    align-self: flex-start; /* Alinhar o texto ao topo */
+}
+
+.sobre-mim-paragrafo {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.info-adicional-container {
+    display: flex; /* Container para informações adicionais abaixo */
+    justify-content: space-between; /* Espaçar os elementos */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px; /* Alinhar padding horizontalmente com o container principal */
+    color: #777; /* Cor mais clara para informações adicionais */
+    font-size: 0.9em;
+}
+
+.info-esquerda, .info-direita {
+    display: flex; /* Para alinhar itens horizontalmente */
+    gap: 20px; /* Espaçamento entre os itens */
+}
+
+.info-esquerda div, .info-direita div {
+    margin-bottom: 10px; /* Espaçamento entre linhas verticais dentro de cada coluna */
 }

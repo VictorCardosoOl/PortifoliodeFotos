@@ -9,8 +9,8 @@
     <meta name="author" content="Seu Nome">
     <title>Portfólio Fotográfico</title>
     <link rel="stylesheet" href="styles.css"> <!-- Arquivo CSS local -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Ícones do Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"> <!-- Fontes do Google -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Ícones do Font Awesome -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!-- Biblioteca AOS para animações -->
 </head>
 
@@ -35,47 +35,79 @@
     <section id="hero">
         <div class="hero-content">
             <h1 data-aos="fade-down" data-aos-duration="1000">Capturando Momentos, Criando Memórias</h1>
-            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Fotografia profissional para retratos, casamentos e eventos.</p>
-            <a href="#albums" class="btn-explore" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">Explorar Álbuns</a>
+            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Fotografia profissional para retratos,
+                casamentos e eventos.</p>
         </div>
     </section>
 
-    <!-- Álbuns -->
-    <section id="albums">
-        <h2 data-aos="fade-down" data-aos-duration="1000">Álbuns</h2>
-        <div class="album-grid">
-            <!-- Álbum 1 -->
-            <div class="album-card" data-aos="fade-up" data-aos-duration="1000">
-                <img src="/img/Album 1/folder.jpg" alt="Álbum 1: Retratos">
-                <div class="album-info">
-                    <h3>Retratos</h3>
-                    <p>Fotos incríveis de pessoas e momentos especiais.</p>
-                    <a href="/Galeria/galeria.html" class="btn-view">Ver Galeria</a>
+    <!-- Gallery Section -->
+
+        <section class="galeria">
+            <div class="cabecalho-galeria">
+                <h1 class="titulo-galeria">Catálogo de Obras</h1>
+            </div>
+            
+            <div class="grid-dinamico">
+                <a href="/obra" class="item-arte">
+                    <div class="imagem-container">
+                        <img src="/img/Album 1/folder.jpg" alt="Álbum 1: Retratos">
+                    </div>
+                    <div class="info-obra">
+                        <h3 class="titulo-obra">Tudo o que você quer ser</h3>
+                        <p class="preco-obra">20.000 DIRHAMS</p>
+                    </div>
+                </a>
+                <a href="/obra" class="item-arte">
+                    <div class="imagem-container">
+                        <img src="/img/Album 2/folder.jpg" alt="Álbum 2: Casamentos">
+                    </div>
+                    <div class="info-obra">
+                        <h3 class="titulo-obra">Tudo o que você quer ser</h3>
+                        <p class="preco-obra">20.000 DIRHAMS</p>
+                    </div>
+                </a>
+                <a href="/obra" class="item-arte">
+                    <div class="imagem-container">
+                        <img src="/img/Album 3/folder.jpg" alt="Álbum 3: Paisagens">
+                    </div>
+                    <div class="info-obra">
+                        <h3 class="titulo-obra">Tudo o que você quer ser</h3>
+                        <p class="preco-obra">20.000 DIRHAMS</p>
+                    </div>
+                </a>
+    
+                <!-- Repetir para outras obras -->
+            </div>
+        </section>
+        <section class="container-principal">
+            <div class="titulo-grande-container">
+                <h1 class="titulo-grande">TUDO O QUE<br>VOCÊ QUER<br>SER</h1>
+            </div>
+    
+            <div class="conteudo-principal">
+                <div class="sobre-mim-imagem">
+                    <img src="URL_DA_SUA_IMAGEM" alt="Sua Foto ou Imagem Representativa">
+                </div>
+                <div class="sobre-mim-texto">
+                    <p class="sobre-mim-paragrafo">
+                        Michelle Hold, com sua formação eclética que vai da arquitetura ao design têxtil, da moda à arte abstrata, apresenta um corpo de trabalho que explora a magia como uma força insondável no universo, acessível apenas pela intuição. Com uma carreira que a viu expor por toda a Europa, Estados Unidos e China, Michelle é confirmada como uma voz significativa na arte contemporânea, capaz de transmitir por meio de suas pinturas abstratas as vibrações de um mundo secreto e profundo. Além disso, Michelle não é apenas uma artista, mas também uma patrona cultural, sendo a fundadora da associação Art Moleto, o que atesta seu comprometimento em promover a arte e o diálogo cultural.
+                    </p>
                 </div>
             </div>
-
-            <!-- Álbum 2 -->
-            <div class="album-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                <img src="/img/Album 2/folder.jpg" alt="Álbum 2: Casamentos">
-                <div class="album-info">
-                    <h3>Casamentos</h3>
-                    <p>Momentos emocionantes de cerimônias e festas.</p>
-                    <a href="/Galeria/galeria.html" class="btn-view">Ver Galeria</a>
-                </div>
+        </section>
+    
+        <section class="info-adicional-container">
+            <div class="info-esquerda">
+                <div>+ VOLTAR PARA TODOS</div>
+                <div>AUTOR: Michelle espera</div>
+                <div>DIMENSÕES: 120 x 80 cm</div>
             </div>
-
-            <!-- Álbum 3 -->
-            <div class="album-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                <img src="/img/Album 3/folder.jpg" alt="Álbum 3: Paisagens">
-                <div class="album-info">
-                    <h3>Paisagens</h3>
-                    <p>Fotos deslumbrantes de paisagens naturais.</p>
-                    <a href="/Galeria/galeria.html" class="btn-view">Ver Galeria</a>
-                </div>
+            <div class="info-direita">
+                <div>RARIDADE: Peça única</div>
+                <div>ANO: 2023</div>
+                <div>MATERIAIS: Acrílicos sobre tela</div>
             </div>
-        </div>
-    </section>
-
+        </section>
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -88,10 +120,14 @@
                 <a class="email" href="mailto:victorcardcunha@gmail.com">seuemail@email.com</a><br>
                 <a class="phone" href="tel:+11977440146">(11) 97744-0146</a>
                 <div class="social-links">
-                    <a target="_blank" href="https://github.com/VictorCardosoOl" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a target="_blank" href="https://www.instagram.com/hi.chicocdo/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a target="_blank" href="https://www.linkedin.com/in/victor-card-cunha/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a target="_blank" href="https://wa.me/5511977440146" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a target="_blank" href="https://github.com/VictorCardosoOl" aria-label="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/hi.chicocdo/" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/victor-card-cunha/" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a target="_blank" href="https://wa.me/5511977440146" aria-label="WhatsApp"><i
+                            class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
