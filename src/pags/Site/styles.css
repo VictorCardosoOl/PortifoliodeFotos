@@ -25,6 +25,15 @@ html {
     line-height: 1.6;
     height: 100vh;
 }
+/* Esconde a barra de scroll padrão */
+html {
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari e Opera */
+}
 
 /* ================= NAVBAR ================= */
 nav {
@@ -72,7 +81,7 @@ nav {
 /* ================= HERO SECTION ================= */
 #hero {
     height: 100vh;
-    background-image: url('/img/wallp.jpg');
+    background-image: url('/img/A/c (5).webp');
     background-size: cover;
     background-position: center;
     display: flex;
