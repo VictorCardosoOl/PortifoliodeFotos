@@ -1,28 +1,16 @@
-/* ================================================== */
-/* 1. VARIÁVEIS GLOBAIS */
-/* ================================================== */
+/* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
-    --primary-color: #001E38;
-    /* Azul escuro */
-    --secondary-color: #FFFFFF;
-    /* Branco */
-    --accent-color: #007BFF;
-    /* Azul claro */
-    --font-primary: 'Playfair Display', serif;
-    /* Fonte moderna para títulos */
-    --font-secondary: 'Playfair Display', serif;
-    /* Fonte legível para textos */
-    --text-color: #333;
-    /* Cor do texto principal */
-    --background-color: #F5F5F5;
-    /* Cor de fundo do site */
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Sombra padrão */
+    --primary-color: #001E38; /* Azul escuro */
+    --secondary-color: #FFFFFF; /* Branco */
+    --accent-color: #007BFF; /* Azul claro */
+    --font-primary: 'Playfair Display', serif; /* Fonte moderna para títulos */
+    --font-secondary: 'Playfair Display', serif; /* Fonte legível para textos */
+    --text-color: #333; /* Cor do texto principal */
+    --background-color: #F5F5F5; /* Cor de fundo do site */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra padrão */
 }
 
-/* ================================================== */
-/* 2. RESET E CONFIGURAÇÕES GERAIS */
-/* ================================================== */
+/* ================= RESET E CONFIGURAÇÕES GERAIS ================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -38,9 +26,7 @@ html {
     height: 100vh;
 }
 
-/* ================================================== */
-/* 3. NAVBAR */
-/* ================================================== */
+/* ================= NAVBAR ================= */
 nav {
     padding: 20px;
     background-color: transparent;
@@ -83,9 +69,7 @@ nav {
     color: var(--accent-color);
 }
 
-/* ================================================== */
-/* 4. HERO SECTION */
-/* ================================================== */
+/* ================= HERO SECTION ================= */
 #hero {
     height: 100vh;
     background-image: url('/img/wallp.jpg');
@@ -106,8 +90,7 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    /* Overlay escuro */
+    background: rgba(0, 0, 0, 0.5); /* Overlay escuro */
     z-index: 1;
 }
 
@@ -129,186 +112,7 @@ nav {
     font-weight: 300;
 }
 
-.btn-explore {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.btn-explore:hover {
-    background-color: #0056b3;
-}
-
-/* ================================================== */
-/* 5. SEÇÃO DE ÁLBUNS */
-/* ================================================== */
-#albums {
-    padding: 50px 20px;
-    background-color: var(--secondary-color);
-}
-
-#albums h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 30px;
-    font-family: var(--font-primary);
-}
-
-.album-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.album-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.album-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.album-card:hover img {
-    transform: scale(1.1);
-}
-
-.album-info {
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    width: 100%;
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    transition: bottom 0.3s ease;
-    z-index: 1;
-}
-
-.album-card:hover .album-info {
-    bottom: 0;
-}
-
-.album-info h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-family: var(--font-primary);
-}
-
-.album-info p {
-    font-size: 1rem;
-    font-weight: 300;
-}
-
-.btn-view {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-}
-
-.btn-view:hover {
-    background-color: #0056b3;
-}
-
-/* ================================================== */
-/* 10. FOOTER */
-/* ================================================== */
-
-/* Footer */
-.footer {
-    width: 100%;
-    height: 70vh;
-    background-color: #1a1a1a;
-    color: #fff;
-    font-family: sans-serif;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
-    /* Aumentei o padding */
-}
-
-.portfolio-link {
-    font-size: 6.5em;
-    /* Aumentei o tamanho */
-    color: #fff;
-    text-decoration: none;
-    margin-top: 20px;
-    font-family: var(--font-secondary);
-}
-
-.contact-info {
-    text-align: left;
-    /* Justificado à esquerda */
-    padding: 20px;
-}
-
-.contact-info a {
-    font-size: 1.1em;
-    /* Aumentei o tamanho */
-    margin-bottom: 10px;
-    color: #fff;
-    text-decoration: none;
-}
-
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-    /* Aumentei o espaço */
-    margin-top: 15px;
-}
-
-.social-links a {
-    color: #fff;
-    font-size: 1.5rem;
-    /* Aumentei o tamanho */
-    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.social-links a:hover {
-    color: #ccc;
-    transform: scale(1.1);
-}
-
-.copyright {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    border-top: 1px solid #333;
-    font-size: 0.9rem;
-    /* Aumentei o tamanho */
-}
-
-
-
-
-
-/* Seção Galeria */
+/* ================= GALLERY SECTION ================= */
 .galeria {
     padding: 4rem 1.5rem;
     max-width: 1440px;
@@ -382,98 +186,173 @@ nav {
     opacity: 0.9;
 }
 
+/* ================= SOBRE MIM SECTION ================= */
+.sobre-mim {
+    padding: 4rem 2rem;
+    background-color: var(--secondary-color);
+}
+
 .container-principal {
     display: flex;
-    /* Container principal para título grande, imagem e texto */
     max-width: 1200px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    padding: 40px;
-    margin-bottom: 20px;
-    /* Espaço abaixo do container principal */
+    margin: 0 auto;
+    gap: 2rem;
 }
 
 .titulo-grande-container {
     flex: 1;
-    /* Título grande ocupa um pouco de espaço à esquerda */
-    padding-right: 20px;
-    align-self: stretch;
-    /* Estender verticalmente para alinhar com a altura da imagem e texto */
     display: flex;
-    flex-direction: column;
-    /* Para alinhar o título verticalmente */
-    justify-content: flex-start;
-    /* Alinhar o título ao topo */
+    align-items: center;
 }
 
 .titulo-grande {
-    font-size: 3em;
-    /* Tamanho maior para o título principal */
-    font-weight: bold;
-    color: #222;
-    line-height: 1;
-    /* Ajustar a altura da linha para o título grande */
+    font-size: 3rem;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .conteudo-principal {
-    flex: 3;
-    /* Imagem e texto descritivo ocupam mais espaço */
+    flex: 2;
     display: flex;
-    /* Flex container para imagem e texto lado a lado */
+    gap: 2rem;
 }
 
-
 .sobre-mim-imagem {
-    flex: 1.5;
-    /* A imagem ocupa mais espaço */
-    padding-right: 30px;
+    flex: 1;
 }
 
 .sobre-mim-imagem img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    display: block;
     border-radius: 8px;
 }
 
 .sobre-mim-texto {
     flex: 2;
-    /* Texto descritivo ocupa espaço à direita */
-    align-self: flex-start;
-    /* Alinhar o texto ao topo */
 }
 
 .sobre-mim-paragrafo {
-    font-size: 1.1em;
+    font-size: 1.1rem;
     line-height: 1.6;
-    margin-bottom: 15px;
+    color: var(--text-color);
 }
 
 .info-adicional-container {
     display: flex;
-    /* Container para informações adicionais abaixo */
     justify-content: space-between;
-    /* Espaçar os elementos */
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    /* Alinhar padding horizontalmente com o container principal */
-    color: #777;
-    /* Cor mais clara para informações adicionais */
-    font-size: 0.9em;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
 }
 
 .info-esquerda,
 .info-direita {
     display: flex;
-    /* Para alinhar itens horizontalmente */
-    gap: 20px;
-    /* Espaçamento entre os itens */
+    gap: 2rem;
 }
 
-.info-esquerda div,
-.info-direita div {
+/* ================= FOOTER ================= */
+
+.footer {
+    width: 100%;
+    height: 70vh;
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px; /* Aumentei o padding */
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 28px; /* Aumentei o tamanho */
+    cursor: pointer;
+}
+
+.menu {
+    width: 30%;
+    height: 100%;
+    background-color: #333;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    padding: 20px;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 15px; /* Aumentei o espaço */
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em; /* Aumentei o tamanho */
+}
+
+.portfolio-link {
+    font-size: 6.5em; /* Aumentei o tamanho */
+    color: #fff;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.contact-info {
+    text-align: left; /* Justificado à esquerda */
+    padding: 20px;
+}
+
+.contact-info a {
+    font-size: 1.1em; /* Aumentei o tamanho */
     margin-bottom: 10px;
-    /* Espaçamento entre linhas verticais dentro de cada coluna */
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem; /* Aumentei o espaço */
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5rem; /* Aumentei o tamanho */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem; /* Aumentei o tamanho */
 }

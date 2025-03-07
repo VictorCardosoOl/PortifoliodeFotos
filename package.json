@@ -4,8 +4,9 @@
   "description": "Portfólio fotográfico profissional com foco em retratos, casamentos e eventos.",
   "author": "Seu Nome <seuemail@email.com>",
   "scripts": {
-    "dev": "vite"
-    
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "gsap": "^3.12.7",
