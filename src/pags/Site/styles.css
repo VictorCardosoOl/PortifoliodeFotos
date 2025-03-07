@@ -2,14 +2,22 @@
 /* 1. VARIÁVEIS GLOBAIS */
 /* ================================================== */
 :root {
-    --primary-color: #001E38; /* Azul escuro */
-    --secondary-color: #FFFFFF; /* Branco */
-    --accent-color: #007BFF; /* Azul claro */
-    --font-primary: 'Playfair Display', serif; /* Fonte moderna para títulos */
-    --font-secondary: 'Playfair Display', serif; /* Fonte legível para textos */
-    --text-color: #333; /* Cor do texto principal */
-    --background-color: #F5F5F5; /* Cor de fundo do site */
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra padrão */
+    --primary-color: #001E38;
+    /* Azul escuro */
+    --secondary-color: #FFFFFF;
+    /* Branco */
+    --accent-color: #007BFF;
+    /* Azul claro */
+    --font-primary: 'Playfair Display', serif;
+    /* Fonte moderna para títulos */
+    --font-secondary: 'Playfair Display', serif;
+    /* Fonte legível para textos */
+    --text-color: #333;
+    /* Cor do texto principal */
+    --background-color: #F5F5F5;
+    /* Cor de fundo do site */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra padrão */
 }
 
 /* ================================================== */
@@ -21,7 +29,8 @@
     padding: 0;
 }
 
-body, html {
+body,
+html {
     font-family: var(--font-secondary);
     background-color: var(--background-color);
     color: var(--text-color);
@@ -97,7 +106,8 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay escuro */
+    background: rgba(0, 0, 0, 0.5);
+    /* Overlay escuro */
     z-index: 1;
 }
 
@@ -239,23 +249,28 @@ nav {
 .footer-content {
     display: flex;
     justify-content: space-between;
-    padding: 30px; /* Aumentei o padding */
+    padding: 30px;
+    /* Aumentei o padding */
 }
 
 .portfolio-link {
-    font-size: 6.5em; /* Aumentei o tamanho */
+    font-size: 6.5em;
+    /* Aumentei o tamanho */
     color: #fff;
     text-decoration: none;
     margin-top: 20px;
+    font-family: var(--font-secondary);
 }
 
 .contact-info {
-    text-align: left; /* Justificado à esquerda */
+    text-align: left;
+    /* Justificado à esquerda */
     padding: 20px;
 }
 
 .contact-info a {
-    font-size: 1.1em; /* Aumentei o tamanho */
+    font-size: 1.1em;
+    /* Aumentei o tamanho */
     margin-bottom: 10px;
     color: #fff;
     text-decoration: none;
@@ -263,13 +278,15 @@ nav {
 
 .social-links {
     display: flex;
-    gap: 1.5rem; /* Aumentei o espaço */
+    gap: 1.5rem;
+    /* Aumentei o espaço */
     margin-top: 15px;
 }
 
 .social-links a {
     color: #fff;
-    font-size: 1.5rem; /* Aumentei o tamanho */
+    font-size: 1.5rem;
+    /* Aumentei o tamanho */
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
@@ -283,7 +300,8 @@ nav {
     justify-content: space-between;
     padding: 20px;
     border-top: 1px solid #333;
-    font-size: 0.9rem; /* Aumentei o tamanho */
+    font-size: 0.9rem;
+    /* Aumentei o tamanho */
 }
 
 
@@ -349,7 +367,7 @@ nav {
     left: 0;
     right: 0;
     padding: 1.5rem;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
     color: white;
 }
 
@@ -365,39 +383,50 @@ nav {
 }
 
 .container-principal {
-    display: flex; /* Container principal para título grande, imagem e texto */
+    display: flex;
+    /* Container principal para título grande, imagem e texto */
     max-width: 1200px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     padding: 40px;
-    margin-bottom: 20px; /* Espaço abaixo do container principal */
+    margin-bottom: 20px;
+    /* Espaço abaixo do container principal */
 }
 
 .titulo-grande-container {
-    flex: 1; /* Título grande ocupa um pouco de espaço à esquerda */
+    flex: 1;
+    /* Título grande ocupa um pouco de espaço à esquerda */
     padding-right: 20px;
-    align-self: stretch; /* Estender verticalmente para alinhar com a altura da imagem e texto */
+    align-self: stretch;
+    /* Estender verticalmente para alinhar com a altura da imagem e texto */
     display: flex;
-    flex-direction: column; /* Para alinhar o título verticalmente */
-    justify-content: flex-start; /* Alinhar o título ao topo */
+    flex-direction: column;
+    /* Para alinhar o título verticalmente */
+    justify-content: flex-start;
+    /* Alinhar o título ao topo */
 }
 
 .titulo-grande {
-    font-size: 3em; /* Tamanho maior para o título principal */
+    font-size: 3em;
+    /* Tamanho maior para o título principal */
     font-weight: bold;
     color: #222;
-    line-height: 1; /* Ajustar a altura da linha para o título grande */
+    line-height: 1;
+    /* Ajustar a altura da linha para o título grande */
 }
 
 .conteudo-principal {
-    flex: 3; /* Imagem e texto descritivo ocupam mais espaço */
-    display: flex; /* Flex container para imagem e texto lado a lado */
+    flex: 3;
+    /* Imagem e texto descritivo ocupam mais espaço */
+    display: flex;
+    /* Flex container para imagem e texto lado a lado */
 }
 
 
 .sobre-mim-imagem {
-    flex: 1.5; /* A imagem ocupa mais espaço */
+    flex: 1.5;
+    /* A imagem ocupa mais espaço */
     padding-right: 30px;
 }
 
@@ -409,8 +438,10 @@ nav {
 }
 
 .sobre-mim-texto {
-    flex: 2; /* Texto descritivo ocupa espaço à direita */
-    align-self: flex-start; /* Alinhar o texto ao topo */
+    flex: 2;
+    /* Texto descritivo ocupa espaço à direita */
+    align-self: flex-start;
+    /* Alinhar o texto ao topo */
 }
 
 .sobre-mim-paragrafo {
@@ -420,20 +451,29 @@ nav {
 }
 
 .info-adicional-container {
-    display: flex; /* Container para informações adicionais abaixo */
-    justify-content: space-between; /* Espaçar os elementos */
+    display: flex;
+    /* Container para informações adicionais abaixo */
+    justify-content: space-between;
+    /* Espaçar os elementos */
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px; /* Alinhar padding horizontalmente com o container principal */
-    color: #777; /* Cor mais clara para informações adicionais */
+    padding: 0 40px;
+    /* Alinhar padding horizontalmente com o container principal */
+    color: #777;
+    /* Cor mais clara para informações adicionais */
     font-size: 0.9em;
 }
 
-.info-esquerda, .info-direita {
-    display: flex; /* Para alinhar itens horizontalmente */
-    gap: 20px; /* Espaçamento entre os itens */
+.info-esquerda,
+.info-direita {
+    display: flex;
+    /* Para alinhar itens horizontalmente */
+    gap: 20px;
+    /* Espaçamento entre os itens */
 }
 
-.info-esquerda div, .info-direita div {
-    margin-bottom: 10px; /* Espaçamento entre linhas verticais dentro de cada coluna */
+.info-esquerda div,
+.info-direita div {
+    margin-bottom: 10px;
+    /* Espaçamento entre linhas verticais dentro de cada coluna */
 }
