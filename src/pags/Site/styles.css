@@ -1,13 +1,25 @@
 /* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
-    --primary-color: #001E38; /* Azul escuro */
-    --secondary-color: #FFFFFF; /* Branco */
-    --accent-color: #007BFF; /* Azul claro */
-    --font-primary: 'Playfair Display', serif; /* Fonte moderna para títulos */
-    --font-secondary: 'Playfair Display', serif; /* Fonte legível para textos */
-    --text-color: #333; /* Cor do texto principal */
-    --background-color: #F5F5F5; /* Cor de fundo do site */
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra padrão */
+    --primary-color: #1a1a1a;
+    /* Preto sofisticado */
+    --secondary-color: #ffffff;
+    /* Branco */
+    --accent-color: #ffffff;
+    /* Branco para o botão no hover ficar com cor sólida */
+    --font-primary: 'Playfair Display', serif;
+    /* Fonte moderna para títulos */
+    --font-secondary: 'Inter', sans-serif;
+    /* Fonte legível para textos */
+    --font-hero-title: 'Baskerville', serif;
+    /* Fonte serifada clássica para títulos Hero */
+
+
+    --text-color: #333;
+    /* Cor do texto principal */
+    --background-color: #F5F5F5;
+    /* Cor de fundo do site */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra padrão */
 }
 
 /* ================= RESET E CONFIGURAÇÕES GERAIS ================= */
@@ -25,58 +37,110 @@ html {
     line-height: 1.6;
     height: 100vh;
 }
+
 /* Esconde a barra de scroll padrão */
 html {
-    scrollbar-width: none; /* Para Firefox */
-    -ms-overflow-style: none; /* Para Internet Explorer e Edge */
+    scrollbar-width: none;
+    /* Para Firefox */
+    -ms-overflow-style: none;
+    /* Para Internet Explorer e Edge */
 }
 
 html::-webkit-scrollbar {
-    display: none; /* Para Chrome, Safari e Opera */
+    display: none;
+    /* Para Chrome, Safari e Opera */
 }
 
 /* ================= NAVBAR ================= */
 nav {
     padding: 20px;
     background-color: transparent;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+    transition: background-color 0.3s ease;
+    border-bottom: none;
 }
 
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 30px;
 }
+
+.nav-left,
+.nav-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    justify-content: flex-start;
+    padding-left: 10px;
+    /* Adicionando padding-left para mover "MENU" mais à esquerda - Adicionado padding-left */
+}
+
+.nav-right {
+    justify-content: flex-end;
+}
+
+.logo {
+    text-align: left;
+    margin-left: 20px;
+    /* Aumentando margin-left do logo para criar mais espaço - Aumentado para 20px */
+    margin-right: 20px;
+    /* Adicionando margin-right ao logo para balancear o espaçamento - Adicionado margin-right */
+}
+
 
 .logo a {
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 2.3rem;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 800;
     font-family: var(--font-primary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
-}
+    gap: 35px; /* Aumentando gap entre os links - Aumentado para 35px */
+    justify-content: flex-end;
+    align-items: center;
+   }
 
-.nav-links li a {
+   .nav-links li a {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.88rem; /* Ajustando ligeiramente tamanho da fonte dos links - Ajustado para 0.88rem */
     transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+   }
+  
+   .nav-links li a:hover {
     color: var(--accent-color);
-}
+   }
+  
+   .hamburger-menu {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.88rem; /* Ajustando ligeiramente tamanho da fonte "MENU" - Ajustado para 0.88rem */
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+   }
 
 /* ================= HERO SECTION ================= */
 #hero {
@@ -87,39 +151,96 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: white;
+    text-align: left;
+    color: var(--secondary-color);
     position: relative;
-}
-
-#hero::before {
+    padding-top: 0;
+   }
+  
+   #hero::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay escuro */
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
-}
-
-.hero-content {
+   }
+  
+   .hero-content {
     position: relative;
     z-index: 2;
-}
-
-.hero-content h1 {
-    font-size: 4rem;
+    padding: 0 30px;
+    max-width: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+   }
+  
+   /* Estilizando o container dos títulos para alinhamento */
+   .hero-titles {
+    margin-right: 60px; /* Aumentando margin-right dos títulos para afastar mais do texto à direita - Aumentado para 60px */
+   }
+  
+   .hero-subtitle {
+    font-size: 0.72rem; /* Diminuindo ligeiramente tamanho do subtitle "ONLINE GALLERY" - Diminuído para 0.72rem */
+    margin-bottom: 16px; /* Diminuindo ligeiramente margin-bottom do subtitle - Diminuído para 16px */
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+    text-align: left;
+   }
+  
+   .hero-content h1 {
+    font-size: 5.3rem; /* Aumentando ligeiramente tamanho do título "VISUAL ARTS" - Aumentado para 5.3rem */
     margin: 0;
-    font-family: var(--font-primary);
-    font-weight: 700;
-}
-
-.hero-content p {
-    font-size: 1.5rem;
-    margin-top: 10px;
+    font-family: var(--font-hero-title);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--secondary-color);
+    text-align: left;
+   }
+  
+   /* Estilo específico para "&" */
+   .hero-title-amp {
+    font-size: 4rem; /* Ajustando tamanho do símbolo "&" - Ajustado para 4rem */
+    margin-top: -10px; /* Ajustando margem superior para alinhar verticalmente - Ajustado para -10px */
+    margin-bottom: -20px; /* Ajustando margem inferior para alinhar verticalmente - Ajustado para -20px */
+    line-height: 0.8; /* Ajustando line-height do "&" - Ajustado line-height */
+    font-family: var(--font-hero-title); /* Usando mesma fonte serifada dos títulos - Mantido */
+    font-weight: 400; /* Mantendo mesmo peso de fonte - Mantido */
+    color: var(--secondary-color); /* Cor branca - Mantido */
+    text-align: left; /* Alinhando à esquerda - Mantido */
+    display: block; /* Garantindo que o "&" se comporte como bloco para margens verticais funcionarem - Display block */
+   }
+  
+  
+   .hero-title-design {
+    font-size: 4.6rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: 0.9;
+   }
+  
+  
+   .hero-paragraph {
+    font-size: 0.93rem; /* Ajustando ligeiramente tamanho do parágrafo - Ajustado para 0.93rem */
+    margin-top: 0;
     font-weight: 300;
-}
+    color: var(--secondary-color);
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+    text-align: left;
+    white-space: pre-line;
+    margin-left: 50px;
+    max-width: 300px; /* Limitando largura máxima da coluna de texto - Adicionado max-width */
+   }
+  
+
 
 /* ================= GALLERY SECTION ================= */
 .galeria {
@@ -280,7 +401,8 @@ nav {
 .footer-content {
     display: flex;
     justify-content: space-between;
-    padding: 30px; /* Aumentei o padding */
+    padding: 30px;
+    /* Aumentei o padding */
 }
 
 .menu-container {
@@ -293,7 +415,8 @@ nav {
     background: none;
     border: none;
     color: #fff;
-    font-size: 28px; /* Aumentei o tamanho */
+    font-size: 28px;
+    /* Aumentei o tamanho */
     cursor: pointer;
 }
 
@@ -313,29 +436,34 @@ nav {
 }
 
 .menu li {
-    margin-bottom: 15px; /* Aumentei o espaço */
+    margin-bottom: 15px;
+    /* Aumentei o espaço */
 }
 
 .menu a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.1em; /* Aumentei o tamanho */
+    font-size: 1.1em;
+    /* Aumentei o tamanho */
 }
 
 .portfolio-link {
-    font-size: 6.5em; /* Aumentei o tamanho */
+    font-size: 6.5em;
+    /* Aumentei o tamanho */
     color: #fff;
     text-decoration: none;
     margin-top: 20px;
 }
 
 .contact-info {
-    text-align: left; /* Justificado à esquerda */
+    text-align: left;
+    /* Justificado à esquerda */
     padding: 20px;
 }
 
 .contact-info a {
-    font-size: 1.1em; /* Aumentei o tamanho */
+    font-size: 1.1em;
+    /* Aumentei o tamanho */
     margin-bottom: 10px;
     color: #fff;
     text-decoration: none;
@@ -343,13 +471,15 @@ nav {
 
 .social-links {
     display: flex;
-    gap: 1.5rem; /* Aumentei o espaço */
+    gap: 1.5rem;
+    /* Aumentei o espaço */
     margin-top: 15px;
 }
 
 .social-links a {
     color: #fff;
-    font-size: 1.5rem; /* Aumentei o tamanho */
+    font-size: 1.5rem;
+    /* Aumentei o tamanho */
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
@@ -363,5 +493,6 @@ nav {
     justify-content: space-between;
     padding: 20px;
     border-top: 1px solid #333;
-    font-size: 0.9rem; /* Aumentei o tamanho */
+    font-size: 0.9rem;
+    /* Aumentei o tamanho */
 }
