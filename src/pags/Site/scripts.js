@@ -5,6 +5,7 @@
 // Importações
 import LocomotiveScroll from 'locomotive-scroll'; // Importa Locomotive Scroll
 import { gsap } from 'gsap'; // Importa GSAP para animações
+import { Fancybox } from "@fancyapps/ui"; // Importa Fancybox para lightbox
 
 // Inicializa o Locomotive Scroll
 const scroll = new LocomotiveScroll({
@@ -102,3 +103,82 @@ document.addEventListener('DOMContentLoaded', () => {
         once: true, // Animações ocorrem apenas uma vez
     });
 });
+
+// Filtros da Galeria
+document.querySelectorAll('.filtros button').forEach(button => {
+    button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        document.querySelector('.filtro-ativo').classList.remove('filtro-ativo');
+        button.classList.add('filtro-ativo');
+
+        document.querySelectorAll('.item-arte').forEach(item => {
+            if (filter === 'todos' || item.getAttribute('data-category') === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Lightbox (Exemplo básico)
+document.querySelectorAll('.item-arte').forEach(item => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const imgSrc = item.querySelector('img').src;
+        const lightbox = document.createElement('div');
+        lightbox.classList.add('lightbox');
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <img src="${imgSrc}" alt="Imagem Ampliada">
+                <button class="fechar-lightbox">&times;</button>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+
+        lightbox.querySelector('.fechar-lightbox').addEventListener('click', () => {
+            lightbox.remove();
+        });
+    });
+});
+
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+document.querySelectorAll('.gallery-item').forEach((item, index) => {
+    gsap.from(item, {
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: item,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+      delay: index * 0.2,
+    });
+  });
+
+  // Filtros da Galeria
+document.querySelectorAll('.filter-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+      document.querySelector('.filter-button.active').classList.remove('active');
+      button.classList.add('active');
+  
+      document.querySelectorAll('.gallery-list__item').forEach(item => {
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+  
+  // Lightbox com Fancybox
+  import { Fancybox } from "@fancyapps/ui";
+  Fancybox.bind("[data-fancybox]", {
+    // Opções do Fancybox
+  });

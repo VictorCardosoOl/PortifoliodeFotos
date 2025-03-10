@@ -19,78 +19,174 @@
     <!-- ================= NAVBAR ================= -->
     <nav id="navbar">
         <div class="navbar-container">
-         <div class="nav-left">
-          <button class="hamburger-menu" aria-label="Menu">
-           MENU
-          </button>
-         </div>
-         <div class="logo">
-          <a href="#" tabindex="0">Fotógrafo</a>
-         </div>
-         <div class="nav-right">
-          <ul class="nav-links" id="nav-links">
-            <li><a href="#hero" tabindex="0">Início</a></li>
-            <li><a href="#albums" tabindex="0">Álbuns</a></li>
-            <li><a href="#about" tabindex="0">Sobre</a></li>
-            <li><a href="#footer" tabindex="0">Contato</a></li>
-          </ul>
-         </div>
+            <div class="nav-left">
+                <button class="hamburger-menu" aria-label="Menu">
+                    MENU
+                </button>
+            </div>
+            <div class="logo">
+                <a href="#" tabindex="0">Fotógrafo</a>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#hero" tabindex="0">Início</a></li>
+                    <li><a href="#albums" tabindex="0">Álbuns</a></li>
+                    <li><a href="#about" tabindex="0">Sobre</a></li>
+                    <li><a href="#footer" tabindex="0">Contato</a></li>
+                </ul>
+            </div>
         </div>
-       </nav>
-      
+    </nav>
+
 
     <!-- ================= HERO SECTION ================= -->
-    <section id="hero">
+    <section id="hero" data-scroll-section>
         <div class="hero-content">
-            <div class="hero-titles">
-                <h2 class="hero-subtitle" data-aos="fade-down" data-aos-duration="1000">ONLINE GALLERY</h2>
-                <h1 data-aos="fade-down" data-aos-duration="1000">Capturando Momentos</h1>
-                <h1 data-aos="fade-down" data-aos-duration="1000" class="hero-title-amp">&</h1>
-                <h1 data-aos="fade-down" data-aos-duration="1000" class="hero-title-design">DESIGN</h1>
+            <div class="hero-titles" data-scroll data-scroll-speed="1">
+                <h2 class="hero-subtitle" data-scroll data-scroll-delay="0.1" data-scroll-speed="2">ONLINE GALLERY</h2>
+                <h1 data-scroll data-scroll-delay="0.2" data-scroll-speed="1.5">Capturando Momentos</h1>
+                <h1 data-scroll data-scroll-delay="0.3" data-scroll-speed="1" class="hero-title-amp">&</h1>
+                <h1 data-scroll data-scroll-delay="0.4" data-scroll-speed="1.5" class="hero-title-design">DESIGN</h1>
             </div>
-            <div class="hero-text-button">
-                <p class="hero-paragraph" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <div class="hero-text-button" data-scroll data-scroll-speed="0.5">
+                <p class="hero-paragraph" data-scroll data-scroll-delay="0.5" data-scroll-speed="1">
                     Balance<br>your Space,<br><br>and<br><br>Enter<br>the gallery</p>
             </div>
         </div>
     </section>
 
-    <!-- ================= GALLERY SECTION ================= -->
-    <section class="galeria">
-        <div class="cabecalho-galeria">
-            <h1 class="titulo-galeria">Catálogo de Obras</h1>
-        </div>
 
-        <div class="grid-dinamico">
-            <a href="/obra" class="item-arte">
-                <div class="imagem-container">
-                    <img src="/img/Album 1/folder.jpg" alt="Álbum 1: Retratos">
+
+    <!-- ================= GALLERY SECTION ================= -->
+    <section class="gallery">
+       
+<!-- ================= GALLERY SECTION ================= -->
+<section class="gallery" aria-labelledby="gallery-heading">
+    <div class="cabecalho-galeria" data-scroll data-scroll-speed="0.5">
+        <h1 class="titulo-galeria">Catálogo de Obras</h1>
+        <div class="filtros">
+            <button class="filtro-ativo" data-filter="todos">Todos</button>
+            <button data-filter="retratos">Retratos</button>
+            <button data-filter="casamentos">Casamentos</button>
+            <button data-filter="paisagens">Paisagens</button>
+        </div>class="filter-button" data-filter="paisagens">Paisagens</button>
+      </div>
+      <ul class="gallery-list">
+        <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+          <a href="/catalogue/all-you-want-to-be" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-thumb">
+                  <img
+                    src="/img/A/a (2).webp"
+                    srcset="
+                      /img/A/a (2).webp 1200w,
+                      https://cdn.boyd.ae/medium_All_you_want_to_be_min_3626e82ef3.webp 800w,
+                      https://cdn.boyd.ae/small_All_you_want_to_be_min_3626e82ef3.webp 480w
+                    "
+                    sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px"
+                    alt="All You Want To Be"
+                    class="card-image"
+                    loading="lazy"
+                  />
                 </div>
-                <div class="info-obra">
-                    <h3 class="titulo-obra">Tudo o que você quer ser</h3>
-                    <p class="preco-obra">20.000 DIRHAMS</p>
+                <div class="card-content">
+                  <h3 class="card-title">All You Want To Be</h3>
+                  <span class="card-price">20,000 DIRHAMS</span>
                 </div>
+              </div>
+            </div>
+          </a>
+        </li>
+  
+        <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+            <a href="/catalogue/all-you-want-to-be" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-thumb">
+                    <img
+                      src="/img/A/a (2).webp"
+                      srcset="
+                        /img/A/a (2).webp 1200w,
+                        https://cdn.boyd.ae/medium_All_you_want_to_be_min_3626e82ef3.webp 800w,
+                        https://cdn.boyd.ae/small_All_you_want_to_be_min_3626e82ef3.webp 480w
+                      "
+                      sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px"
+                      alt="All You Want To Be"
+                      class="card-image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">All You Want To Be</h3>
+                    <span class="card-price">20,000 DIRHAMS</span>
+                  </div>
+                </div>
+              </div>
             </a>
-            <a href="/obra" class="item-arte">
-                <div class="imagem-container">
-                    <img src="/img/Album 2/folder.jpg" alt="Álbum 2: Casamentos">
+          </li>
+
+          <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+            <a href="/catalogue/all-you-want-to-be" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-thumb">
+                    <img
+                      src="/img/A/a (2).webp"
+                      srcset="
+                        /img/A/a (2).webp 1200w,
+                        /img/A/a (2).webp 800w,
+                        /img/A/a (2).webp 480w
+                      "
+                      sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px"
+                      alt="All You Want To Be"
+                      class="card-image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">All You Want To Be</h3>
+                    <span class="card-price">20,000 DIRHAMS</span>
+                  </div>
                 </div>
-                <div class="info-obra">
-                    <h3 class="titulo-obra">Tudo o que você quer ser</h3>
-                    <p class="preco-obra">20.000 DIRHAMS</p>
-                </div>
+              </div>
             </a>
-            <a href="/obra" class="item-arte">
-                <div class="imagem-container">
-                    <img src="/img/Album 3/folder.jpg" alt="Álbum 3: Paisagens">
+          </li>
+
+          <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+            <a href="/catalogue/all-you-want-to-be" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+              <div class="card">
+                <div class="card-inner">
+                  <div class="card-thumb">
+                    <img
+                      src="/img/A/a (2).webp"
+                      srcset="
+                        /img/A/a (2).webp 1200w,
+                        https://cdn.boyd.ae/medium_All_you_want_to_be_min_3626e82ef3.webp 800w,
+                        https://cdn.boyd.ae/small_All_you_want_to_be_min_3626e82ef3.webp 480w
+                      "
+                      sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px"
+                      alt="All You Want To Be"
+                      class="card-image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">All You Want To Be</h3>
+                    <span class="card-price">20,000 DIRHAMS</span>
+                  </div>
                 </div>
-                <div class="info-obra">
-                    <h3 class="titulo-obra">Tudo o que você quer ser</h3>
-                    <p class="preco-obra">20.000 DIRHAMS</p>
-                </div>
+              </div>
             </a>
-        </div>
-    </section>
+          </li>
+        <!-- Adicione mais itens aqui -->
+      </ul>
+    </div>
+  </section>
 
     <!-- ================= SOBRE MIM SECTION ================= -->
     <section id="about" class="sobre-mim">
