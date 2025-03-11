@@ -244,8 +244,6 @@ nav {
 
 /* ================= GALLERY SECTION ================= */
 
-
-
 .cabecalho-galeria {
     text-align: center;
     margin-bottom: 3rem;
@@ -312,9 +310,6 @@ nav {
     transition: box-shadow 0.3s ease;
   }
   
-  .card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
   
   .card-inner {
     position: relative;
@@ -348,9 +343,7 @@ nav {
     transition: transform 0.4s ease;
   }
   
-  .gallery-list__item:hover .card-content {
-    transform: translateY(-8px);
-  }
+
   
   .card-title {
     font-family: var(--font-canela-regular, serif);
