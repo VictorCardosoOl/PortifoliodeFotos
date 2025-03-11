@@ -53,7 +53,7 @@ html::-webkit-scrollbar {
 
 /* ================= NAVBAR ================= */
 nav {
-    padding: 20px;
+    padding: 10px;
     background-color: transparent;
     position: fixed;
     top: 0;
