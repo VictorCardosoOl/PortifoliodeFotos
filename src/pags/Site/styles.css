@@ -260,33 +260,6 @@ nav {
     letter-spacing: -0.03em;
 }
 
-.filtros {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.filtros button {
-    background: transparent;
-    border: 1px solid var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.filtros button:hover {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-}
-
-.filtro-ativo {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-}
-
-/* ================= GALLERY SECTION ================= */
 .gallery {
     padding: 4rem 2rem;
     background-color: var(--c-bg, #f8f8f8);
