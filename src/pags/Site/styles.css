@@ -305,35 +305,6 @@ nav {
     color: var(--c-base-1000, #333);
   }
   
-  .filters {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .filter-button {
-    background: transparent;
-    border: 1px solid var(--c-base-1000, #333);
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-    font-family: var(--font-love-regular, serif);
-    font-size: 1rem;
-    color: var(--c-base-1000, #333);
-  }
-  
-  .filter-button:hover, .filter-button:focus {
-    background: var(--c-base-1000, #333);
-    color: var(--c-base-0, #fff);
-  }
-  
-  .filter-button.active {
-    background: var(--c-base-1000, #333);
-    color: var(--c-base-0, #fff);
-  }
-  
   .gallery-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
