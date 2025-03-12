@@ -149,98 +149,44 @@ nav {
     background-size: cover;
     background-position: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end; /* Alinha o conteúdo no final (parte inferior) */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
     text-align: left;
     color: var(--secondary-color);
     position: relative;
-    padding-top: 0;
-   }
+    padding: 0 0 40px 40px; /* Adiciona padding na parte inferior e esquerda */
+  }
   
-   #hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-   }
-  
-   .hero-content {
+  .hero-content {
     position: relative;
     z-index: 2;
-    padding: 0 30px;
     max-width: 90%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-   }
+  }
   
-   /* Estilizando o container dos títulos para alinhamento */
-   .hero-titles {
-    margin-right: 60px; /* Aumentando margin-right dos títulos para afastar mais do texto à direita - Aumentado para 60px */
-   }
+  /* Estilizando o container dos títulos para alinhamento */
+  .hero-titles {
+    text-align: left; /* Garante alinhamento à esquerda */
+  }
   
-   .hero-subtitle {
-    font-size: 0.72rem; /* Diminuindo ligeiramente tamanho do subtitle "ONLINE GALLERY" - Diminuído para 0.72rem */
-    margin-bottom: 16px; /* Diminuindo ligeiramente margin-bottom do subtitle - Diminuído para 16px */
+  .hero-subtitle {
+    font-size: 0.72rem;
+    margin-bottom: 8px; /* Reduzindo o espaçamento entre o subtítulo e o título */
     font-family: var(--font-secondary);
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--secondary-color);
-    text-align: left;
-   }
+    color: var(--primary-color);
+  }
   
-   .hero-content h1 {
-    font-size: 5.3rem; /* Aumentando ligeiramente tamanho do título "VISUAL ARTS" - Aumentado para 5.3rem */
+  .hero-content h1 {
+    font-size: 5.3rem;
     margin: 0;
     font-family: var(--font-hero-title);
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: var(--secondary-color);
-    text-align: left;
-   }
-  
-   /* Estilo específico para "&" */
-   .hero-title-amp {
-    font-size: 4rem; /* Ajustando tamanho do símbolo "&" - Ajustado para 4rem */
-    margin-top: -10px; /* Ajustando margem superior para alinhar verticalmente - Ajustado para -10px */
-    margin-bottom: -20px; /* Ajustando margem inferior para alinhar verticalmente - Ajustado para -20px */
-    line-height: 0.8; /* Ajustando line-height do "&" - Ajustado line-height */
-    font-family: var(--font-hero-title); /* Usando mesma fonte serifada dos títulos - Mantido */
-    font-weight: 400; /* Mantendo mesmo peso de fonte - Mantido */
-    color: var(--secondary-color); /* Cor branca - Mantido */
-    text-align: left; /* Alinhando à esquerda - Mantido */
-    display: block; /* Garantindo que o "&" se comporte como bloco para margens verticais funcionarem - Display block */
-   }
-  
-  
-   .hero-title-design {
-    font-size: 4.6rem;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    line-height: 0.9;
-   }
-  
-  
-   .hero-paragraph {
-    font-size: 0.93rem; /* Ajustando ligeiramente tamanho do parágrafo - Ajustado para 0.93rem */
-    margin-top: 0;
-    font-weight: 300;
-    color: var(--secondary-color);
-    letter-spacing: 0.05em;
-    line-height: 1.7;
-    text-align: left;
-    white-space: pre-line;
-    margin-left: 50px;
-    max-width: 300px; /* Limitando largura máxima da coluna de texto - Adicionado max-width */
-   }
-  
-
+    color: var(--primary-color);
+  }
 
 /* ================= GALLERY SECTION ================= */
 
