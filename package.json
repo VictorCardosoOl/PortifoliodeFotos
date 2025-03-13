@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@fancyapps/ui": "^5.0.36",
+    "all": "^0.0.0",
     "gsap": "^3.12.7",
     "locomotive-scroll": "^4.1.4",
+    "ogl": "^1.0.11",
     "react-intersection-observer": "^9.15.1"
   },
   "devDependencies": {

@@ -148,37 +148,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.querySelectorAll('.gallery-item').forEach((item, index) => {
     gsap.from(item, {
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: item,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-      delay: index * 0.2,
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            toggleActions: "play none none none",
+        },
+        delay: index * 0.2,
     });
-  });
+});
 
-  // Filtros da Galeria
+// Filtros da Galeria
 document.querySelectorAll('.filter-button').forEach(button => {
     button.addEventListener('click', () => {
-      const filter = button.getAttribute('data-filter');
-      document.querySelector('.filter-button.active').classList.remove('active');
-      button.classList.add('active');
-  
-      document.querySelectorAll('.gallery-list__item').forEach(item => {
-        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+        const filter = button.getAttribute('data-filter');
+        document.querySelector('.filter-button.active').classList.remove('active');
+        button.classList.add('active');
+
+        document.querySelectorAll('.gallery-list__item').forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
     });
-  });
-  
-  // Lightbox com Fancybox
-  import { Fancybox } from "@fancyapps/ui";
-  Fancybox.bind("[data-fancybox]", {
+});
+
+// Lightbox com Fancybox
+import { Fancybox } from "@fancyapps/ui";
+Fancybox.bind("[data-fancybox]", {
     // Opções do Fancybox
-  });
+});
+
+
