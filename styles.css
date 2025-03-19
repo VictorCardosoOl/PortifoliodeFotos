@@ -1,0 +1,486 @@
+/* ================= VARIÁVEIS GLOBAIS ================= */
+:root {
+    --primary-color: #1a1a1a;
+    /* Preto sofisticado */
+    --secondary-color: #ffffff;
+    /* Branco */
+    --accent-color: #ffffff;
+    /* Branco para o botão no hover ficar com cor sólida */
+    --font-primary: 'Playfair Display', serif;
+    /* Fonte moderna para títulos */
+    --font-secondary: 'Inter', sans-serif;
+    /* Fonte legível para textos */
+    --font-hero-title: 'Baskerville', serif;
+    /* Fonte serifada clássica para títulos Hero */
+
+
+    --text-color: #333;
+    /* Cor do texto principal */
+    --background-color: #F5F5F5;
+    /* Cor de fundo do site */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra padrão */
+}
+
+/* ================= RESET E CONFIGURAÇÕES GERAIS ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    font-family: var(--font-secondary);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    height: 100vh;
+}
+
+/* Esconde a barra de scroll padrão */
+html {
+    scrollbar-width: none;
+    /* Para Firefox */
+    -ms-overflow-style: none;
+    /* Para Internet Explorer e Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    /* Para Chrome, Safari e Opera */
+}
+
+/* ================= NAVBAR ================= */
+nav {
+    padding: 10px;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    border-bottom: none;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.nav-left,
+.nav-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    justify-content: flex-start;
+    padding-left: 10px;
+    /* Adicionando padding-left para mover "MENU" mais à esquerda - Adicionado padding-left */
+}
+
+.nav-right {
+    justify-content: flex-end;
+}
+
+.logo {
+    text-align: left;
+    margin-left: 20px;
+    /* Aumentando margin-left do logo para criar mais espaço - Aumentado para 20px */
+    margin-right: 20px;
+    /* Adicionando margin-right ao logo para balancear o espaçamento - Adicionado margin-right */
+}
+
+
+.logo a {
+    color: var(--primary-color);
+    font-size: 2.3rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-family: var(--font-primary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 35px; /* Aumentando gap entre os links - Aumentado para 35px */
+    justify-content: flex-end;
+    align-items: center;
+   }
+
+   .nav-links li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.88rem; /* Ajustando ligeiramente tamanho da fonte dos links - Ajustado para 0.88rem */
+    transition: color 0.3s ease;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+   }
+  
+   .nav-links li a:hover {
+    color: var(--accent-color);
+   }
+  
+   .hamburger-menu {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.88rem; /* Ajustando ligeiramente tamanho da fonte "MENU" - Ajustado para 0.88rem */
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+   }
+
+/* ================= HERO SECTION ================= */
+#hero {
+    height: 100vh;
+    background-image: url('/public/img/A/c (5).webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end; /* Alinha o conteúdo no final (parte inferior) */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    text-align: left;
+    color: var(--secondary-color);
+    position: relative;
+    padding: 0 0 40px 40px; /* Adiciona padding na parte inferior e esquerda */
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+  }
+  
+  /* Estilizando o container dos títulos para alinhamento */
+  .hero-titles {
+    text-align: left; /* Garante alinhamento à esquerda */
+  }
+  
+  .hero-subtitle {
+    font-size: 0.72rem;
+    margin-bottom: 8px; /* Reduzindo o espaçamento entre o subtítulo e o título */
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+  }
+  
+  .hero-content h1 {
+    font-size: 5.3rem;
+    margin: 0;
+    font-family: var(--font-hero-title);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--primary-color);
+  }
+
+/* ================= GALLERY SECTION ================= */
+
+.cabecalho-galeria {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.titulo-galeria {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.75rem;
+    margin: 2rem 0 0.5rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+}
+
+.gallery {
+    padding: 4rem 2rem;
+    background-color: var(--c-bg, #f8f8f8);
+  }
+  
+  .gallery-container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .gallery-heading {
+    font-family: var(--font-canela-regular, serif);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--c-base-1000, #333);
+  }
+  
+  .gallery-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .gallery-list__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .gallery-list__item:hover {
+    transform: translateY(-8px);
+  }
+  
+  .gallery-list__card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: var(--c-base-0, #fff);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  
+  .card-inner {
+    position: relative;
+  }
+  
+  .card-thumb {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  
+  .gallery-list__item:hover .card-image {
+    transform: scale(1.05);
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    color: var(--c-base-0, #fff);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+  }
+  
+
+  
+  .card-title {
+    font-family: var(--font-canela-regular, serif);
+    font-size: 1.4rem;
+    margin: 0 0 0.25rem;
+    font-weight: 400;
+  }
+  
+  .card-price {
+    font-family: var(--font-love-regular, serif);
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+/* ================= SOBRE MIM SECTION ================= */
+.sobre-mim {
+    padding: 4rem 2rem;
+    background-color: var(--secondary-color);
+}
+
+.container-principal {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.titulo-grande-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.titulo-grande {
+    font-size: 3rem;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.conteudo-principal {
+    flex: 2;
+    display: flex;
+    gap: 2rem;
+}
+
+.sobre-mim-imagem {
+    flex: 1;
+}
+
+.sobre-mim-imagem img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.sobre-mim-texto {
+    flex: 2;
+}
+
+.sobre-mim-paragrafo {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.info-adicional-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.info-esquerda,
+.info-direita {
+    display: flex;
+    gap: 2rem;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    width: 100%;
+    height: 70vh;
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    /* Aumentei o padding */
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    /* Aumentei o tamanho */
+    cursor: pointer;
+}
+
+.menu {
+    width: 30%;
+    height: 100%;
+    background-color: #333;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    padding: 20px;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 15px;
+    /* Aumentei o espaço */
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    /* Aumentei o tamanho */
+}
+
+.portfolio-link {
+    font-size: 6.5em;
+    /* Aumentei o tamanho */
+    color: #fff;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.contact-info {
+    text-align: left;
+    /* Justificado à esquerda */
+    padding: 20px;
+}
+
+.contact-info a {
+    font-size: 1.1em;
+    /* Aumentei o tamanho */
+    margin-bottom: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    /* Aumentei o espaço */
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5rem;
+    /* Aumentei o tamanho */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+    /* Aumentei o tamanho */
+}
