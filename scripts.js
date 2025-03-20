@@ -1,26 +1,37 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const navLinks = document.getElementById('nav-links');
-    const navbar = document.getElementById('navbar');
-    let lastScrollTop = 0;
+// Função para o menu hambúrguer
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const navRight = document.querySelector('.nav-right');
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+document.body.appendChild(overlay);
 
-    // Funcionalidade do menu hambúrguer
-    hamburgerMenu.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-    });
+hamburgerMenu.addEventListener('click', () => {
+    navRight.classList.toggle('active');
+    overlay.classList.toggle('active');
+    hamburgerMenu.setAttribute('aria-expanded', navRight.classList.contains('active'));
+});
 
-    // Funcionalidade de ocultar/exibir a navbar ao scroll
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.scrollY || document.documentElement.scrollTop;
+// Fechar o menu ao clicar no overlay
+overlay.addEventListener('click', () => {
+    navRight.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburgerMenu.setAttribute('aria-expanded', false);
+});
 
-        if (scrollTop > lastScrollTop && scrollTop > navbar.offsetHeight) {
-            // Rolando para baixo e passou da altura da navbar
-            navbar.classList.add('hidden');
-        } else if (scrollTop < lastScrollTop) {
-            // Rolando para cima
-            navbar.classList.remove('hidden');
-        }
+// Função para ocultar/exibir a navbar ao rolar a página
+let lastScroll = 0;
+const navbar = document.getElementById('navbar');
 
-        lastScrollTop = scrollTop;
-    });
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll <= 0) {
+        navbar.style.transform = 'translateY(0)'; // Exibe a navbar no topo da página
+    } else if (currentScroll > lastScroll) {
+        navbar.style.transform = 'translateY(-100%)'; // Oculta a navbar ao rolar para baixo
+    } else {
+        navbar.style.transform = 'translateY(0)'; // Exibe a navbar ao rolar para cima
+    }
+
+    lastScroll = currentScroll;
 });

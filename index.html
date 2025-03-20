@@ -17,28 +17,29 @@
 <body data-scroll-container>
 
   <!-- ================= NAVBAR ================= -->
-  <nav id="navbar">
+  <nav id="navbar" role="navigation">
     <div class="navbar-container">
-        <div class="nav-left">
-            <button class="hamburger-menu" aria-label="Menu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="logo">
-            <a href="#" tabindex="0">Fotógrafo</a>
-        </div>
-        <div class="nav-right">
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#hero" tabindex="0">Início</a></li>
-                <li><a href="#albums" tabindex="0">Álbuns</a></li>
-                <li><a href="#about" tabindex="0">Sobre</a></li>
-                <li><a href="#footer" tabindex="0">Contato</a></li>
-            </ul>
-        </div>
+      <!-- Logo no lado esquerdo -->
+      <div class="logo">
+        <a href="#" tabindex="0">Fotógrafo</a>
+      </div>
+  
+      <!-- Botão do menu hambúrguer (visível em desktop e mobile) -->
+      <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
+        <span class="hamburger-icon"></span>
+      </button>
+  
+      <!-- Menu expansível (lado direito) -->
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#hero" tabindex="0">Início</a></li>
+          <li><a href="#albums" tabindex="0">Álbuns</a></li>
+          <li><a href="#about" tabindex="0">Sobre</a></li>
+          <li><a href="#footer" tabindex="0">Contato</a></li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
 
 
   <!-- ================= HERO SECTION ================= -->
