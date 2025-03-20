@@ -16,7 +16,7 @@
 
     --text-color: #333;
     /* Cor do texto principal */
-    --background-color: #F5F5F5;
+    --background-color: #ffffff;
     /* Cor de fundo do site */
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* Sombra padrão */
@@ -51,7 +51,6 @@ html::-webkit-scrollbar {
     /* Para Chrome, Safari e Opera */
 }
 
-/* ================= NAVBAR ================= */
 /* ================= NAVBAR ================= */
 nav {
     padding: 10px;
@@ -250,7 +249,7 @@ nav {
 
 .gallery {
     padding: 4rem 2rem;
-    background-color: var(--c-bg, #f8f8f8);
+   
   }
   
   .gallery-container {
@@ -351,7 +350,6 @@ nav {
 /* ================= SOBRE MIM SECTION ================= */
 .sobre-mim {
     padding: 4rem 2rem;
-    background-color: var(--secondary-color);
 }
 
 .container-principal {
