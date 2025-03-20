@@ -67,7 +67,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 30px;
 }
@@ -214,7 +214,6 @@ nav {
   .hero-subtitle {
     font-size: 0.72rem;
     margin-bottom: 8px; /* Reduzindo o espaçamento entre o subtítulo e o título */
-    font-family: var(--font-secondary);
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -433,48 +432,6 @@ nav {
     justify-content: space-between;
     padding: 30px;
     /* Aumentei o padding */
-}
-
-.menu-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.menu-toggle {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 28px;
-    /* Aumentei o tamanho */
-    cursor: pointer;
-}
-
-.menu {
-    width: 30%;
-    height: 100%;
-    background-color: #333;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    padding: 20px;
-}
-
-.menu ul {
-    list-style: none;
-}
-
-.menu li {
-    margin-bottom: 15px;
-    /* Aumentei o espaço */
-}
-
-.menu a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1em;
-    /* Aumentei o tamanho */
 }
 
 .portfolio-link {
