@@ -3,8 +3,6 @@
     --primary-color: #1a1a1a;
     /* Preto sofisticado */
     --secondary-color: #ffffff;
-    /* Branco */
-    --accent-color: #ffffff;
     /* Branco para o botão no hover ficar com cor sólida */
     --font-primary: 'Playfair Display', serif;
     /* Fonte moderna para títulos */
@@ -13,10 +11,7 @@
     --font-hero-title: 'Baskerville', serif;
     /* Fonte serifada clássica para títulos Hero */
 
-
     --text-color: #333;
-    /* Cor do texto principal */
-    --background-color: #ffffff;
     /* Cor de fundo do site */
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* Sombra padrão */
@@ -32,7 +27,7 @@
 body,
 html {
     font-family: var(--font-secondary);
-    background-color: var(--background-color);
+    background-color: var(--secondary-color);
     color: var(--text-color);
     line-height: 1.6;
     height: 100vh;
@@ -162,7 +157,7 @@ nav {
 }
 
 .nav-links li a:hover {
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 /* Quando o menu está ativo */
@@ -420,7 +415,6 @@ nav {
     height: 70vh;
     background-color: #1a1a1a;
     color: #fff;
-    font-family: sans-serif;
     position: relative;
     display: flex;
     flex-direction: column;
