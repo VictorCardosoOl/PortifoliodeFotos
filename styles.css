@@ -59,7 +59,7 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adicionando transição para o transform */
     border-bottom: none;
 }
 
@@ -82,7 +82,6 @@ nav {
 .nav-left {
     justify-content: flex-start;
     padding-left: 10px;
-    /* Adicionando padding-left para mover "MENU" mais à esquerda - Adicionado padding-left */
 }
 
 .nav-right {
@@ -92,11 +91,8 @@ nav {
 .logo {
     text-align: left;
     margin-left: 20px;
-    /* Aumentando margin-left do logo para criar mais espaço - Aumentado para 20px */
     margin-right: 20px;
-    /* Adicionando margin-right ao logo para balancear o espaçamento - Adicionado margin-right */
 }
-
 
 .logo a {
     color: var(--primary-color);
@@ -111,37 +107,83 @@ nav {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 35px; /* Aumentando gap entre os links - Aumentado para 35px */
+    gap: 35px;
     justify-content: flex-end;
     align-items: center;
-   }
+}
 
-   .nav-links li a {
+.nav-links li a {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 0.88rem; /* Ajustando ligeiramente tamanho da fonte dos links - Ajustado para 0.88rem */
+    font-size: 0.88rem;
     transition: color 0.3s ease;
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-   }
-  
-   .nav-links li a:hover {
+}
+
+.nav-links li a:hover {
     color: var(--accent-color);
-   }
-  
-   .hamburger-menu {
-    display: block;
+}
+
+.hamburger-menu {
+    display: none; /* Oculta o menu hambúrguer por padrão em telas maiores */
     background: none;
     border: none;
     color: var(--primary-color);
-    font-size: 0.88rem; /* Ajustando ligeiramente tamanho da fonte "MENU" - Ajustado para 0.88rem */
     cursor: pointer;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-   }
+    padding: 10px;
+}
 
+.hamburger-menu svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Estilos para telas menores (mobile) */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Oculta os links de navegação em telas menores inicialmente */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Ajuste conforme a altura da sua navbar */
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.9); /* Cor de fundo para o menu mobile */
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        z-index: 1001; /* Garante que o menu fique acima de outros elementos */
+    }
+
+    .nav-links.active {
+        display: flex; /* Exibe os links quando a classe 'active' é adicionada */
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .nav-links li a {
+        font-size: 1rem;
+    }
+
+    .hamburger-menu {
+        display: block; /* Exibe o menu hambúrguer em telas menores */
+    }
+
+    .logo {
+        margin-left: 10px; /* Ajusta a margem do logo em telas menores */
+    }
+
+    .navbar-container {
+        padding: 0 20px; /* Ajusta o padding do container em telas menores */
+    }
+}
+
+/* Estilos para ocultar/exibir a navbar ao scroll */
+nav.hidden {
+    transform: translateY(-100%);
+}
 /* ================= HERO SECTION ================= */
 #hero {
     height: 100vh;
