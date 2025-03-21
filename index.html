@@ -14,219 +14,219 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!-- Biblioteca AOS para animações -->
 </head>
 
-<body data-scroll-container>
+<body>
+  <div class="container" data-scroll-container>
+    <!-- ================= NAVBAR ================= -->
+    <nav id="navbar" role="navigation">
+      <div class="navbar-container">
+        <!-- Logo no lado esquerdo -->
+        <div class="logo">
+          <a href="#" tabindex="0">Fotógrafo</a>
+        </div>
 
-  <!-- ================= NAVBAR ================= -->
-  <nav id="navbar" role="navigation">
-    <div class="navbar-container">
-      <!-- Logo no lado esquerdo -->
-      <div class="logo">
-        <a href="#" tabindex="0">Fotógrafo</a>
+        <!-- Botão do menu hambúrguer (visível em desktop e mobile) -->
+        <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
+          <span class="hamburger-icon"></span>
+        </button>
+
+        <!-- Menu expansível (lado direito) -->
+        <div class="nav-right">
+          <ul class="nav-links" id="nav-links">
+            <li><a href="#hero" tabindex="0">Início</a></li>
+            <li><a href="#albums" tabindex="0">Álbuns</a></li>
+            <li><a href="#about" tabindex="0">Sobre</a></li>
+            <li><a href="#footer" tabindex="0">Contato</a></li>
+          </ul>
+        </div>
       </div>
-  
-      <!-- Botão do menu hambúrguer (visível em desktop e mobile) -->
-      <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
-        <span class="hamburger-icon"></span>
-      </button>
-  
-      <!-- Menu expansível (lado direito) -->
-      <div class="nav-right">
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#hero" tabindex="0">Início</a></li>
-          <li><a href="#albums" tabindex="0">Álbuns</a></li>
-          <li><a href="#about" tabindex="0">Sobre</a></li>
-          <li><a href="#footer" tabindex="0">Contato</a></li>
-        </ul>
+    </nav>
+
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero">
+      <div class="hero-content">
+        <div class="hero-titles" data-scroll data-scroll-speed="1">
+          <h2 class="hero-subtitle" data-scroll data-scroll-delay="0.1" data-scroll-speed="2">ONLINE GALLERY</h2>
+          <h1 data-scroll data-scroll-delay="0.2" data-scroll-speed="1.5">Capturando Momentos</h1>
+        </div>
       </div>
-    </div>
-  </nav>
+    </section>
 
-
-  <!-- ================= HERO SECTION ================= -->
-  <section id="hero" data-scroll-section>
-    <div class="hero-content">
-      <div class="hero-titles" data-scroll data-scroll-speed="1">
-        <h2 class="hero-subtitle" data-scroll data-scroll-delay="0.1" data-scroll-speed="2">ONLINE GALLERY</h2>
-        <h1 data-scroll data-scroll-delay="0.2" data-scroll-speed="1.5">Capturando Momentos</h1>
+    <!-- ================= GALLERY SECTION ================= -->
+    <section id="albums" class="gallery" aria-labelledby="gallery-heading">
+      <div class="cabecalho-galeria" data-scroll data-scroll-speed="0.5">
+        <h1 class="titulo-galeria">Catálogo de Obras</h1>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= GALLERY SECTION ================= -->
-  <section id="albums" class="gallery" aria-labelledby="gallery-heading" data-scroll-section>
-    <div class="cabecalho-galeria" data-scroll data-scroll-speed="0.5">
-      <h1 class="titulo-galeria">Catálogo de Obras</h1>
-    </div>
-    <ul class="gallery-list">
-      <!-- Item 1 -->
-      <li class="gallery-list__item" data-category="retratos">
-        <a href="/Galeria/galeria.html" class="gallery-list__card"
-          aria-label="Ver detalhes de All You Want To Be">
-          <div class="card">
-            <div class="card-inner">
-              <div class="card-thumb">
-                <img src="/public/img/A/a (2).webp" srcset="
+      <ul class="gallery-list">
+        <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+          <a href="/Galeria/galeria.html" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-thumb">
+                  <img src="/public/img/A/a (2).webp" srcset="
                   /public/img/A/a (2).webp.webp 1200w,
                   /public/img/A/a (2).webp.webp 800w,
                   /public/img/A/a (2).webp.webp 480w
                     " sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px" alt="All You Want To Be"
-                  class="card-image" loading="lazy" />
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">All You Want To Be</h3>
-                <span class="card-price">20,000 DIRHAMS</span>
+                    class="card-image" loading="lazy" />
+                </div>
+                <div class="card-content">
+                  <h3 class="card-title">All You Want To Be</h3>
+                  <span class="card-price">20,000 DIRHAMS</span>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <!-- Item 1 -->
-      <li class="gallery-list__item" data-category="retratos">
-        <a href="/Galeria/galeria.html" class="gallery-list__card"
-          aria-label="Ver detalhes de All You Want To Be">
-          <div class="card">
-            <div class="card-inner">
-              <div class="card-thumb">
-                <img src="/public/img/A/b (6).webp" srcset="
+        <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+          <a href="/Galeria/galeria.html" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-thumb">
+                  <img src="/public/img/A/b (6).webp" srcset="
                   /public/img/A/b (6).webp 1200w,
                   /public/img/A/b (6).webp 800w,
                   /public/img/A/b (6).webp 480w
                       " sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px" alt="All You Want To Be"
-                  class="card-image" loading="lazy" />
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">All You Want To Be</h3>
-                <span class="card-price">20,000 DIRHAMS</span>
+                    class="card-image" loading="lazy" />
+                </div>
+                <div class="card-content">
+                  <h3 class="card-title">All You Want To Be</h3>
+                  <span class="card-price">20,000 DIRHAMS</span>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <!-- Item 1 -->
-      <li class="gallery-list__item" data-category="retratos">
-        <a href="/Galeria/galeria.html" class="gallery-list__card"
-          aria-label="Ver detalhes de All You Want To Be">
-          <div class="card">
-            <div class="card-inner">
-              <div class="card-thumb">
-                <img src="/public/img/A/a (2).webp" srcset="
+        <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+          <a href="/Galeria/galeria.html" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-thumb">
+                  <img src="/public/img/A/a (2).webp" srcset="
                         /public/img/A/a (2).webp 1200w,
                         /public/img/A/a (2).webp 800w,
                         /public/img/A/a (2).webp 480w
                       " sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px" alt="All You Want To Be"
-                  class="card-image" loading="lazy" />
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">All You Want To Be</h3>
-                <span class="card-price">20,000 DIRHAMS</span>
+                    class="card-image" loading="lazy" />
+                </div>
+                <div class="card-content">
+                  <h3 class="card-title">All You Want To Be</h3>
+                  <span class="card-price">20,000 DIRHAMS</span>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </li>
+          </a>
+        </li>
 
-      <!-- Item 1 -->
-      <li class="gallery-list__item" data-category="retratos">
-        <a href="/Galeria/galeria.html" class="gallery-list__card"
-          aria-label="Ver detalhes de All You Want To Be">
-          <div class="card">
-            <div class="card-inner">
-              <div class="card-thumb">
-                <img src="/public/img/A/b (3).webp" srcset="
+        <!-- Item 1 -->
+        <li class="gallery-list__item" data-category="retratos">
+          <a href="/Galeria/galeria.html" class="gallery-list__card" aria-label="Ver detalhes de All You Want To Be">
+            <div class="card">
+              <div class="card-inner">
+                <div class="card-thumb">
+                  <img src="/public/img/A/b (3).webp" srcset="
                       /public/img/A/b (3).webp 1200w,
                         /public/img/A/b (3).webp 800w,
                         /public/img/A/b (3).webp 480w
                       " sizes="(max-width: 600px) 480px, (max-width: 1000px) 800px, 1200px" alt="All You Want To Be"
-                  class="card-image" loading="lazy" />
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">All You Want To Be</h3>
-                <span class="card-price">20,000 DIRHAMS</span>
+                    class="card-image" loading="lazy" />
+                </div>
+                <div class="card-content">
+                  <h3 class="card-title">All You Want To Be</h3>
+                  <span class="card-price">20,000 DIRHAMS</span>
+                </div>
               </div>
             </div>
+          </a>
+        </li>
+        <!-- Adicione mais itens aqui -->
+
+      </ul>
+
+    </section>
+    <!-- ================= SOBRE MIM SECTION ================= -->
+    <section id="about" class="sobre-mim">
+      <div class="container-principal">
+        <div class="titulo-grande-container">
+          <h1 class="titulo-grande">TUDO O QUE<br>VOCÊ QUER<br>SER</h1>
+        </div>
+
+        <div class="conteudo-principal">
+          <div class="sobre-mim-imagem">
+            <img src="/public/img/A/a (2).webp" alt="Sua Foto ou Imagem Representativa">
           </div>
-        </a>
-      </li>
-      <!-- Adicione mais itens aqui -->
-
-    </ul>
-    </div>
-  </section>
-
-  <!-- ================= SOBRE MIM SECTION ================= -->
-  <section id="about" class="sobre-mim">
-    <div class="container-principal">
-      <div class="titulo-grande-container">
-        <h1 class="titulo-grande">TUDO O QUE<br>VOCÊ QUER<br>SER</h1>
-      </div>
-
-      <div class="conteudo-principal">
-        <div class="sobre-mim-imagem">
-          <img src="/public/img/A/a (2).webp" alt="Sua Foto ou Imagem Representativa">
-        </div>
-        <div class="sobre-mim-texto">
-          <p class="sobre-mim-paragrafo">
-            Michelle Hold, com sua formação eclética que vai da arquitetura ao design têxtil, da moda à arte
-            abstrata, apresenta um corpo de trabalho que explora a magia como uma força insondável no
-            universo, acessível apenas pela intuição. Com uma carreira que a viu expor por toda a Europa,
-            Estados Unidos e China, Michelle é confirmada como uma voz significativa na arte contemporânea,
-            capaz de transmitir por meio de suas pinturas abstratas as vibrações de um mundo secreto e
-            profundo. Além disso, Michelle não é apenas uma artista, mas também uma patrona cultural, sendo
-            a
-            fundadora da associação Art Moleto, o que atesta seu comprometimento em promover a arte e o
-            diálogo cultural.
-          </p>
+          <div class="sobre-mim-texto">
+            <p class="sobre-mim-paragrafo">
+              Michelle Hold, com sua formação eclética que vai da arquitetura ao design têxtil, da moda à arte
+              abstrata, apresenta um corpo de trabalho que explora a magia como uma força insondável no
+              universo, acessível apenas pela intuição. Com uma carreira que a viu expor por toda a Europa,
+              Estados Unidos e China, Michelle é confirmada como uma voz significativa na arte contemporânea,
+              capaz de transmitir por meio de suas pinturas abstratas as vibrações de um mundo secreto e
+              profundo. Além disso, Michelle não é apenas uma artista, mas também uma patrona cultural, sendo
+              a
+              fundadora da associação Art Moleto, o que atesta seu comprometimento em promover a arte e o
+              diálogo cultural.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="info-adicional-container">
-      <div class="info-esquerda">
-        <div>+ VOLTAR PARA TODOS</div>
-        <div>AUTOR: Michelle espera</div>
-        <div>DIMENSÕES: 120 x 80 cm</div>
-      </div>
-      <div class="info-direita">
-        <div>RARIDADE: Peça única</div>
-        <div>ANO: 2023</div>
-        <div>MATERIAIS: Acrílicos sobre tela</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="menu-container">
-        <a href="#" class="portfolio-link">Portfolio</a>
-      </div>
-      <div class="contact-info">
-        <p class="name">Victor Cardoso</p>
-        <p class="location">São Paulo - SP</p>
-        <a class="email" href="mailto:victorcardcunha@gmail.com">seuemail@email.com</a><br>
-        <a class="phone" href="tel:+11977440146">(11) 97744-0146</a>
-        <div class="social-links">
-          <a target="_blank" href="https://github.com/VictorCardosoOl" aria-label="GitHub"><i
-              class="fab fa-github"></i></a>
-          <a target="_blank" href="https://www.instagram.com/hi.chicocdo/" aria-label="Instagram"><i
-              class="fab fa-instagram"></i></a>
-          <a target="_blank" href="https://www.linkedin.com/in/victor-card-cunha/" aria-label="LinkedIn"><i
-              class="fab fa-linkedin"></i></a>
-          <a target="_blank" href="https://wa.me/5511977440146" aria-label="WhatsApp"><i
-              class="fab fa-whatsapp"></i></a>
+      <div class="info-adicional-container">
+        <div class="info-esquerda">
+          <div>+ VOLTAR PARA TODOS</div>
+          <div>AUTOR: Michelle espera</div>
+          <div>DIMENSÕES: 120 x 80 cm</div>
+        </div>
+        <div class="info-direita">
+          <div>RARIDADE: Peça única</div>
+          <div>ANO: 2023</div>
+          <div>MATERIAIS: Acrílicos sobre tela</div>
         </div>
       </div>
-    </div>
-    <div class="copyright">
-      <p>© 2023 Victor Cardoso</p>
-      <p>Design por Victor Cardoso</p>
-    </div>
-  </footer>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="menu-container">
+          <a href="#" class="portfolio-link">Portfolio</a>
+        </div>
+        <div class="contact-info">
+          <p class="name">Victor Cardoso</p>
+          <p class="location">São Paulo - SP</p>
+          <a class="email" href="mailto:victorcardcunha@gmail.com">seuemail@email.com</a><br>
+          <a class="phone" href="tel:+11977440146">(11) 97744-0146</a>
+          <div class="social-links">
+            <a target="_blank" href="https://github.com/VictorCardosoOl" aria-label="GitHub"><i
+                class="fab fa-github"></i></a>
+            <a target="_blank" href="https://www.instagram.com/hi.chicocdo/" aria-label="Instagram"><i
+                class="fab fa-instagram"></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/victor-card-cunha/" aria-label="LinkedIn"><i
+                class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://wa.me/5511977440146" aria-label="WhatsApp"><i
+                class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2023 Victor Cardoso</p>
+        <p>Design por Victor Cardoso</p>
+      </div>
+    </footer>
+  </div>
+
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script type="module" src="scripts.js"></script>
 </body>

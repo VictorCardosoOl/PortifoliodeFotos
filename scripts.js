@@ -1,37 +1,81 @@
-// Função para o menu hambúrguer
-const hamburgerMenu = document.querySelector('.hamburger-menu');
-const navRight = document.querySelector('.nav-right');
-const overlay = document.createElement('div');
-overlay.classList.add('overlay');
-document.body.appendChild(overlay);
-
-hamburgerMenu.addEventListener('click', () => {
-    navRight.classList.toggle('active');
-    overlay.classList.toggle('active');
-    hamburgerMenu.setAttribute('aria-expanded', navRight.classList.contains('active'));
-});
-
-// Fechar o menu ao clicar no overlay
-overlay.addEventListener('click', () => {
-    navRight.classList.remove('active');
-    overlay.classList.remove('active');
-    hamburgerMenu.setAttribute('aria-expanded', false);
-});
-
-// Função para ocultar/exibir a navbar ao rolar a página
-let lastScroll = 0;
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll <= 0) {
-        navbar.style.transform = 'translateY(0)'; // Exibe a navbar no topo da página
-    } else if (currentScroll > lastScroll) {
-        navbar.style.transform = 'translateY(-100%)'; // Oculta a navbar ao rolar para baixo
-    } else {
-        navbar.style.transform = 'translateY(0)'; // Exibe a navbar ao rolar para cima
-    }
-
-    lastScroll = currentScroll;
-});
+document.addEventListener('DOMContentLoaded', function() {
+    // ============ Locomotive Scroll ============
+    const scrollEl = document.querySelector('[data-scroll-container]');
+    
+    const locoScroll = new LocomotiveScroll({
+      el: scrollEl,
+      smooth: true,
+      inertia: 0.5,
+      smartphone: { smooth: true },
+      tablet: { smooth: true },
+      scrollbar: {
+        el: document.querySelector('.c-scrollbar'),
+        draggable: true
+      }
+    });
+  
+    // ============ Integração com GSAP ScrollTrigger ============
+    gsap.registerPlugin(ScrollTrigger);
+  
+    // Conectar Locomotive Scroll ao ScrollTrigger
+    locoScroll.on("scroll", ScrollTrigger.update);
+  
+    ScrollTrigger.scrollerProxy(scrollEl, {
+      scrollTop(value) {
+        return arguments.length ? 
+          locoScroll.scrollTo(value, 0, 0) : 
+          locoScroll.scroll.instance.scroll.y;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        };
+      },
+      pinType: scrollEl.style.transform ? "transform" : "fixed"
+    });
+  
+    // Atualizações recíprocas
+    ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+    ScrollTrigger.refresh();
+  
+    // ============ Seu código existente ============
+    // Menu hambúrguer
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navRight = document.querySelector('.nav-right');
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
+  
+    hamburgerMenu.addEventListener('click', () => {
+      navRight.classList.toggle('active');
+      overlay.classList.toggle('active');
+      hamburgerMenu.setAttribute('aria-expanded', navRight.classList.contains('active'));
+    });
+  
+    overlay.addEventListener('click', () => {
+      navRight.classList.remove('active');
+      overlay.classList.remove('active');
+      hamburgerMenu.setAttribute('aria-expanded', false);
+    });
+  
+    // Ocultar navbar ao rolar
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+  
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+  
+      if (currentScroll <= 0) {
+        navbar.style.transform = 'translateY(0)';
+      } else if (currentScroll > lastScroll) {
+        navbar.style.transform = 'translateY(-100%)';
+      } else {
+        navbar.style.transform = 'translateY(0)';
+      }
+  
+      lastScroll = currentScroll;
+    });
+  });
