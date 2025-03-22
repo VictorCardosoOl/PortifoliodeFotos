@@ -30,143 +30,34 @@ referencia de desing do site
 https://www.osklen.com.br/
 
 
-==================================================================================
 
-Vou analisar seu código e apontar pontos de melhoria, repetições e possíveis problemas:
-
-1. **Repetições no HTML**:
-- Os itens da galeria estão duplicados manualmente. Você poderia gerar isso dinamicamente via JavaScript
-- As imagens estão com caminhos inconsistentes (`/img/A/c (2).webp` vs `/img/A/a (2).webp`)
-- Mesmo título e preço repetidos em todos os cards da galeria
-
-2. **CSS problemático**:
-- Unidades misturadas (vh, px, rem) sem uma estratégia clara
-- Muitos valores fixos que dificultam a responsividade
-- Regras duplicadas para .gallery-list__item
-- !important desnecessário em algumas regras
-- Falta de organização com metodologias como BEM
-- Media queries ausentes para responsividade real
-
-3. **JavaScript**:
-- Inicialização dupla do AOS (no HTML e JS)
-- Event listeners duplicados para scroll
-- Código de filtragem da galeria repetido
-- Lightbox implementado de duas formas diferentes (custom e Fancybox)
-- Ausência de tratamento de erros
-
-4. **Acessibilidade**:
-- Menu hamburguer não funcional
-- Faltam labels ARIA em elementos interativos
-- Focus states não estilizados
-- Alt text genérico nas imagens
-- Navegação por teclado não otimizada
-
-5. **Performance**:
-- Imagens sem lazy loading eficiente
-- Ausência de pré-carregamento para fontes
-- Animações podem causar repaints desnecessários
-- Scripts bloqueando renderização
-
-**Sugestões de Melhoria**:
-
-1. **HTML Semântico**:
-```html
-<!-- Usar roles ARIA -->
-<nav role="navigation" aria-label="Menu principal">
-<!-- Melhorar hierarquia de cabeçalhos -->
-<h2 class="visually-hidden">Galeria de obras</h2>
-```
-
-2. **CSS Modularizado**:
-```css
-/* Usar variáveis CSS */
-:root {
-  --gutter: 1rem;
-  --breakpoint-md: 768px;
-}
-
-/* Metodologia BEM */
-.gallery__item {}
-.gallery__image {}
-```
-
-3. **JavaScript Modular**:
-```javascript
-// Modules pattern
-const Gallery = {
-  init() {
-    this.cacheElements();
-    this.bindEvents();
-  },
-
-  cacheElements() {
-    this.items = document.querySelectorAll('.gallery-item');
-  },
-
-  bindEvents() {
-    // Event delegation
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('.filter-button')) {
-        this.handleFilter(e);
-      }
-    });
-  }
-};
-```
-
-4. **Otimização de Imagens**:
-- Usar `<picture>` com fallbacks
-- Implementar blur-up technique
-- Gerar versões WebP e AVIF
-
-5. **Melhor Responsividade**:
-```css
-@media (min-width: 768px) and (max-width: 1024px) {
-  .hero-content h1 {
-    font-size: calc(3rem + 2vw);
-  }
-}
-```
-
-6. **Performance Critical**:
-- Implementar Critical CSS
-- Defer non-essential JS
-- Preload key requests
-```html
-<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>
-```
-
-7. **Acessibilidade**:
-```css
-/* Focus states */
-a:focus, button:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 3px;
-}
-```
-
-8. **Estado do Menu**:
-```javascript
-// Menu toggle acessível
-const menuButton = document.querySelector('.hamburger-menu');
-menuButton.addEventListener('click', () => {
-  const expanded = menuButton.getAttribute('aria-expanded') === 'true';
-  menuButton.setAttribute('aria-expanded', !expanded);
-  navLinks.classList.toggle('active');
-});
-```
-
-**Principais Ações Recomendadas**:
-
-1. Implementar sistema de componentes reutilizáveis
-2. Adotar metodologia CSS (BEM, SMACSS)
-3. Configurar processo de build (Webpack/Vite)
-4. Adicionar testes de acessibilidade (axe-core)
-5. Otimizar carregamento de recursos
-6. Implementar SSR ou SSG para SEO
-7. Adicionar schema markup para fotografia
-8. Criar sistema de cache para assets
 
 Você pode ver um exemplo de melhoria progressiva neste CodePen: https://codepen.io/team/css-tricks/pen/QWdjLbq
 
-Dica profissional: Considere usar um static site generator como Eleventy ou Astro para melhorar performance e manter a base de código organizada.
+https://www.fontevraud.fr/
+Eu gosto do formato com que essa navbar se comporta, gostarai de colocar o mesmo tipo de animação no site, chega desenvolvi uma função, mas ao colocar o locomotivescroll a função parou de funcionar
+
+https://boyd.ae/
+Gosto totalmente da identidade visual desse site, acho ele perfeito 
+
+https://www.srmg.com/en/home
+Gosto desse efeito de cursor, acho que apesar de ser simples e comum deixa o site muito bonito
+
+https://saisei-sbj.webflow.io/
+Adoro a identidade visual desse site e o scroll dele. 
+
+
+https://saintlouvent.com/photography
+Otima referencia para galeria, uma observação de texto ao lado da imagem no canto inferior esquerdo. 
+
+https://cristianaaraujo.com/
+Referencia para portifólio 
+
+https://www.richardekwonye.com/
+Referecia de portifólio 
+
+https://emmaissocial.com/
+Ref. Scroll lateral 
+
+
+https://anatoletouvron.fr/project/keepgrading/

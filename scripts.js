@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
-  
+    
       if (currentScroll <= 0) {
         navbar.style.transform = 'translateY(0)';
       } else if (currentScroll > lastScroll) {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         navbar.style.transform = 'translateY(0)';
       }
-  
+    
       lastScroll = currentScroll;
     });
   });

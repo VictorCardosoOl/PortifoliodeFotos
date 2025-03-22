@@ -182,24 +182,25 @@ nav {
 }
 /* ================= HERO SECTION ================= */
 #hero {
-    height: 100vh;
-    background-image: url('/public/img/A/c (5).webp');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end; /* Alinha o conteúdo no final (parte inferior) */
-    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
-    text-align: left;
-    color: var(--secondary-color);
-    position: relative;
-    padding: 0 0 40px 40px; /* Adiciona padding na parte inferior e esquerda */
-  }
-  
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 90%;
-  }
+  height: 100vh;
+  background-image: url('/public/img/A/c (5).webp');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+  color: var(--secondary-color);
+  position: relative;
+  padding: 0 0 80px 40px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  padding-bottom: 20px; /* Adicione um padding inferior para evitar corte */
+}
   
   /* Estilizando o container dos títulos para alinhamento */
   .hero-titles {
@@ -525,3 +526,4 @@ nav {
           cursor: grab;
         }
     
+
