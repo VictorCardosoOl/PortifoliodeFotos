@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
     ScrollTrigger.refresh();
   
+
+    
     // ============ Seu código existente ============
     // Menu hambúrguer
     const hamburgerMenu = document.querySelector('.hamburger-menu');
