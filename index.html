@@ -17,25 +17,21 @@
 <body>
   <div class="container" data-scroll-container>
     <!-- ================= NAVBAR ================= -->
-    <nav id="navbar" role="navigation">
-      <div class="navbar-container">
-        <!-- Logo no lado esquerdo -->
-        <div class="logo">
-          <a href="#" tabindex="0">Fotógrafo</a>
-        </div>
 
-        <!-- Botão do menu hambúrguer (visível em desktop e mobile) -->
+    <nav id="navbar">
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#">Fotógrafo</a>
+        </div>
         <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
           <span class="hamburger-icon"></span>
         </button>
-
-        <!-- Menu expansível (lado direito) -->
         <div class="nav-right">
           <ul class="nav-links" id="nav-links">
-            <li><a href="#hero" tabindex="0">Início</a></li>
-            <li><a href="#albums" tabindex="0">Álbuns</a></li>
-            <li><a href="#about" tabindex="0">Sobre</a></li>
-            <li><a href="#footer" tabindex="0">Contato</a></li>
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#albums">Álbuns</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#footer">Contato</a></li>
           </ul>
         </div>
       </div>
@@ -192,7 +188,7 @@
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="footer">
+    <footer class="footer" id="footer">
       <div class="footer-content">
         <div class="menu-container">
           <a href="#" class="portfolio-link">Portfolio</a>
@@ -226,7 +222,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script type="module" src="scripts.js"></script>
+  <script src="scripts.js"></script>
 </body>
 
 </html>
