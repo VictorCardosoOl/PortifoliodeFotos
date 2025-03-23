@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "sass": "^1.86.0"
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "locomotive-scroll": "^4.1.4"
+  }
+}
