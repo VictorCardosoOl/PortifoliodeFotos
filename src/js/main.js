@@ -4,29 +4,22 @@ document.addEventListener('DOMContentLoaded', function () {
   // ============ CONFIGURAÇÃO DO LOCOMOTIVE SCROLL ============
   let locoScroll;
 
-  const initLocomotiveScroll = () => {
-    const scrollEl = document.querySelector('[data-scroll-container]');
-    if (scrollEl) {
-      locoScroll = new LocomotiveScroll({
-        el: scrollEl,
-        smooth: true,
-        inertia: 0.5,
-        smartphone: { smooth: true },
-        tablet: { smooth: true },
-        scrollbar: {
-          el: document.querySelector('.c-scrollbar'),
-          draggable: true,
-        },
-      });
-
-      console.log('Locomotive Scroll inicializado:', locoScroll);
-
-      // Atualiza o LocomotiveScroll após carregar a página
-      window.addEventListener('load', () => {
-        locoScroll.update();
-      });
-    }
-  };
+  const scroll = new LocomotiveScroll({
+    el: document.querySelector('[data-scroll-container]'),
+    smooth: true,
+    inertia: 0.5,
+    smartphone: { smooth: true },
+    tablet: { smooth: true },
+    scrollbar: {
+      el: document.querySelector('.c-scrollbar'),
+      draggable: true,
+    },
+  });
+  
+  // Atualiza o scroll quando o conteúdo mudar
+  window.addEventListener('load', () => {
+    scroll.update();
+  });
 
   // Inicializa o Locomotive Scroll
   initLocomotiveScroll();
