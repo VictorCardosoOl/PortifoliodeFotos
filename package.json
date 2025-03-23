@@ -5,7 +5,8 @@
   },
   "dependencies": {
     "aos": "^2.3.4",
-    "locomotive-scroll": "^4.1.4"
+    "locomotive-scroll": "^4.1.4",
+    "smooth-scrollbar": "^8.8.4"
   },
   "scripts": {
     "dev": "vite --open",

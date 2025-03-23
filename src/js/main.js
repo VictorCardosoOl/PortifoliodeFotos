@@ -1,3 +1,5 @@
+import LocomotiveScroll from 'locomotive-scroll';
+
 document.addEventListener('DOMContentLoaded', function () {
   // ============ CONFIGURAÇÃO DO LOCOMOTIVE SCROLL ============
   let locoScroll;
@@ -100,3 +102,4 @@ document.addEventListener('DOMContentLoaded', function () {
     locoScroll.update();
   }
 });
+
