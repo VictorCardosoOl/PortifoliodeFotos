@@ -1,7 +1,8 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
+  base: '/', // Define o caminho base para o deploy
   root: resolve(__dirname, 'src'), // Pasta raiz do projeto
   publicDir: resolve(__dirname, 'public'), // Pasta de arquivos públicos
   build: {
@@ -10,12 +11,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/index.html'),
-        galeria: resolve(__dirname, 'src/pages/galeria1.html')
-      }
-    }
+        galeria: resolve(__dirname, 'src/pages/galeria1.html'),
+      },
+    },
   },
   server: {
     port: 3000,
-    strictPort: true // Impede a troca automática de porta
-  }
-})
+    strictPort: true, // Impede a troca automática de porta
+  },
+});
