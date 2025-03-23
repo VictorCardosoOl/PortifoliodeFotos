@@ -1,42 +1,53 @@
 document.addEventListener('DOMContentLoaded', function () {
   // ============ CONFIGURAÇÃO DO LOCOMOTIVE SCROLL ============
-  const scrollEl = document.querySelector('[data-scroll-container]');
-  const locoScroll = new LocomotiveScroll({
-    el: scrollEl,
-    smooth: true,
-    inertia: 0.5,
-    smartphone: { smooth: true },
-    tablet: { smooth: true },
-    scrollbar: {
-      el: document.querySelector('.c-scrollbar'),
-      draggable: true,
-    },
-  });
+  let locoScroll;
 
-  console.log('Locomotive Scroll inicializado:', locoScroll);
+  const initLocomotiveScroll = () => {
+    const scrollEl = document.querySelector('[data-scroll-container]');
+    if (scrollEl) {
+      locoScroll = new LocomotiveScroll({
+        el: scrollEl,
+        smooth: true,
+        inertia: 0.5,
+        smartphone: { smooth: true },
+        tablet: { smooth: true },
+        scrollbar: {
+          el: document.querySelector('.c-scrollbar'),
+          draggable: true,
+        },
+      });
 
-  // Atualiza o LocomotiveScroll após carregar a página
-  window.addEventListener('load', () => {
-    locoScroll.update();
-  });
+      console.log('Locomotive Scroll inicializado:', locoScroll);
+
+      // Atualiza o LocomotiveScroll após carregar a página
+      window.addEventListener('load', () => {
+        locoScroll.update();
+      });
+    }
+  };
+
+  // Inicializa o Locomotive Scroll
+  initLocomotiveScroll();
 
   // ============ NAVBAR ESCONDER AO ROLAR ============
   const navbar = document.getElementById('navbar');
   let lastScroll = 0;
 
-  locoScroll.on('scroll', (instance) => {
-    const currentScroll = instance.scroll.y;
+  if (locoScroll) {
+    locoScroll.on('scroll', (instance) => {
+      const currentScroll = instance.scroll.y;
 
-    if (currentScroll <= 0) {
-      navbar.style.transform = 'translateY(0)';
-    } else if (currentScroll > lastScroll && currentScroll > navbar.offsetHeight) {
-      navbar.style.transform = 'translateY(-100%)';
-    } else if (currentScroll < lastScroll) {
-      navbar.style.transform = 'translateY(0)';
-    }
+      if (currentScroll <= 0) {
+        navbar.style.transform = 'translateY(0)';
+      } else if (currentScroll > lastScroll && currentScroll > navbar.offsetHeight) {
+        navbar.style.transform = 'translateY(-100%)';
+      } else if (currentScroll < lastScroll) {
+        navbar.style.transform = 'translateY(0)';
+      }
 
-    lastScroll = currentScroll;
-  });
+      lastScroll = currentScroll;
+    });
+  }
 
   // ============ MENU HAMBÚRGUER ============
   const hamburgerMenu = document.querySelector('.hamburger-menu');
@@ -52,17 +63,19 @@ document.addEventListener('DOMContentLoaded', function () {
     hamburgerMenu.setAttribute('aria-expanded', navRight.classList.contains('active'));
   });
 
-  // Fecha o menu ao clicar no overlay
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      navRight.classList.remove('active');
-      overlay.classList.remove('active');
-      hamburgerMenu.setAttribute('aria-expanded', false);
-    }
+  // Fecha o menu ao clicar no overlay ou em um link do menu
+  const closeMenu = () => {
+    navRight.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburgerMenu.setAttribute('aria-expanded', false);
+  };
+
+  overlay.addEventListener('click', closeMenu);
+
+  // Fecha o menu ao clicar em um link do menu
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
   });
-
-
-
 
   // ============ CURSOR PERSONALIZADO ============
   const cursor = document.createElement('div');
@@ -70,8 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.appendChild(cursor);
 
   document.addEventListener('mousemove', (e) => {
-    cursor.style.left = `${e.clientX}px`;
-    cursor.style.top = `${e.clientY}px`;
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
   });
 
   document.querySelectorAll('a, button').forEach((element) => {
@@ -84,5 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ============ ATUALIZAÇÃO DO LOCOMOTIVE SCROLL ============
-  locoScroll.update();
+  if (locoScroll) {
+    locoScroll.update();
+  }
 });
