@@ -64,3 +64,12 @@ https://anatoletouvron.fr/project/keepgrading/
 
 Ao clicar na imagem mudar para o próximo 
 https://www.guglielmoprofeti.com/
+
+
+
+
+Transições Suaves entre as Seções: Embora o Locomotive Scroll já proporcione um scroll suave, você pode adicionar animações sutis ao mudar de uma seção para outra, utilizando GSAP ou a própria API de animações da web.
+
+Detalhes Adicionais ao Hover na Galeria: Ao passar o mouse sobre uma imagem na galeria, você pode exibir informações adicionais, como o título da foto, a data ou uma breve descrição.
+
+Efeitos Visuais Sutis: Considere adicionar pequenos efeitos visuais, como paralaxe em segundo plano (além do que o Locomotive Scroll já faz), animações de entrada para elementos ao rolar a página (o AOS já está fazendo isso, mas você pode personalizar mais), ou transições de cores sutis.

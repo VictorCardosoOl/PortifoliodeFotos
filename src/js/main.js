@@ -1,9 +1,10 @@
 import LocomotiveScroll from 'locomotive-scroll';
+import gsap from 'gsap';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 document.addEventListener('DOMContentLoaded', function () {
   // ============ CONFIGURAÇÃO DO LOCOMOTIVE SCROLL ============
-  let locoScroll;
-
   const scroll = new LocomotiveScroll({
     el: document.querySelector('[data-scroll-container]'),
     smooth: true,
@@ -15,34 +16,29 @@ document.addEventListener('DOMContentLoaded', function () {
       draggable: true,
     },
   });
-  
+
   // Atualiza o scroll quando o conteúdo mudar
   window.addEventListener('load', () => {
     scroll.update();
   });
 
-  // Inicializa o Locomotive Scroll
-  initLocomotiveScroll();
-
   // ============ NAVBAR ESCONDER AO ROLAR ============
   const navbar = document.getElementById('navbar');
   let lastScroll = 0;
 
-  if (locoScroll) {
-    locoScroll.on('scroll', (instance) => {
-      const currentScroll = instance.scroll.y;
+  scroll.on('scroll', (instance) => {
+    const currentScroll = instance.scroll.y;
 
-      if (currentScroll <= 0) {
-        navbar.style.transform = 'translateY(0)';
-      } else if (currentScroll > lastScroll && currentScroll > navbar.offsetHeight) {
-        navbar.style.transform = 'translateY(-100%)';
-      } else if (currentScroll < lastScroll) {
-        navbar.style.transform = 'translateY(0)';
-      }
+    if (currentScroll <= 0) {
+      navbar.style.transform = 'translateY(0)';
+    } else if (currentScroll > lastScroll && currentScroll > navbar.offsetHeight) {
+      navbar.style.transform = 'translateY(-100%)';
+    } else if (currentScroll < lastScroll) {
+      navbar.style.transform = 'translateY(0)';
+    }
 
-      lastScroll = currentScroll;
-    });
-  }
+    lastScroll = currentScroll;
+  });
 
   // ============ MENU HAMBÚRGUER ============
   const hamburgerMenu = document.querySelector('.hamburger-menu');
@@ -90,9 +86,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ============ ATUALIZAÇÃO DO LOCOMOTIVE SCROLL ============
-  if (locoScroll) {
-    locoScroll.update();
-  }
-});
+  // ============ GSAP PARA TRANSIÇÕES SUAVES ============
+  gsap.utils.toArray('section').forEach(section => {
+    gsap.from(section, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+    });
+  });
 
+  // ============ AOS INICIALIZAÇÃO ============
+  AOS.init({
+    duration: 1000,
+    easing: 'ease-in-out',
+    once: true,
+  });
+});
