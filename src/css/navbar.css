@@ -1,0 +1,180 @@
+/* ================= NAVBAR ================= */
+nav {
+    padding: 10px;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-bottom: none;
+}
+#navbar {
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Logo no lado esquerdo */
+.logo {
+    text-align: left;
+}
+
+.logo a {
+    color: var(--primary-color);
+    font-size: 2.3rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-family: var(--font-primary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* Botão do menu hambúrguer (visível em desktop e mobile) */
+.hamburger-menu {
+    display: block; /* Sempre visível */
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: relative;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hamburger-icon::before {
+    top: -8px;
+}
+
+.hamburger-icon::after {
+    top: 8px;
+}
+
+/* Menu expansível (lado direito) */
+.nav-right {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Inicialmente oculto */
+    width: 300px;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: right 0.3s ease;
+    z-index: 1001;
+    padding-top: 60px; /* Espaço para a navbar */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.nav-links li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.nav-links li a:hover {
+    color: var(--secondary-color);
+}
+
+/* Quando o menu está ativo */
+.nav-right.active {
+    right: 0; /* Exibe o menu */
+}
+
+/* Melhorias para o menu */
+.nav-right {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Overlay transparente */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 998;
+  display: none;
+}
+
+/* Menu mobile */
+.nav-right {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: #fff;
+  z-index: 999;
+  transition: transform 0.4s ease;
+}
+
+.nav-right.active {
+  transform: translateX(-300px);
+}
+
+/* Garante que os links sejam clicáveis */
+.nav-links a {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+
+/* Garante que o container ocupe toda a altura */
+html.has-scroll-smooth {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow: visible;
+}
+
+[data-scroll-container] {
+  min-height: 100vh;
+}
