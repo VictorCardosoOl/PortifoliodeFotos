@@ -1,3 +1,4 @@
+@import url(cursor.css);
 /* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
     --primary-color: #1a1a1a;
@@ -56,6 +57,11 @@ nav {
     z-index: 1000;
     transition: background-color 0.3s ease, transform 0.3s ease;
     border-bottom: none;
+}
+#navbar {
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .navbar-container {
@@ -172,24 +178,40 @@ nav {
   transform: translateZ(0);
 }
 
+/* Overlay transparente */
 .overlay {
-  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 998;
   display: none;
-  transition: opacity 0.3s ease;
-  will-change: opacity;
 }
 
-/* Melhorias para o cursor */
-.custom-cursor {
-  will-change: transform;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  z-index: 9999;
+/* Menu mobile */
+.nav-right {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: #fff;
+  z-index: 999;
+  transition: transform 0.4s ease;
 }
 
-.custom-cursor.hover {
-  transform: translate(-50%, -50%) scale(1.5);
+.nav-right.active {
+  transform: translateX(-300px);
 }
+
+/* Garante que os links sejam clicáveis */
+.nav-links a {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
 
 /* Garante que o container ocupe toda a altura */
 html.has-scroll-smooth {
@@ -572,24 +594,6 @@ body {
         }
     
 
-/* styles.css */
-.custom-cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
-  z-index: 10000;
-}
-
-.custom-cursor.hover {
-  width: 40px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.2);
-}
 
 /* Camadas de layout */
 @layer components {

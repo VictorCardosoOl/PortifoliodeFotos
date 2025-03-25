@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 document.addEventListener('DOMContentLoaded', function () {
-  // ============ CONFIGURAÇÃO DO LOCOMOTIVE SCROLL ============
+  // ============ LOCOMOTIVE SCROLL INIT ============
   const scroll = new LocomotiveScroll({
     el: document.querySelector('[data-scroll-container]'),
     smooth: true,
@@ -18,167 +18,189 @@ document.addEventListener('DOMContentLoaded', function () {
     },
   });
 
-  // Atualiza o scroll quando o conteúdo mudar
-  window.addEventListener('load', () => {
-    scroll.update();
-  });
+  // ============ CUSTOM DUAL CURSOR (FIXED VERSION) ============
+  const initCustomCursor = () => {
+    // Create cursor elements if they don't exist
+    const cursorHTML = `
+      <div class="cursor">
+        <div class="cursor__ball cursor__ball--big">
+          <svg height="30" width="30">
+            <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+          </svg>
+        </div>
+        <div class="cursor__ball cursor__ball--small">
+          <svg height="10" width="10">
+            <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+          </svg>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', cursorHTML);
 
-  // ============ NAVBAR ESCONDER AO ROLAR ============
+    const $bigBall = document.querySelector('.cursor__ball--big');
+    const $smallBall = document.querySelector('.cursor__ball--small');
+    const $hoverables = document.querySelectorAll('a, button, [data-hover]');
+
+    // Hide default cursor
+    document.body.style.cursor = 'none';
+
+    const moveCursor = (e) => {
+      gsap.to($bigBall, {
+        duration: 0.4,
+        x: e.clientX - 15,
+        y: e.clientY - 15
+      });
+      gsap.to($smallBall, {
+        duration: 0.1,
+        x: e.clientX - 5,
+        y: e.clientY - 7
+      });
+    };
+
+    const hoverEffect = () => {
+      gsap.to($bigBall, {
+        duration: 0.3,
+        scale: 1.5
+      });
+    };
+
+    const hoverEffectOut = () => {
+      gsap.to($bigBall, {
+        duration: 0.3,
+        scale: 1
+      });
+    };
+
+    document.addEventListener('mousemove', moveCursor);
+    
+    $hoverables.forEach(item => {
+      item.addEventListener('mouseenter', hoverEffect);
+      item.addEventListener('mouseleave', hoverEffectOut);
+      item.style.cursor = 'none';
+    });
+
+    // Disable on touch devices
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      document.body.style.cursor = '';
+      document.querySelector('.cursor').style.display = 'none';
+    }
+  };
+
+  // ============ NAVBAR BEHAVIOR (FIXED VERSION) ============
   const navbar = document.getElementById('navbar');
   let lastScroll = 0;
   let isMenuOpen = false;
+  let isScrollingToSection = false;
 
-  scroll.on('scroll', (instance) => {
+  const handleNavbarScroll = (instance) => {
+    if (isMenuOpen || isScrollingToSection) return;
+
     const currentScroll = instance.scroll.y;
-    const scrollDirection = instance.direction;
+    const direction = instance.direction;
+    const navbarHeight = navbar.offsetHeight;
+    const scrollThreshold = 100; // Aumentei o threshold para melhor comportamento
 
-    // Não esconde a navbar se o menu estiver aberto
-    if (isMenuOpen) return;
-
-    if (currentScroll <= 0) {
-      navbar.style.transform = 'translateY(0)';
-    } else if (scrollDirection === 'down' && currentScroll > navbar.offsetHeight) {
-      navbar.style.transform = 'translateY(-100%)';
-    } else if (scrollDirection === 'up') {
-      navbar.style.transform = 'translateY(0)';
+    if (direction === 'down' && currentScroll > lastScroll && currentScroll > scrollThreshold) {
+      gsap.to(navbar, { 
+        y: -navbarHeight, 
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    } else if (direction === 'up' || currentScroll <= scrollThreshold) {
+      gsap.to(navbar, { 
+        y: 0, 
+        duration: 0.4,
+        ease: "power2.out"
+      });
     }
 
     lastScroll = currentScroll;
-  });
+  };
 
-  // ============ MENU HAMBÚRGUER ============
+  scroll.on('scroll', handleNavbarScroll);
+
+  // ============ MOBILE MENU (FIXED CLICK OUTSIDE) ============
   const hamburgerMenu = document.querySelector('.hamburger-menu');
   const navRight = document.querySelector('.nav-right');
   const navLinks = document.querySelectorAll('.nav-links a');
   const overlay = document.createElement('div');
-  overlay.classList.add('overlay');
+  overlay.className = 'overlay';
   document.body.appendChild(overlay);
 
-  // Animação do menu hambúrguer
-  const toggleMenu = () => {
-    isMenuOpen = !isMenuOpen;
+  const toggleMenu = (state) => {
+    isMenuOpen = state !== undefined ? state : !isMenuOpen;
     
-    if (isMenuOpen) {
-      // Abre o menu com animação
-      gsap.to(navRight, {
-        right: 0,
-        duration: 0.5,
-        ease: 'power3.out'
-      });
-      gsap.to(overlay, {
-        opacity: 1,
-        duration: 0.3,
-        display: 'block'
-      });
-      document.body.style.overflow = 'hidden';
-    } else {
-      // Fecha o menu com animação
-      gsap.to(navRight, {
-        right: '-300px',
-        duration: 0.4,
-        ease: 'power2.in'
-      });
-      gsap.to(overlay, {
-        opacity: 0,
-        duration: 0.2,
-        display: 'none'
-      });
-      document.body.style.overflow = '';
-    }
-    
+    gsap.to(navRight, {
+      right: isMenuOpen ? 0 : '-300px',
+      duration: isMenuOpen ? 0.5 : 0.4,
+      ease: isMenuOpen ? 'power3.out' : 'power2.in'
+    });
+
+    gsap.to(overlay, {
+      opacity: isMenuOpen ? 1 : 0,
+      display: isMenuOpen ? 'block' : 'none',
+      duration: isMenuOpen ? 0.3 : 0.2,
+      onComplete: () => {
+        if (!isMenuOpen) {
+          overlay.style.pointerEvents = 'none';
+        } else {
+          overlay.style.pointerEvents = 'auto';
+        }
+      }
+    });
+
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     hamburgerMenu.setAttribute('aria-expanded', isMenuOpen);
   };
 
-  // Fecha o menu ao clicar fora (no overlay)
-  overlay.addEventListener('click', () => {
-    if (isMenuOpen) toggleMenu();
+  // FIX: Close menu when clicking outside (including hero section)
+  document.addEventListener('click', (e) => {
+    if (isMenuOpen && 
+        !navRight.contains(e.target) && 
+        e.target !== hamburgerMenu &&
+        !hamburgerMenu.contains(e.target)) {
+      toggleMenu(false);
+    }
   });
 
-  // Fecha o menu ao pressionar ESC
+  // Close menu on ESC
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isMenuOpen) toggleMenu();
+    if (e.key === 'Escape' && isMenuOpen) toggleMenu(false);
   });
 
-  // Abre/fecha o menu hambúrguer
-  hamburgerMenu.addEventListener('click', toggleMenu);
+  hamburgerMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
 
-  // Navegação suave para seções
+  // ============ SMOOTH ANCHOR LINKS ============
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
       
-      // Fecha o menu
-      if (isMenuOpen) toggleMenu();
-      
-      const targetId = link.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        // Scroll suave para a seção com Locomotive
-        scroll.scrollTo(targetElement, {
+      if (target) {
+        if (isMenuOpen) toggleMenu(false);
+        
+        isScrollingToSection = true;
+        gsap.to(navbar, { y: 0, duration: 0.2 });
+        
+        scroll.scrollTo(target, {
           offset: -navbar.offsetHeight,
           duration: 1.2,
           easing: [0.25, 0.0, 0.35, 1.0],
           callback: () => {
-            // Atualiza a URL sem recarregar a página
-            history.pushState(null, null, targetId);
+            isScrollingToSection = false;
+            history.pushState(null, null, link.href);
           }
         });
       }
     });
   });
 
-  // ============ CURSOR PERSONALIZADO ============
-  const cursor = document.createElement('div');
-  cursor.classList.add('custom-cursor');
-  document.body.appendChild(cursor);
-
-  // Cursor com física suavizada
-  let mouseX = 0;
-  let mouseY = 0;
-  let cursorX = 0;
-  let cursorY = 0;
-  const speed = 0.1;
-
-  const animateCursor = () => {
-    const dx = mouseX - cursorX;
-    const dy = mouseY - cursorY;
-    
-    cursorX += dx * speed;
-    cursorY += dy * speed;
-    
-    cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-    requestAnimationFrame(animateCursor);
-  };
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  animateCursor();
-
-  // Efeitos de hover
-  document.querySelectorAll('a, button, [data-hover]').forEach((element) => {
-    element.addEventListener('mouseenter', () => {
-      cursor.classList.add('hover');
-      if (element.dataset.cursorSize) {
-        cursor.style.width = element.dataset.cursorSize;
-        cursor.style.height = element.dataset.cursorSize;
-      }
-    });
-    
-    element.addEventListener('mouseleave', () => {
-      cursor.classList.remove('hover');
-      cursor.style.width = '';
-      cursor.style.height = '';
-    });
-  });
-
-  // ============ GSAP PARA TRANSIÇÕES SUAVES ============
+  // ============ GSAP ANIMATIONS ============
   gsap.registerPlugin(ScrollTrigger);
   
-  // Configura o ScrollTrigger para trabalhar com Locomotive
   ScrollTrigger.scrollerProxy('[data-scroll-container]', {
     scrollTop(value) {
       return arguments.length ? 
@@ -195,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Animações de seção
+  // Section animations
   gsap.utils.toArray('section').forEach(section => {
     gsap.from(section, {
       opacity: 0,
@@ -206,15 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
         trigger: section,
         scroller: '[data-scroll-container]',
         start: 'top 85%',
-        toggleActions: 'play none none none',
+        toggleActions: 'play none none none'
       }
     });
   });
 
-  // Reconecta ScrollTrigger após cada atualização do Locomotive
   scroll.on('scroll', ScrollTrigger.update);
 
-  // ============ AOS INICIALIZAÇÃO ============
+  // ============ AOS INIT ============
   AOS.init({
     duration: 800,
     easing: 'ease-out-quart',
@@ -222,9 +243,13 @@ document.addEventListener('DOMContentLoaded', function () {
     disable: window.innerWidth < 768
   });
 
-  // ============ CORREÇÃO PARA LINKS INTERNOS ============
-  // Garante que o scroll funcione corretamente ao carregar uma página com hash
+  // ============ INITIALIZE COMPONENTS ============
+  initCustomCursor();
+  
   window.addEventListener('load', () => {
+    scroll.update();
+    
+    // Handle hash links on page load
     if (window.location.hash) {
       const target = document.querySelector(window.location.hash);
       if (target) {
