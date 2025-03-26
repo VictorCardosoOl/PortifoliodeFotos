@@ -1,7 +1,7 @@
 @import url(cursor.css);
 @import url(navbar.css);
 @import url(footer.css);
-@import url(locomotive.css);
+@import url(galery.css);
 /* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
     --primary-color: #1a1a1a;
@@ -97,140 +97,6 @@ html::-webkit-scrollbar {
     color: var(--primary-color);
   }
 
-/* ================= GALLERY SECTION ================= */
-
-.cabecalho-galeria {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding: 0 1rem;
-}
-
-.titulo-galeria {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.75rem;
-    margin: 2rem 0 0.5rem;
-    font-weight: 400;
-    letter-spacing: -0.03em;
-}
-
-.gallery {
-    padding: 4rem 2rem;
-   
-  }
-  
-  .gallery-container {
-    max-width: 1440px;
-    margin: 0 auto;
-  }
-  
-  .gallery-heading {
-    font-family: var(--font-canela-regular, serif);
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--c-base-1000, #333);
-  }
-  
-  .gallery-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .gallery-list__item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  .gallery-list__item:hover {
-    transform: translateY(-8px);
-  }
-  
-  .gallery-list__card {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  
-  .card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: var(--c-base-0, #fff);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  
-  .card-inner {
-    position: relative;
-  }
-  
-  .card-thumb {
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  
-  .gallery-list__item:hover .card-image {
-    transform: scale(1.05);
-  }
-  
-  .card-content {
-    padding: 1.5rem;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
-    color: var(--c-base-0, #fff);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: translateY(0);
-    transition: transform 0.4s ease;
-  }
-  
-
-  
-  .card-title {
-    font-family: var(--font-canela-regular, serif);
-    font-size: 1.4rem;
-    margin: 0 0 0.25rem;
-    font-weight: 400;
-  }
-  
-  .card-price {
-    font-family: var(--font-love-regular, serif);
-    font-size: 0.95rem;
-    opacity: 0.9;
-  }
-
-  /* Adicionar ao CSS */
-.gallery-list__item {
-  perspective: 1000px;
-}
-
-.card-inner {
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.gallery-list__item:hover .card-inner {
-  transform: rotateY(15deg) scale(1.03);
-}
-
-.card-content {
-  backface-visibility: hidden;
-  transform: translateZ(30px);
-}
 
 /* ================= SOBRE MIM SECTION ================= */
 .sobre-mim {
@@ -316,3 +182,51 @@ html::-webkit-scrollbar {
     box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25);
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html.has-scroll-smooth {
+    overflow: hidden; }
+  
+  html.has-scroll-dragging {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  
+  .has-scroll-smooth body {
+    overflow: hidden; }
+  
+  .has-scroll-smooth [data-scroll-container] {
+    min-height: 100vh; }
+  
+    .c-scrollbar {
+      
+      position: fixed;
+      right: 24px;
+      bottom: 40px;
+      width: 2px;
+      background-color: #6e6e6e;
+      height: 20vh;
+      transform-origin: center center;
+      transition: transform 0.3s, opacity 0.3s;
+      opacity: .1;
+      z-index: 1000;
+    }
+    .c-scrollbar:hover {
+      transform: scaleX(1.45); }
+    .c-scrollbar:hover, .has-scroll-scrolling .c-scrollbar, .has-scroll-dragging .c-scrollbar {
+      opacity: 1; }
+  
+      .c-scrollbar_thumb {
+        position: absolute;
+        top: auto;
+        min-height: 30%;
+        background-color: #f8f8f8;
+        opacity: 1;
+        width: 2px;
+        cursor: -webkit-grab;
+        cursor: grab;
+      }

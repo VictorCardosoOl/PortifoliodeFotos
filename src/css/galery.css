@@ -1,0 +1,179 @@
+
+
+/* ================= SEÇÃO GALERIA ================= */
+.gallery {
+  padding: 5rem 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.cabecalho-galeria {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.titulo-galeria {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.titulo-galeria::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+/* ================= GRID DA GALERIA ================= */
+.gallery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-auto-rows: minmax(300px, auto);
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* Itens com tamanhos variados para layout dinâmico */
+.gallery-list__item:nth-child(3n+1) {
+  grid-row: span 2;
+}
+
+.gallery-list__item:nth-child(5n+2) {
+  grid-column: span 2;
+}
+
+.gallery-list__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-list__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ================= CARDS DA GALERIA ================= */
+.gallery-list__card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  background-color: var(--secondary-color);
+}
+
+.card-thumb {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.3s ease;
+}
+
+.gallery-list__item:hover .card-image {
+  transform: scale(1.05);
+  filter: brightness(0.95);
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  color: var(--secondary-color);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-list__item:hover .card-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-title {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.card-price {
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  display: block;
+}
+
+/* ================= ANIMAÇÕES ================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gallery-list__item {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.gallery-list__item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-list__item:nth-child(2) { animation-delay: 0.2s; }
+.gallery-list__item:nth-child(3) { animation-delay: 0.3s; }
+.gallery-list__item:nth-child(4) { animation-delay: 0.4s; }
+.gallery-list__item:nth-child(5) { animation-delay: 0.5s; }
+
+/* ================= RESPONSIVIDADE ================= */
+@media (max-width: 1024px) {
+  .gallery-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .gallery-list__item:nth-child(5n+2) {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    padding: 3rem 1.5rem;
+  }
+  
+  .gallery-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-list__item:nth-child(3n+1) {
+    grid-row: span 1;
+  }
+  
+  .card-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -9,20 +9,26 @@ export const initLocomotiveScroll = () => {
   const scroll = new LocomotiveScroll({
     el: document.querySelector('[data-scroll-container]'),
     smooth: true,
-    inertia: 0.8,
-    smartphone: { smooth: true },
-    tablet: { smooth: true },
+    inertia: 0.8, // Reduzi de 1.1 para 0.8
+    smartphone: { 
+      smooth: false // Desativei para mobile
+    },
+    tablet: { 
+      smooth: false // Desativei para tablet
+    },
     getDirection: true,
+    multiplier: 0.8, // Adicionei para reduzir velocidade
     scrollbar: {
       el: document.querySelector('.c-scrollbar'),
-      draggable: true,
-    },
+      draggable: false // Desativei arrastar para melhor performance
+    }
   });
 
+  // Otimizei o scrollerProxy
   ScrollTrigger.scrollerProxy('[data-scroll-container]', {
     scrollTop(value) {
       return arguments.length ? 
-        scroll.scrollTo(value, 0, 0) : 
+        scroll.scrollTo(value, { duration: 0, disableLerp: true }) : 
         scroll.scroll.instance.scroll.y;
     },
     getBoundingClientRect() {
@@ -32,14 +38,25 @@ export const initLocomotiveScroll = () => {
         width: window.innerWidth,
         height: window.innerHeight
       };
-    }
+    },
+    pinType: document.querySelector('[data-scroll-container]').style.transform ? "transform" : "fixed"
   });
 
-  scroll.on('scroll', ScrollTrigger.update);
+  // Atualização mais eficiente
+  let timeout;
+  scroll.on('scroll', (args) => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => ScrollTrigger.update(), 100);
+  });
+
+  // Atualização após imagens carregarem
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('load', () => scroll.update(), { once: true });
+  });
 
   return scroll;
 };
-
 export const setupSectionAnimations = () => {
   gsap.utils.toArray('section').forEach(section => {
     gsap.from(section, {
@@ -70,3 +87,4 @@ export const handleHashLinks = (scroll, navbar) => {
     }
   }
 };
+
