@@ -12,12 +12,7 @@ export const initCustomCursor = () => {
     <div class="cursor">
       <div class="cursor__ball cursor__ball--big">
         <svg height="30" width="30">
-          <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
-        </svg>
-      </div>
-      <div class="cursor__ball cursor__ball--small">
-        <svg height="10" width="10">
-          <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+          <circle cx="10" cy="10" r="8" stroke-width="0"></circle>
         </svg>
       </div>
     </div>
@@ -27,7 +22,7 @@ export const initCustomCursor = () => {
 
   // Elementos do DOM
   const $bigBall = document.querySelector('.cursor__ball--big');
-  const $smallBall = document.querySelector('.cursor__ball--small');
+  const $smallBall = document.querySelector('.cursor__ball--big');
   const $hoverables = document.querySelectorAll(
     'a, button, [data-hover], .gallery-list__card, .social-links a'
   );
@@ -89,10 +84,10 @@ export const initCustomCursor = () => {
 
   // Esconder cursor ao sair da janela
   document.addEventListener('mouseleave', () => {
-    gsap.to([$bigBall, $smallBall], { opacity: 0, duration: 0.3 });
+    gsap.to([$bigBall, $smallBall], { opacity: 0, duration: 0.5 });
   });
   
   document.addEventListener('mouseenter', () => {
-    gsap.to([$bigBall, $smallBall], { opacity: 1, duration: 0.3 });
+    gsap.to([$bigBall, $smallBall], { opacity: 1, duration: 0.5 });
   });
 };
