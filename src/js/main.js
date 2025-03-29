@@ -3,6 +3,7 @@ import { initCustomCursor } from './custom-cursor';
 import { setupNavbarScrollBehavior, setupMobileMenu, setupSmoothLinks } from './navbar-menu';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import './gallery';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializar AOS

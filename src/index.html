@@ -49,43 +49,27 @@
     </section>
 
     <!-- ================= GALLERY SECTION ================= -->
+    <!-- Substitua a seção de galeria atual por: -->
     <section id="albums" class="gallery" aria-labelledby="gallery-heading">
       <div class="cabecalho-galeria" data-scroll data-scroll-speed="0.5">
-        <h1 class="titulo-galeria">Catálogo de Obras</h1>
+        <h1 class="titulo-galeria" id="gallery-heading">Catálogo de Obras</h1>
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="destaque">Destaques</button>
+          <button class="filter-btn" data-filter="retratos">Retratos</button>
+          <button class="filter-btn" data-filter="casamentos">Casamentos</button>
+          <button class="filter-btn" data-filter="eventos">Eventos</button>
+        </div>
       </div>
-      <ul class="gallery-list">
-        <!-- Item com destaque (largura dupla) -->
-        <li class="gallery-list__item" data-category="destaque">
-          <a href="#" class="gallery-list__card" aria-label="Ver álbum Tudo o que você quer ser">
-            <div class="card">
-              <div class="card-thumb">
-                <img src="/img/A/a (2).webp" class="card-image" alt="Tudo o que você quer ser" loading="lazy">
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">Tudo o que você quer ser</h3>
-                <span class="card-price">20.000 DIRHAMS</span>
-              </div>
-            </div>
-          </a>
-        </li>
-      
-        <!-- Itens padrão -->
-        <li class="gallery-list__item" data-category="retratos">
-          <a href="#" class="gallery-list__card" aria-label="Ver álbum Lembre-se daquele dia perfeito">
-            <div class="card">
-              <div class="card-thumb">
-                <img src="/img/A/b (6).webp" class="card-image" alt="Lembre-se daquele dia perfeito" loading="lazy">
-              </div>
-              <div class="card-content">
-                <h3 class="card-title">Lembre-se daquele dia perfeito</h3>
-                <span class="card-price">15.000 DIRHAMS</span>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul>
 
+      <div class="gallery-grid-container">
+        <ul class="gallery-list" id="gallery-container">
+          <!-- Itens serão injetados via JavaScript -->
+        </ul>
+      </div>
     </section>
+
+
     <!-- ================= SOBRE MIM SECTION ================= -->
     <section id="about" class="sobre-mim">
       <div class="container-principal">
@@ -155,9 +139,9 @@
         <p>Design por Victor Cardoso</p>
       </div>
     </footer>
-    </div>
-    <!-- Scripts -->
-    <script type="module" src="/js/main.js"></script>
+  </div>
+  <!-- Scripts -->
+  <script type="module" src="/js/main.js"></script>
 </body>
 
 </html>

@@ -1,55 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-scroll-container>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Galeria de Fotos Moderna e Responsiva">
-    <title>Galeria de Fotos</title>
-    <link rel="stylesheet" href="/css/stylesG1.css">
+    <title>Tudo o que você quer ser - Galeria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+    <link rel="stylesheet" href="../CSS/stylesG1.css">
+    <link rel="preload" href="../img/A/a (2).webp" as="image">
 </head>
 <body>
-   <!-- -No futuro utilizar o https://www.henriheymans.com/ na seção Recognitions para criar um pop up na barra esquerda da galeria.
-    Área Lateral -->
+    <!-- Área Lateral -->
     <aside id="sidebar">
-        <div class="sidebar-content">
-            <h1>Título da Galeria</h1>
-            <p>Descrição da galeria. Aqui você pode adicionar um texto explicativo sobre a exposição ou coleção de fotos.</p>
-            <div class="details">
-                <span class="date">10/2023</span>
-                <span class="location">São Paulo, Brasil</span>
+        <div class="sidebar-minimized">
+            <div class="logo" title="Voltar ao topo">
+                <i class="fas fa-camera"></i>
             </div>
         </div>
-        <div class="sidebar-minimized">
-            <img src="assets/logo.png" alt="Logo da Galeria" class="logo">
+        <div class="sidebar-content">
+            <a href="../index.html" class="back-button">
+                <i class="fas fa-camera"></i>
+            </a>
+            <div class="title-container">
+                <h1 >Tudo o que você quer ser</h1>
+            </div>
+            <div class="details">
+                <span ><i class="far fa-calendar"></i> 10/2023</span>
+                <span ><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</span>
+            </div>
+           
         </div>
     </aside>
 
- Galeria de Fotos 
-    <main id="gallery">
-        <div class="gallery-item">
-            <img src="/img/A/a (2).webp" alt="Imagem 1" loading="lazy">
+    <!-- Conteúdo Principal -->
+    <div class="main-content" id="scroll-container">
+        <!-- Galeria de Fotos -->
+        <div class="gallery-container" data-scroll-section>
+            <div class="gallery-header">
+                <h2 class="gallery-title" data-scroll data-scroll-speed="0.5">Galeria</h2>
+            </div>
+            
+            <div class="gallery-grid" id="gallery-grid"></div>
         </div>
-        <div class="gallery-item">
-            <img src="/img/A/b (3).webp" alt="Imagem 2" loading="lazy">
-        </div>
-        <div class="gallery-item">
-            <img src="/img/A/b (6).webp" alt="Imagem 3" loading="lazy">
-        </div>
-        <div class="gallery-item">
-            <img src="/img/A/b (7).webp" alt="Imagem 4" loading="lazy">
-        </div>
-        <div class="gallery-item">
-            <img src="/img/A/c (1).webp" alt="Imagem 5" loading="lazy">
-        </div>
-        <div class="gallery-item">
-            <img src="/img/A/c (2).webp" alt="Imagem 6" loading="lazy">
-        </div>
-        <div class="gallery-item">
-            <img src="/img/A/c (4).webp" alt="Imagem 7" loading="lazy">
-        </div>
-    </main> 
+    </div>
 
-
-    <script type="module" src="/js/scriptsG1.js"></script>
+    <script src="../JS/scriptsG1.js"></script>
 </body>
 </html>

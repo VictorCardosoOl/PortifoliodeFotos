@@ -72,4 +72,7 @@ Transições Suaves entre as Seções: Embora o Locomotive Scroll já proporcion
 
 Detalhes Adicionais ao Hover na Galeria: Ao passar o mouse sobre uma imagem na galeria, você pode exibir informações adicionais, como o título da foto, a data ou uma breve descrição.
 
-Efeitos Visuais Sutis: Considere adicionar pequenos efeitos visuais, como paralaxe em segundo plano (além do que o Locomotive Scroll já faz), animações de entrada para elementos ao rolar a página (o AOS já está fazendo isso, mas você pode personalizar mais), ou transições de cores sutis.
+Efeitos Vissssuais Sutis: Considere adicionar pequenos efeitos visuais, como paralaxe em segundo plano (além do que o Locomotive Scroll já faz), animações de entrada para elementos ao rolar a página (o AOS já está fazendo isso, mas você pode personalizar mais), ou transições de cores sutis.
+
+ <!-- -No futuro utilizar o https://www.henriheymans.com/ na seção Recognitions para criar um pop up na barra esquerda da galeria.
+    Área Lateral -->

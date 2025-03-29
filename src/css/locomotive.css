@@ -1,3 +1,49 @@
-
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html.has-scroll-smooth {
+      overflow: hidden; }
+    
+    html.has-scroll-dragging {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
+    
+    .has-scroll-smooth body {
+      overflow: hidden; }
+    
+    .has-scroll-smooth [data-scroll-container] {
+      min-height: 100vh; }
+    
+      .c-scrollbar {
+        
+        position: fixed;
+        right: 24px;
+        bottom: 40px;
+        width: 2px;
+        background-color: #6e6e6e;
+        height: 20vh;
+        transform-origin: center center;
+        transition: transform 0.3s, opacity 0.3s;
+        opacity: .1;
+        z-index: 1000;
+      }
+      .c-scrollbar:hover {
+        transform: scaleX(1.45); }
+      .c-scrollbar:hover, .has-scroll-scrolling .c-scrollbar, .has-scroll-dragging .c-scrollbar {
+        opacity: 1; }
+    
+        .c-scrollbar_thumb {
+          position: absolute;
+          top: auto;
+          min-height: 30%;
+          background-color: #f8f8f8;
+          opacity: 1;
+          width: 2px;
+          cursor: -webkit-grab;
+          cursor: grab;
+        }
     
 
