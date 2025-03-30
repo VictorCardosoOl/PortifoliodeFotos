@@ -18,7 +18,7 @@ const galleryData = [
         price: "20.000 DIRHAMS",
         category: "destaque",
         size: "large", // large, medium, wide, small, extra-wide, portrait
-        imageUrl: "/img/A/a (2).webp",
+        imageUrl: "/img/body/wallp (4).jpg",
         link: "/pages/galeria1.html",
         featured: true
     },
@@ -28,7 +28,7 @@ const galleryData = [
         price: "15.000 DIRHAMS",
         category: "retratos",
         size: "portrait",
-        imageUrl: "/img/A/b (6).webp",
+        imageUrl: "/img/body/wallp (3).webp",
         link: "#"
     },
     {
@@ -37,7 +37,7 @@ const galleryData = [
         price: "15.000 DIRHAMS",
         category: "retratos",
         size: "portrait",
-        imageUrl: "/img/A/b (6).webp",
+        imageUrl: "/img/body/b (6).webp",
         link: "#"
     },
     {
@@ -46,7 +46,7 @@ const galleryData = [
         price: "18.000 DIRHAMS",
         category: "casamentos",
         size: "wide",
-        imageUrl: "/img/A/c (1).webp",
+        imageUrl: "/img/body/c (1).webp",
         link: "#"
     },
     {
@@ -55,7 +55,7 @@ const galleryData = [
         price: "12.000 DIRHAMS",
         category: "retratos",
         size: "extra-wide",
-        imageUrl: "/img/A/c (4).webp",
+        imageUrl: "/img/body/c (4).webp",
         link: "#"
     },
     {
@@ -64,7 +64,7 @@ const galleryData = [
         price: "25.000 DIRHAMS",
         category: "eventos",
         size: "small",
-        imageUrl: "/img/A/b (3).webp",
+        imageUrl: "/img/body/b (3).webp",
         link: "#"
     },
     {
@@ -73,7 +73,7 @@ const galleryData = [
         price: "14.000 DIRHAMS",
         category: "retratos",
         size: "medium",
-        imageUrl: "/img/A/c (3).webp",
+        imageUrl: "/img/body/c (3).webp",
         link: "#"
     },
     {
@@ -82,7 +82,7 @@ const galleryData = [
         price: "12.000 DIRHAMS",
         category: "retratos",
         size: "extra-wide",
-        imageUrl: "/img/A/c (4).webp",
+        imageUrl: "/img/body/c (4).webp",
         link: "#"
     },
     {
@@ -91,7 +91,7 @@ const galleryData = [
         price: "12.000 DIRHAMS",
         category: "retratos",
         size: "large",
-        imageUrl: "/img/A/c (4).webp",
+        imageUrl: "/img/body/c (4).webp",
         link: "#"
     },
     {
@@ -100,7 +100,7 @@ const galleryData = [
         price: "12.000 DIRHAMS",
         category: "retratos",
         size: "extra-wide",
-        imageUrl: "/img/A/c (4).webp",
+        imageUrl: "/img/body/c (4).webp",
         link: "#"
  
     }
