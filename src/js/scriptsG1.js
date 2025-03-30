@@ -6,7 +6,7 @@ const galleryData = [
         id: 1,
         title: "Tudo o que você quer ser",
         size: "large",
-        imageUrl: "../img/A/a (2).webp",
+        imageUrl: "/img/1galeria/a (2).webp",
         link: "visualizador.html?id=1",
         featured: true
     },
@@ -14,35 +14,35 @@ const galleryData = [
         id: 2,
         title: "Lembre-se daquele dia perfeito",
         size: "portrait",
-        imageUrl: "../img/A/b (6).webp",
+        imageUrl: "/img/1galeria/b (6).webp",
         link: "visualizador.html?id=2"
     },
     {
         id: 3,
         title: "Momentos Eternos",
         size: "wide",
-        imageUrl: "../img/A/c (1).webp",
+        imageUrl: "/img/1galeria/c (1).webp",
         link: "visualizador.html?id=3"
     },
     {
         id: 4,
         title: "Expressões Únicas",
         size: "extra-wide",
-        imageUrl: "../img/A/c (4).webp",
+        imageUrl: "/img/1galeria/c (4).webp",
         link: "visualizador.html?id=4"
     },
     {
         id: 5,
         title: "Celebração",
         size: "small",
-        imageUrl: "../img/A/b (3).webp",
+        imageUrl: "/img/1galeria/b (3).webp",
         link: "visualizador.html?id=5"
     },
     {
         id: 6,
         title: "Olhares",
         size: "medium",
-        imageUrl: "../img/A/c (3).webp",
+        imageUrl: "/img/1galeria/c (3).webp",
         link: "visualizador.html?id=6"
     }
 ];
