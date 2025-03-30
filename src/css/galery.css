@@ -40,42 +40,6 @@
   --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);   /* Lenta */
 }
 
-/* ================= SEÇÃO HERO ================= */
-#hero {
-  height: 100vh;
-  min-height: 800px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
-              url('/img/hero-bg.webp') center/cover no-repeat;
-  color: var(--text-light);
-}
-
-.hero-content {
-  text-align: center;
-  max-width: 800px;
-  padding: 0 2rem;
-}
-
-.hero-titles h2 {
-  font-size: 1.2rem;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-weight: 300;
-}
-
-.hero-titles h1 {
-  font-family: var(--font-primary);
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 400;
-  line-height: 1.1;
-  margin-bottom: 2rem;
-}
-
 /* ================= SEÇÃO GALERIA ================= */
 .gallery {
   background-color: var(--secondary-color);
