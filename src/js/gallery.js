@@ -19,7 +19,7 @@ const galleryData = [
         category: "destaque",
         size: "large", // large, medium, wide, small, extra-wide, portrait
         imageUrl: "/img/body/e (3).webp",
-        link: "/pages/galeria1.html",
+        link: "/pages/galeria/galeria.html",
         featured: true
     },
     {

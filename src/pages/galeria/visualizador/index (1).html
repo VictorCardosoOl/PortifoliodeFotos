@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Interiores - Photoyoshi (Revisão Responsiva)</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'neue-haas-grotesk-display', sans-serif;
+            background: #ffffff;
+        }
+
+        /* Layout Principal Responsivo */
+        .main-container {
+            display: flex;
+            flex-direction: column; /* Layout vertical para telas menores */
+            min-height: 100vh; /* Garante que o container ocupe a altura total */
+        }
+
+        /* Painel de Categoria (Topo) */
+        .category-panel {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Visualizador Principal (Centro) */
+        .main-viewer {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px; /* Adiciona padding para respiro */
+        }
+
+        .main-image {
+            max-width: 95%; /* Aumenta um pouco para telas menores */
+            max-height: 85vh; /* Aumenta um pouco para telas menores */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .main-image.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Barra de Miniaturas Horizontal (Abaixo) */
+        .thumbnails-container {
+            padding: 20px;
+            display: flex;
+            overflow-x: auto; /* Scroll horizontal para miniaturas */
+            scroll-snap-type: x mandatory;
+            background: #f8f8f8;
+            justify-content: center; /* Centraliza as miniaturas horizontalmente */
+        }
+
+        .thumbnail-item {
+            width: 120px;
+            height: 80px;
+            margin: 0 5px; /* Reduz margin-bottom e adiciona margin horizontal */
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease-out;
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 12px rgba(7, 7, 7, 0.08);
+            opacity: 1;
+            transform: translateY(0);
+            scroll-snap-align: start; /* Alinhamento para scroll horizontal */
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .thumbnail-item.active {
+            transform: scale(1.04);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 2px solid #0c0c0c;
+        }
+
+        /* Lightbox (Sem alterações significativas no CSS) */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Transição de entrada */
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: lightboxEnter 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            border-radius: 10px;
+            cursor: zoom-in;
+        }
+
+        .lightbox-img.zoomed {
+            cursor: zoom-out;
+            transform: scale(1.5);
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        @keyframes lightboxEnter {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Media Queries para Responsividade */
+        @media (min-width: 768px) { /* Telas maiores que tablets */
+            .main-container {
+                flex-direction: row; /* Layout horizontal em telas maiores */
+            }
+
+            .category-panel {
+                width: 200px;
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center; /* Centraliza o texto verticalmente */
+                padding: 0; /* Remove padding para layout vertical */
+            }
+
+            .main-viewer {
+                margin-left: 200px; /* Margem esquerda para o painel de categoria */
+                margin-right: 150px; /* Margem direita para a barra de miniaturas */
+                padding: 0; /* Remove padding para layout horizontal */
+            }
+
+            .thumbnails-container {
+                width: 150px;
+                height: 100vh;
+                position: fixed;
+                right: 0;
+                top: 0;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                overflow-y: auto;
+                overflow-x: hidden; /* Desabilita scroll horizontal */
+                scroll-snap-type: y mandatory;
+                padding: 20px 0;
+            }
+
+            .thumbnail-item {
+                margin: 0 0 10px 0; /* Restaura margin-bottom e remove margin horizontal */
+                scroll-snap-align: start; /* Alinhamento para scroll vertical */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <section class="category-panel">
+            Interior
+        </section>
+
+        <section class="main-viewer">
+            <img class="main-image active" id="mainImage"
+                 src="https://photoyoshi.com/uploads/2024/11/MG_5391-2048x1365.jpg.webp"
+                 alt="Visualização Principal">
+        </section>
+
+        <section class="thumbnails-container" id="thumbnailsContainer">
+            <div class="thumbnail-item active" data-index="0">
+                <img src="https://photoyoshi.com/uploads/2024/11/MG_5391-300x200.jpg.webp"
+                     data-full="https://photoyoshi.com/uploads/2024/11/MG_5391-2048x1365.jpg.webp">
+            </div>
+            <div class="thumbnail-item" data-index="1">
+                <img src="https://photoyoshi.com/uploads/2024/11/9-300x200.jpg.webp"
+                     data-full="https://photoyoshi.com/uploads/2024/11/9.jpg.webp">
+            </div>
+            <div class="thumbnail-item" data-index="2">
+                <img src="https://photoyoshi.com/uploads/2024/11/13080026-300x199.jpg.webp"
+                     data-full="https://photoyoshi.com/uploads/2024/11/13080026-2048x1357.jpg.webp">
+            </div>
+        </section>
+
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-overlay" id="lightboxOverlay"></div>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Visualização Ampliada">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... (JavaScript -  sem alterações significativas na lógica, apenas ajuste para scroll horizontal se necessário) ...
+            const mainImage = document.getElementById('mainImage');
+            const thumbnailsContainer = document.getElementById('thumbnailsContainer');
+            const thumbnails = document.querySelectorAll('.thumbnail-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            let activeIndex = 0;
+
+            gsap.from('.thumbnail-item', {
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+                delay: 0.5,
+            });
+
+            function updateMainImage(index) {
+                const newSrc = thumbnails[index].querySelector('img').dataset.full;
+
+                gsap.to(mainImage, {
+                    opacity: 0,
+                    scale: 0.98,
+                    duration: 0.3,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        mainImage.src = newSrc;
+
+                        gsap.fromTo(mainImage,
+                            { opacity: 0, scale: 1.02 },
+                            {
+                                opacity: 1,
+                                scale: 1,
+                                duration: 0.5,
+                                ease: 'power2.out',
+                            }
+                        );
+                    }
+                });
+
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+
+                // Scroll horizontal se miniaturas forem horizontais
+                if (window.innerWidth < 768) {
+                    thumbnails[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else { // Scroll vertical para layout desktop original
+                    thumbnails[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            window.addEventListener('wheel', (e) => {
+                e.preventDefault();
+
+                const direction = e.deltaY > 0 ? 1 : -1;
+                activeIndex = (activeIndex + direction + thumbnails.length) % thumbnails.length;
+
+                updateMainImage(activeIndex);
+            });
+
+            thumbnails.forEach((thumb, index) => {
+                thumb.addEventListener('click', () => {
+                    activeIndex = index;
+                    updateMainImage(activeIndex);
+                });
+
+                thumb.addEventListener('mouseenter', () => {
+                    gsap.to(thumb, {
+                        scale: 1.05,
+                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
+                        duration: 0.3,
+                    });
+                });
+
+                thumb.addEventListener('mouseleave', () => {
+                    gsap.to(thumb, {
+                        scale: 1,
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+                        duration: 0.3,
+                    });
+                });
+            });
+
+            mainImage.addEventListener('click', () => {
+                lightboxImg.src = mainImage.src;
+                lightbox.classList.add('active');
+
+                gsap.fromTo(lightboxImg,
+                    { opacity: 0, scale: 0.95 },
+                    {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                    }
+                );
+            });
+
+            lightboxOverlay.addEventListener('click', () => {
+                gsap.to(lightboxImg, {
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: 0.4,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        lightbox.classList.remove('active');
+                        lightboxImg.classList.remove('zoomed');
+                    }
+                });
+            });
+
+            lightboxImg.addEventListener('click', () => {
+                lightboxImg.classList.toggle('zoomed');
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft') {
+                        activeIndex = (activeIndex - 1 + thumbnails.length) % thumbnails.length;
+                        updateMainImage(activeIndex);
+                        lightboxImg.src = thumbnails[activeIndex].querySelector('img').dataset.full;
+                    } else if (e.key === 'ArrowRight') {
+                        activeIndex = (activeIndex + 1) % thumbnails.length;
+                        updateMainImage(activeIndex);
+                        lightboxImg.src = thumbnails[activeIndex].querySelector('img').dataset.full;
+                    }
+                } else {
+                    if (e.key === 'ArrowUp') {
+                        activeIndex = (activeIndex - 1 + thumbnails.length) % thumbnails.length;
+                        updateMainImage(activeIndex);
+                    } else if (e.key === 'ArrowDown') {
+                        activeIndex = (activeIndex + 1) % thumbnails.length;
+                        updateMainImage(activeIndex);
+                    }
+                }
+
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                    lightboxImg.classList.remove('zoomed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+Sites referencias:
+
+Referencia para visualizador de imagens:
+https://www.awwwards.com/sites/takamitsu-motoyoshi
+Site que faz uma analise sobre o site:
+https://photoyoshi.com/
+
+https://www.awwwards.com/inspiration/art-direction-and-photograpy-portfolio
+Site que faz uma analise sobre o site:
+https://saintlouvent.com/photography
+
+
+Referencias para portifólio: 
+
+https://www.awwwards.com/sites/cris-araujo
+Site que faz uma analise sobre o site:
+https://cristianaaraujo.com/
+
+
+https://www.awwwards.com/inspiration/portfolio-of-richard-ekwonye-creative-developer
+Site que faz uma analise sobre o site:
+https://www.richardekwonye.com/
+
+https://www.awwwards.com/inspiration/home-page-horizontal-scroll-emma-is-social
+Site que faz uma analise sobre o site:
+https://emmaissocial.com/
+
+https://www.awwwards.com/sites/anatole-touvron-portfolio
+Site que faz uma analise sobre o site:
+https://anatoletouvron.fr/project/keepgrading/
+
+https://www.isabelmoranta.com/
