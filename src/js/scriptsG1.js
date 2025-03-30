@@ -7,7 +7,7 @@ const galleryData = [
         title: "Tudo o que você quer ser",
         size: "large",
         imageUrl: "/img/1galeria/a (2).webp",
-        link: "visualizador.html?id=1",
+        link: "/pages/galeria/visualizador/1visualizador.html",
         featured: true
     },
     {
