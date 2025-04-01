@@ -3,6 +3,7 @@
 @import url(footer.css);
 @import url(galery.css);
 @import url(locomotive.css);
+@import url(responsive.css);
 /* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
     --primary-color: #1a1a1a;

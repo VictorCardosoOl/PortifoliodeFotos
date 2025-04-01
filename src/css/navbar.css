@@ -160,13 +160,3 @@ nav {
     transform: rotate(-45deg);
   }
   
-  /* Responsivo */
-  @media (max-width: 768px) {
-    .navbar-container {
-      padding: 0 20px;
-    }
-    
-    .logo a {
-      font-size: 1.5rem;
-    }
-  }
