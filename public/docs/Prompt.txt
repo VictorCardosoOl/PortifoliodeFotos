@@ -1,0 +1,52 @@
+Contexto do Projeto:
+Estou desenvolvendo um portfólio fotográfico estático (apenas frontend) para um fotógrafo profissional, com foco em desempenho visual e experiência do usuário. O projeto já está em estágio avançado, utilizando as seguintes tecnologias e características:
+
+Tecnologias e Bibliotecas:
+
+Framework/Ferramentas:
+- Vite (para build e desenvolvimento).
+- Hospedagem na  Netlify.
+
+Bibliotecas Principais:
+- GSAP (para animações customizadas, como cursor personalizado e efeitos de hover).
+- Locomotive Scroll (para rolagem suave e efeitos parallax).
+- AOS (Animate On Scroll) (para animações baseadas em scroll).
+
+Formato de Imagens:
+Todas as imagens estão otimizadas em .webp (máximo de 500 KB cada).
+Estrutura do Projeto:
+
+Páginas Principais:
+index.html: Página inicial com seções hero, galeria dinâmica ("Catálogo de Obras") e sobre o fotógrafo.
+galeria.html: Página secundária com layout de galeria vertical/horizontal responsiva.
+1visualizador.html: Visualizador de imagens com lightbox e miniaturas (adaptado para mobile/desktop).
+JavaScript Modular:
+Módulos separados para navbar, cursor customizado, galeria e scroll.
+Dados da galeria injetados dinamicamente via gallery.js e scriptsG1.js.
+Funcionalidades Implementadas:
+
+Navegação:
+Menu responsivo com animação GSAP (mobile/desktop).
+Links âncora suaves integrados ao Locomotive Scroll.
+
+Galeria Dinâmica:
+Filtros por categorias (Retratos, Casamentos, Eventos).
+Layout "masonry" com itens de tamanhos variados (large, wide, portrait).
+Hover com zoom e transições suaves.
+
+Visualizador de Imagens:
+Lightbox com zoom e navegação por teclado (setas/Escape).
+Miniaturas laterais (desktop) ou inferiores (mobile).
+
+Efeitos Visuais:
+Cursor personalizado que reage a hover (desativado em touch devices).
+Animações baseadas em scroll (AOS e Locomotive Scroll).
+
+Objetivos da Consulta:
+
+[Inserir aqui o que deseja otimizar/corrigir, por exemplo:]
+
+
+Melhorar a performance de carregamento das imagens na galeria.
+Ajustar o comportamento do visualizador em dispositivos móveis.
+Sugestões para otimizar a integração entre Locomotive Scroll e AOS.
