@@ -10,7 +10,7 @@
  * - Efeitos sutis e sofisticados
  */
 
-/* ============bbbbb===== VARIÁVEIS GLOBAIS PREMIUM ================= */
+/* ================= VARIÁVEIS GLOBAIS PREMIUM ================= */
 :root {
   /* Cores Sofisticadas */
   --primary-color: #b19261;            /* Dourado premium */
@@ -162,7 +162,8 @@
 /* ================= GRID PERFEITAMENTE ALINHADO ================= */
 .gallery-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--grid-base-size), 1fr));
+  grid-template-columns: repeat(4, 350px); /* 4 colunas de 280px cada */
+  justify-content: center; /* Centraliza o grid na página */
   grid-auto-rows: 320px;
   gap: var(--grid-gap);
   list-style: none;
@@ -408,5 +409,23 @@
   .filter-btn {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .gallery-list {
+    grid-template-columns: repeat(3, 280px);
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery-list {
+    grid-template-columns: repeat(2, 280px);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-list {
+    grid-template-columns: 280px;
   }
 }
