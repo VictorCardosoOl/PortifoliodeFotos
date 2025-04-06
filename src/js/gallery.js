@@ -85,15 +85,7 @@ const galleryData = [
         imageUrl: "/img/body/e (7).webp",
         link: "#"
     },
-    {
-        id: 4,
-        title: "Expressões Únicas",
-        price: "12.000 DIRHAMS",
-        category: "retratos",
-        size: "large",
-        imageUrl: "/img/body/e (2).webp",
-        link: "#"
-    },
+  
     {
         id: 5,
         title: "Expressões Únicas",
