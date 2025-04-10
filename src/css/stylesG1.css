@@ -3,16 +3,33 @@
 /* ========== VARIÁVEIS ========== */
 :root {
     --primary-color: #b19261;
-    --secondary-color: #ffffff;
-    --text-color: #333333;
-    --text-light: #f8f8f8;
+    --primary-light: #d4b483;
+    --secondary-color: #f9f7f4;
     --bg-dark: #1a1a1a;
-    --overlay-dark: rgba(0, 0, 0, 0.7);
-    --border-radius: 8px;
-    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.2);
+    --text-color: #333333;
+    --text-light: #ffffff;
+    --overlay-dark: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
+    --overlay-light: rgba(255,255,255,0.12);
+    
+    /* Tipografia */
+    --font-primary: 'Playfair Display', serif;
+    --font-secondary: 'Open Sans', sans-serif;
+    
+    /* Espaçamento */
+    --section-padding: 8rem 5%;
+    --header-margin: 6rem;
+    --grid-gap: 2rem;
+    
+    /* Bordas e Efeitos */
+    --border-radius: 10px;
+    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-md: 0 15px 40px rgba(0,0,0,0.12);
+    --shadow-lg: 0 25px 60px rgba(0,0,0,0.15);
+    
+    /* Grid Fixo */
+    --grid-columns: 4;
+    --grid-base-size: 280px;
 }
 
 /* ========== RESET E ESTILOS BASE ========== */
@@ -25,6 +42,7 @@
 html {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    overflow-x: hidden;
 }
 
 html::-webkit-scrollbar {
@@ -32,12 +50,10 @@ html::-webkit-scrollbar {
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-secondary);
     color: var(--text-color);
     background-color: var(--secondary-color);
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -64,7 +80,7 @@ body {
 }
 
 .sidebar-content h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
     font-size: 2rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
@@ -134,22 +150,26 @@ body {
     transition: margin-left 0.5s ease, width 0.5s ease;
 }
 
-/* ========== GALERIA ========== */
+/* ========== GALERIA COM GRID FIXO ========== */
 .gallery-container {
-    padding: 2rem 1.5rem;
+    padding: var(--section-padding);
     flex: 1;
     width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .gallery-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: var(--header-margin);
 }
 
 .gallery-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
+    font-family: var(--font-primary);
+    font-size: clamp(3rem, 6vw, 4.5rem);
     font-weight: 400;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
     position: relative;
     display: inline-block;
@@ -158,130 +178,180 @@ body {
 .gallery-title::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -1.2rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
+    width: 100px;
     height: 2px;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     transition: var(--transition);
 }
 
 .gallery-title:hover::after {
-    width: 200px;
+    width: 150px;
 }
 
+/* Grid fixo - mantém o mesmo layout em todos os tamanhos de tela */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(var(--grid-columns), minmax(200px, 1fr));
+    grid-auto-rows: 320px;
+    gap: var(--grid-gap);
     width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
 }
 
+/* Proporções dos itens (mantém as mesmas posições sempre) */
 .gallery-item {
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
     background-color: #f8f8f8;
     transition: var(--transition);
-    aspect-ratio: 3/4;
-    width: 100%;
-    will-change: transform, opacity;
+    will-change: transform;
+    box-shadow: var(--shadow-sm);
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
 }
 
 .gallery-item[data-size="medium"] {
     grid-row: span 1;
-    aspect-ratio: 4/5;
 }
 
 .gallery-item[data-size="wide"] {
     grid-column: span 2;
-    aspect-ratio: 16/9;
 }
 
 .gallery-item[data-size="large"] {
     grid-column: span 2;
-    grid-row: span 1;
-    aspect-ratio: 16/9;
+    grid-row: span 2;
 }
 
 .gallery-item[data-size="extra-wide"] {
     grid-column: span 3;
-    aspect-ratio: 21/9;
 }
 
 .gallery-item[data-size="portrait"] {
-    grid-row: span 1;
-    aspect-ratio: 3/5;
+    grid-row: span 1.5;
 }
 
 .gallery-link {
     display: block;
     height: 100%;
+    width: 100%;
+    position: relative;
 }
 
 .gallery-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    transition: var(--transition);
     will-change: transform;
+    transform-origin: center center;
 }
 
-/* ========== EFEITOS DE SCROLL ========== */
-body.scrolled #sidebar {
-    width: 80px;
-    padding: 1rem;
-    text-align: center;
+.gallery-item:hover .gallery-image {
+    transform: scale(1.08);
+    filter: brightness(0.92);
 }
 
-body.scrolled .sidebar-content {
-    display: none;
-}
-
-body.scrolled .sidebar-minimized {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-body.scrolled .main-content {
-    margin-left: 80px;
-    width: calc(100% - 80px);
-}
-
-/* ========== ANIMAÇÕES ========== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 30px, 0);
-    }
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-.gallery-item {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Efeito de overlay e conteúdo */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2.2rem;
+    background: var(--overlay-dark);
+    color: var(--text-light);
     opacity: 0;
-    backface-visibility: hidden;
+    transform: translateY(20px);
+    transition: var(--transition);
+    z-index: 2;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
 }
 
-.gallery-item:nth-child(1) { animation-delay: 0.1s; }
-.gallery-item:nth-child(2) { animation-delay: 0.2s; }
-.gallery-item:nth-child(3) { animation-delay: 0.3s; }
-.gallery-item:nth-child(4) { animation-delay: 0.4s; }
-.gallery-item:nth-child(5) { animation-delay: 0.5s; }
-.gallery-item:nth-child(6) { animation-delay: 0.6s; }
-.gallery-item:nth-child(7) { animation-delay: 0.7s; }
-.gallery-item:nth-child(8) { animation-delay: 0.8s; }
-.gallery-item:nth-child(9) { animation-delay: 0.9s; }
-.gallery-item:nth-child(10) { animation-delay: 1s; }
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+}
+
+.caption-title {
+    font-family: var(--font-primary);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+}
+
+.caption-category {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    opacity: 0.9;
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+}
+
+/* Efeito de brilho sutil */
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%,
+             var(--overlay-light) 0%,
+             transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
 
 /* ========== RESPONSIVIDADE ========== */
+@media (max-width: 1600px) {
+    :root {
+        --grid-base-size: 260px;
+        --grid-gap: 1.8rem;
+    }
+}
+
+@media (max-width: 1440px) {
+    :root {
+        --grid-base-size: 240px;
+        --section-padding: 7rem 5%;
+        --header-margin: 5rem;
+    }
+}
+
 @media (max-width: 1200px) {
+    :root {
+        --grid-columns: 3;
+        --grid-base-size: 220px;
+        --grid-gap: 1.5rem;
+    }
+    
     #sidebar {
         width: 25%;
     }
@@ -290,9 +360,19 @@ body.scrolled .main-content {
         margin-left: 25%;
         width: 75%;
     }
+    
+    .gallery-item[data-size="extra-wide"] {
+        grid-column: span 2;
+    }
 }
 
 @media (max-width: 1024px) {
+    :root {
+        --grid-base-size: 200px;
+        --section-padding: 6rem 5%;
+        --header-margin: 4rem;
+    }
+    
     #sidebar {
         width: 30%;
         padding: 1.5rem;
@@ -302,16 +382,17 @@ body.scrolled .main-content {
         margin-left: 30%;
         width: 70%;
     }
-    
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+@media (max-width: 900px) {
+    :root {
+        --grid-columns: 2;
     }
     
     .gallery-item[data-size="wide"],
     .gallery-item[data-size="large"],
     .gallery-item[data-size="extra-wide"] {
         grid-column: span 1;
-        aspect-ratio: 3/4;
     }
 }
 
@@ -345,14 +426,20 @@ body.scrolled .main-content {
     }
     
     .gallery-container {
-        padding: 1.5rem 1rem;
+        padding: 4rem 5%;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+    :root {
+        --grid-columns: 1;
+        --grid-base-size: 100%;
+        --section-padding: 3rem 5%;
+        --header-margin: 2.5rem;
+    }
+    
     .gallery-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
     }
     
     .gallery-title {
@@ -364,33 +451,7 @@ body.scrolled .main-content {
     }
 }
 
-/* ========== RESET E ESTILOS BASE ========== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overflow-x: hidden;
-}
-
-html::-webkit-scrollbar {
-    display: none;
-}
-
-body {
-    font-family: 'Open Sans', sans-serif;
-    color: var(--text-color);
-    background-color: var(--secondary-color);
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* ========== LOCOMOTIVE SCROLL CONTAINER ========== */
+/* ========== LOCOMOTIVE SCROLL ========== */
 html.has-scroll-smooth {
     overflow: hidden;
 }
@@ -407,38 +468,6 @@ html.has-scroll-dragging {
     min-height: 100vh;
 }
 
-/* ========== ÁREA LATERAL ========== */
-#sidebar {
-    width: 20%;
-    height: 100vh;
-    background-color: var(--bg-dark);
-    padding: 2rem;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-    color: var(--text-light);
-    transition: width 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-/* ... (mantenha o resto do CSS da sidebar como estava) ... */
-
-/* ========== SEÇÃO PRINCIPAL ========== */
-.main-content {
-    margin-left: 20%;
-    width: 80%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: margin-left 0.5s ease, width 0.5s ease;
-}
-
-/* ... (mantenha o resto do CSS como estava) ... */
-
-/* Ajustes para Locomotive Scroll */
 [data-scroll] {
     will-change: transform;
 }
