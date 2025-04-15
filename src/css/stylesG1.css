@@ -26,10 +26,6 @@
     --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
     --shadow-md: 0 15px 40px rgba(0,0,0,0.12);
     --shadow-lg: 0 25px 60px rgba(0,0,0,0.15);
-    
-    /* Grid Fixo */
-    --grid-columns: 4;
-    --grid-base-size: 280px;
 }
 
 /* ========== RESET E ESTILOS BASE ========== */
@@ -158,6 +154,7 @@ body {
     max-width: 1800px;
     margin: 0 auto;
     position: relative;
+    background-color: var(--secondary-color);
 }
 
 .gallery-header {
@@ -194,7 +191,8 @@ body {
 /* Grid fixo - mantém o mesmo layout em todos os tamanhos de tela */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(var(--grid-columns), minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 280px); /* 4 colunas fixas de 280px */
+    justify-content: center; /* Centraliza o grid */
     grid-auto-rows: 320px;
     gap: var(--grid-gap);
     width: 100%;
@@ -220,8 +218,12 @@ body {
     z-index: 10;
 }
 
+.gallery-item[data-size="small"] {
+    /* Padrão 1x1 */
+}
+
 .gallery-item[data-size="medium"] {
-    grid-row: span 1;
+    grid-row: span 2;
 }
 
 .gallery-item[data-size="wide"] {
@@ -330,26 +332,9 @@ body {
 }
 
 /* ========== RESPONSIVIDADE ========== */
-@media (max-width: 1600px) {
-    :root {
-        --grid-base-size: 260px;
-        --grid-gap: 1.8rem;
-    }
-}
-
-@media (max-width: 1440px) {
-    :root {
-        --grid-base-size: 240px;
-        --section-padding: 7rem 5%;
-        --header-margin: 5rem;
-    }
-}
-
 @media (max-width: 1200px) {
-    :root {
-        --grid-columns: 3;
-        --grid-base-size: 220px;
-        --grid-gap: 1.5rem;
+    .gallery-grid {
+        grid-template-columns: repeat(3, 280px); /* 3 colunas */
     }
     
     #sidebar {
@@ -368,7 +353,6 @@ body {
 
 @media (max-width: 1024px) {
     :root {
-        --grid-base-size: 200px;
         --section-padding: 6rem 5%;
         --header-margin: 4rem;
     }
@@ -385,8 +369,8 @@ body {
 }
 
 @media (max-width: 900px) {
-    :root {
-        --grid-columns: 2;
+    .gallery-grid {
+        grid-template-columns: repeat(2, 280px); /* 2 colunas */
     }
     
     .gallery-item[data-size="wide"],
@@ -430,16 +414,14 @@ body {
     }
 }
 
-@media (max-width: 576px) {
-    :root {
-        --grid-columns: 1;
-        --grid-base-size: 100%;
-        --section-padding: 3rem 5%;
-        --header-margin: 2.5rem;
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: 280px; /* 1 coluna */
     }
     
-    .gallery-grid {
-        grid-template-columns: 1fr;
+    .gallery-item[data-size="medium"],
+    .gallery-item[data-size="portrait"] {
+        grid-row: span 1;
     }
     
     .gallery-title {
