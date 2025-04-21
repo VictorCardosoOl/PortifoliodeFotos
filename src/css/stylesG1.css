@@ -661,3 +661,41 @@ html.has-scroll-dragging {
         max-height: calc(100vh - 140px);
     }
 }
+
+/* Adicione no final do arquivo */
+
+/* Navbar scroll behavior */
+#sidebar {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#sidebar.scrolled {
+    width: 80px;
+    padding: 1rem;
+}
+
+#sidebar.scrolled .sidebar-content {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar.scrolled .sidebar-minimized {
+    display: block;
+}
+
+.sidebar-minimized {
+    display: none;
+    text-align: center;
+}
+
+.sidebar-minimized .logo {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-minimized .logo:hover {
+    transform: scale(1.1);
+}
