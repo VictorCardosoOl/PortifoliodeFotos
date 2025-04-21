@@ -10,24 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
             featured: true
         },
         {
-            id: 1,
+            id: 2,
             title: "Tudo o que você quer ser",
             size: "small",
             imageUrl: "/img/1galeria/e (1).webp",
             featured: true
         },
         {
-            id: 1,
+            id: 3,
             title: "Tudo o que você quer ser",
             size: "small",
             imageUrl: "/img/1galeria/e (8).webp",
             featured: true
         },
         {
-            id: 1,
+            id: 4,
             title: "Tudo o que você quer ser",
             size: "wide",
-            imageUrl: "/img/1galeria/e (8).webp",
+            imageUrl: "/img/1galeria/e (4).webp",
             featured: true
         }
         // Adicione mais itens conforme necessário
