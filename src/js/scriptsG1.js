@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             featured: true
         },
         {
-            id: 4,
+            id: 6,
             title: "Tudo o que você quer ser",
             size: "wide",
             imageUrl: "/img/1galeria/wallp (4).jpg",
