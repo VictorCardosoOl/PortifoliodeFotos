@@ -33,8 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 5,
             title: "Tudo o que você quer ser",
-            size: "wide",
+            size: "extra-wide",
             imageUrl: "/img/1galeria/e (4).webp",
+            featured: true
+        },
+        {
+            id: 4,
+            title: "Tudo o que você quer ser",
+            size: "wide",
+            imageUrl: "/img/1galeria/wallp (4).jpg",
             featured: true
         },
         // Adicione mais itens conforme necessário
