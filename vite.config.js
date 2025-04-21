@@ -11,7 +11,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/index.html'),
-        galeria: resolve(__dirname, 'src/pages/galeria1.html'),
+        galeria: resolve(__dirname, 'src/pages/galeria/galeria.html'),
       },
     },
   },
