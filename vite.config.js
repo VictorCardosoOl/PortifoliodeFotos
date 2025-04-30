@@ -12,6 +12,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'src/index.html'),
         galeria: resolve(__dirname, 'src/pages/galeria/galeria.html'),
+        india: resolve(__dirname, 'src/pages/galeria/india.html'),
       },
     },
   },
