@@ -24,11 +24,11 @@ const galleryData = [
     },
     {
         id: 2,
-        title: "Lembre-se daquele dia perfeito",
-        price: "15.000 DIRHAMS",
+        title: "India",
+        price: "O coração que está em paz vê uma festa em todas as aldeias.",
         category: "retratos",
         size: "portrait",
-        imageUrl: "/img/body/wallp (3).webp",
+        imageUrl: "/img/india/a (11).jpg",
         link: "#"
     },
     {
