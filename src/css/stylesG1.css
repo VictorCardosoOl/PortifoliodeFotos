@@ -143,12 +143,12 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.5s ease, width 0.5s ease;
+    transition: margin-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ========== GALERIA COM GRID FIXO ========== */
 .gallery-container {
-    padding: var(--section-padding);
+    padding: 3rem;
     flex: 1;
     width: 100%;
     max-width: 1800px;
@@ -159,7 +159,7 @@ body {
 
 .gallery-header {
     text-align: center;
-    margin-bottom: var(--header-margin);
+    margin-bottom: 3rem;
 }
 
 .gallery-title {
@@ -167,7 +167,7 @@ body {
     font-size: clamp(3rem, 6vw, 4.5rem);
     font-weight: 400;
     letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     position: relative;
     display: inline-block;
 }
@@ -672,6 +672,8 @@ html.has-scroll-dragging {
 #sidebar.scrolled {
     width: 80px;
     padding: 1rem;
+    transform: translateX(calc(-100% + 80px));
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #sidebar.scrolled .sidebar-content {
@@ -698,4 +700,9 @@ html.has-scroll-dragging {
 
 .sidebar-minimized .logo:hover {
     transform: scale(1.1);
+}
+
+#sidebar.scrolled + .main-content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
 }
