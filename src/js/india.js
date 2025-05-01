@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Adicione mais itens conforme necessário
     ];
 
-    // Estado do lightbox
+    /////// Estado do lightbox
     let lightboxState = {
         currentIndex: 0,
         isOpen: false,
