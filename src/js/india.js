@@ -1,4 +1,3 @@
-// scriptsG1.js - Versão Atualizada
 document.addEventListener('DOMContentLoaded', () => {
     // Dados da galeria
     const galleryData = [
@@ -44,28 +43,32 @@ document.addEventListener('DOMContentLoaded', () => {
             imageUrl: "/img/india/a (6).jpg",
             featured: true
         },
-        // Adicione mais itens conforme necessário
     ];
 
-    /////// Estado do lightbox
+    // Estado do lightbox
     let lightboxState = {
         currentIndex: 0,
         isOpen: false,
-        scrollDelay: 150, // Delay para navegação por scroll
+        scrollDelay: 150,
         scrollTimeout: null
     };
 
     // Inicialização
     function init() {
         renderGallery();
-        loadGSAP();
+        setupLightbox();
         setupEventListeners();
+        setupScrollBehavior();
+        loadGSAP();
     }
 
     // Renderizar a galeria
     function renderGallery() {
         const galleryContainer = document.getElementById('gallery-grid');
-        if (!galleryContainer || galleryContainer.hasChildNodes()) return;
+        if (!galleryContainer) return;
+
+        // Limpa o container se já houver conteúdo
+        galleryContainer.innerHTML = '';
 
         const fragment = document.createDocumentFragment();
 
@@ -75,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         galleryContainer.appendChild(fragment);
-        setupLightbox();
     }
 
     // Criar item da galeria
@@ -124,12 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Criar estrutura HTML do lightbox
     function createLightboxHTML() {
+        // Remove o lightbox existente se houver
+        const existingLightbox = document.getElementById('lightbox');
+        if (existingLightbox) existingLightbox.remove();
+
         const lightboxHTML = `
             <div class="lightbox" id="lightbox">
                 <div class="lightbox-overlay" id="lightboxOverlay"></div>
                 <div class="lightbox-container">
                     <section class="category-panel">
-                        Galeria
+                        <a href="/index.html" class="back-to-home">Galeria</a>
                     </section>
                     <section class="main-viewer">
                         <img class="main-image" id="mainImage" src="" alt="Visualização Principal">
@@ -146,11 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Popular miniaturas
     function populateThumbnails() {
         const thumbnailsContainer = document.getElementById('thumbnailsContainer');
+        thumbnailsContainer.innerHTML = ''; // Limpa as miniaturas existentes
+
         galleryData.forEach((item, index) => {
             const thumb = document.createElement('div');
             thumb.className = 'thumbnail-item';
             thumb.dataset.index = index;
-            thumb.innerHTML = `<img src="${item.imageUrl}" data-full="${item.imageUrl}">`;
+            thumb.innerHTML = `<img src="${item.imageUrl}" alt="Miniatura ${index + 1}">`;
             thumbnailsContainer.appendChild(thumb);
         });
     }
@@ -172,6 +180,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightbox) {
             lightbox.addEventListener('wheel', handleLightboxScroll, { passive: false });
         }
+    }
+
+    // Comportamento de scroll
+    function setupScrollBehavior() {
+        const sidebar = document.getElementById('sidebar');
+        let lastScroll = 0;
+        const scrollThreshold = 100;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > scrollThreshold && currentScroll > lastScroll) {
+                sidebar.classList.add('scrolled');
+            } else if (currentScroll < lastScroll || currentScroll <= scrollThreshold) {
+                sidebar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
     }
 
     // Handlers de eventos
@@ -214,10 +241,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, lightboxState.scrollDelay);
     }
 
+    function handleThumbnailClick(e) {
+        e.stopPropagation();
+        lightboxState.currentIndex = parseInt(e.currentTarget.dataset.index);
+        updateMainImage(lightboxState.currentIndex);
+    }
+
     // Controles do lightbox
     function openLightbox(index) {
         if (lightboxState.isOpen) return;
-
+        
+        cleanupLightboxListeners();
         lightboxState.isOpen = true;
         lightboxState.currentIndex = index;
         
@@ -232,30 +266,34 @@ document.addEventListener('DOMContentLoaded', () => {
         
         lightbox.classList.add('active');
         
-        gsap.fromTo(mainImage,
-            { opacity: 0, scale: 0.95 },
-            { 
-                opacity: 1, 
-                scale: 1, 
-                duration: 0.6, 
-                ease: 'power2.out',
-                onComplete: () => {
-                    mainImage.classList.add('active');
-                }
-            }
-        );
-
-        // Configurar eventos após abertura
+        // Configurar eventos
         const lightboxOverlay = document.getElementById('lightboxOverlay');
         const closeBtn = document.getElementById('lightboxClose');
         
         lightboxOverlay.addEventListener('click', closeLightbox);
         closeBtn.addEventListener('click', closeLightbox);
         
-        const thumbnailsContainer = document.getElementById('thumbnailsContainer');
-        thumbnailsContainer.querySelectorAll('.thumbnail-item').forEach(thumb => {
+        thumbnails.forEach(thumb => {
             thumb.addEventListener('click', handleThumbnailClick);
         });
+
+        // Animação com GSAP ou fallback
+        if (typeof gsap !== 'undefined') {
+            gsap.fromTo(mainImage,
+                { opacity: 0, scale: 0.95 },
+                { 
+                    opacity: 1, 
+                    scale: 1, 
+                    duration: 0.6, 
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        mainImage.classList.add('active');
+                    }
+                }
+            );
+        } else {
+            mainImage.classList.add('active');
+        }
     }
 
     function closeLightbox() {
@@ -267,14 +305,37 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxState.isOpen = false;
         mainImage.classList.remove('active');
         
-        gsap.to(lightbox, {
-            opacity: 0,
-            duration: 0.3,
-            ease: 'power2.inOut',
-            onComplete: () => {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+        if (typeof gsap !== 'undefined') {
+            gsap.to(lightbox, {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    finalizeClose();
+                }
+            });
+        } else {
+            finalizeClose();
+        }
+    }
+
+    function finalizeClose() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        cleanupLightboxListeners();
+    }
+
+    function cleanupLightboxListeners() {
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const closeBtn = document.getElementById('lightboxClose');
+        const thumbnails = document.querySelectorAll('.thumbnail-item');
+        
+        if (lightboxOverlay) lightboxOverlay.removeEventListener('click', closeLightbox);
+        if (closeBtn) closeBtn.removeEventListener('click', closeLightbox);
+        
+        thumbnails.forEach(thumb => {
+            thumb.removeEventListener('click', handleThumbnailClick);
         });
     }
 
@@ -287,27 +348,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const newSrc = galleryData[index].imageUrl;
         const mainImage = document.getElementById('mainImage');
 
-        gsap.to(mainImage, {
-            opacity: 0,
-            scale: 0.98,
-            duration: 0.3,
-            ease: 'power2.inOut',
-            onComplete: () => {
-                mainImage.src = newSrc;
-                
-                gsap.fromTo(mainImage,
-                    { opacity: 0, scale: 1.02 },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.5,
-                        ease: 'power2.out',
-                    }
-                );
-                
-                updateActiveThumbnail(index);
-            }
-        });
+        if (typeof gsap !== 'undefined') {
+            gsap.to(mainImage, {
+                opacity: 0,
+                scale: 0.98,
+                duration: 0.3,
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    mainImage.src = newSrc;
+                    
+                    gsap.fromTo(mainImage,
+                        { opacity: 0, scale: 1.02 },
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.5,
+                            ease: 'power2.out',
+                        }
+                    );
+                    
+                    updateActiveThumbnail(index);
+                }
+            });
+        } else {
+            mainImage.src = newSrc;
+            updateActiveThumbnail(index);
+        }
     }
 
     function updateActiveThumbnail(index) {
@@ -324,12 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function handleThumbnailClick(e) {
-        e.stopPropagation();
-        lightboxState.currentIndex = parseInt(e.currentTarget.dataset.index);
-        updateMainImage(lightboxState.currentIndex);
-    }
-
     // Carregar GSAP se necessário
     function loadGSAP() {
         if (typeof gsap === 'undefined') {
@@ -342,33 +402,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Iniciar a aplicação
     init();
 });
-
-// Adicione esta função junto com as outras
-function setupScrollBehavior() {
-    const sidebar = document.getElementById('sidebar');
-    const sidebarContent = document.querySelector('.sidebar-content');
-    const sidebarMinimized = document.querySelector('.sidebar-minimized');
-    let lastScroll = 0;
-    const scrollThreshold = 100; // Quantidade de scroll antes de minimizar
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > scrollThreshold && currentScroll > lastScroll) {
-            // Scroll para baixo - minimizar
-            sidebar.classList.add('scrolled');
-        } else if (currentScroll < lastScroll) {
-            // Scroll para cima - restaurar
-            sidebar.classList.remove('scrolled');
-        }
-        
-        lastScroll = currentScroll;
-    });
-
-    // Click no ícone minimizado para restaurar
-    if (sidebarMinimized) {
-        sidebarMinimized.addEventListener('click', () => {
-            sidebar.classList.remove('scrolled');
-        });
-    }
-}
