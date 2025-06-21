@@ -33,20 +33,7 @@
   --grid-base-size: 280px;
 }
 
-/* =================================================================== */
-/* GARANTE QUE O CURSOR NATIVO FIQUE OCULTO EM ELEMENTOS INTERATIVOS */
-/* =================================================================== */
-/* Modifique a regra no seu main.css */
 
-a,
-button,
-input,
-textarea,
-select,
-.gallery-list__card,
-[data-hover] {
-  cursor: none !important; /* Adicione !important aqui */
-}
 /* ================= RESET E CONFIGURAÇÕES GERAIS ================= */
 * {
   box-sizing: border-box;
