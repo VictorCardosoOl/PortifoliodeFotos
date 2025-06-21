@@ -2,6 +2,7 @@ import { initLocomotiveScroll, setupSectionAnimations, handleHashLinks } from '.
 import { initCustomCursor } from './custom-cursor';
 import { setupNavbarScrollBehavior, setupMobileMenu, setupSmoothLinks } from './navbar-menu';
 import { initGallery } from './gallery'; // Importa a nova função da galeria
+import { initAnimations } from './animations.js';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 

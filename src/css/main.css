@@ -3,57 +3,51 @@
 @import url(footer.css);
 @import url(galery.css);
 @import url(locomotive.css);
+
 /* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
-    --primary-color: #1a1a1a;
-    /* Preto sofisticado */
-    --secondary-color: #ffffff;
-    /* Branco para o botão no hover ficar com cor sólida */
-    --font-primary: 'Playfair Display', serif;
-    /* Fonte moderna para títulos */
-    --font-secondary: 'Inter', sans-serif;
-    /* Fonte legível para textos */
-    --font-hero-title: 'Baskerville', serif;
-    /* Fonte serifada clássica para títulos Hero */
+  --primary-color: #1a1a1a;
+  --secondary-color: #ffffff;
 
-    --text-color: #333;
-    /* Cor de fundo do site */
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Sombra padrão */
-      /* Cores Sofisticadas */
-             /* Dourado claro */
-  --secondary-color: #f9f7f4;          /* Fundo suave */
-  --dark-bg: #1a1a1a;                  /* Preto sofisticado */
-  --text-color: #333333;               /* Texto principal */
-  --text-light: #ffffff;               /* Texto claro */
-  --overlay-dark: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
-  --overlay-light: rgba(255,255,255,0.12);
-  
+
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  --dark-bg: #1a1a1a;
+  /* Preto sofisticado */
+  --text-color: #333333;
+  /* Texto principal */
+  --text-light: #ffffff;
+  /* Texto claro */
+  --overlay-dark: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%);
+  --overlay-light: rgba(255, 255, 255, 0.12);
+
   /* Tipografia Elegante */
-  --font-primary: 'Playfair Display', serif;    /* Para títulos */
-  --font-secondary: 'Montserrat', sans-serif;   /* Para textos */
-  
+  --font-primary: 'Playfair Display', serif;
+  --font-secondary: 'Inter', sans-serif;
+  --font-hero-title: 'Baskerville', serif;
+
+
   /* Espaçamento Harmonioso */
   --section-padding: 8rem 5%;
   --header-margin: 6rem;
   --filters-margin: 4rem;
   --filters-gap: 2.5rem;
   --grid-gap: 2rem;
-  
+
   /* Bordas Refinadas */
   --border-radius: 10px;
-  --border-thin: 1px solid rgba(0,0,0,0.08);
-  
+  --border-thin: 1px solid rgba(0, 0, 0, 0.08);
+
   /* Sombras Premium */
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-md: 0 15px 40px rgba(0,0,0,0.12);
-  --shadow-lg: 0 25px 60px rgba(0,0,0,0.15);
-  
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 15px 40px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.15);
+
   /* Transições Suaves */
   --transition-fast: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   --transition-normal: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  
+
   /* Grid Responsivo */
   --grid-base-size: 280px;
 }
@@ -61,30 +55,30 @@
 
 /* ================= RESET E CONFIGURAÇÕES GERAIS ================= */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body,
 html {
-    font-family: var(--font-secondary);
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    height: 100vh;
-    
+  font-family: var(--font-secondary);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  height: 100vh;
+
 }
 
 
 html {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar {
-    display: none;
-    /* Para Chrome, Safari e Opera */
+  display: none;
+  /* Para Chrome, Safari e Opera */
 }
 
 
@@ -107,101 +101,161 @@ html::-webkit-scrollbar {
   position: relative;
   z-index: 2;
   max-width: 90%;
-  padding-bottom: 20px; /* Adicione um padding inferior para evitar corte */
+  padding-bottom: 20px;
+  /* Adicione um padding inferior para evitar corte */
 }
-  
-  /* Estilizando o container dos títulos para alinhamento */
-  .hero-titles {
-    text-align: left; /* Garante alinhamento à esquerda */
-  }
-  
-  .hero-subtitle {
-    font-size: 0.72rem;
-    margin-bottom: 8px; /* Reduzindo o espaçamento entre o subtítulo e o título */
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--primary-color);
-  }
-  
-  .hero-content h1 {
-    font-size: 5.8rem;
-    margin: 0;
-    font-family: var(--font-hero-title);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--primary-color);
-  }
+
+/* Estilizando o container dos títulos para alinhamento */
+.hero-titles {
+  text-align: left;
+  /* Garante alinhamento à esquerda */
+}
+
+.hero-subtitle {
+  font-size: 0.72rem;
+  margin-bottom: 8px;
+  /* Reduzindo o espaçamento entre o subtítulo e o título */
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.hero-content h1 {
+  font-size: 5.8rem;
+  margin: 0;
+  font-family: var(--font-hero-title);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--primary-color);
+}
 
 
 /* ================= SOBRE MIM SECTION ================= */
 .sobre-mim {
-    padding: 4rem 2rem;
+  padding: 4rem 2rem;
 }
 
 .container-principal {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 2rem;
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
 }
 
 .titulo-grande-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .titulo-grande {
-    font-size: 3rem;
-    font-family: var(--font-primary);
-    font-weight: 700;
-    line-height: 1.2;
+  font-size: 3rem;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .conteudo-principal {
-    flex: 2;
-    display: flex;
-    gap: 2rem;
+  flex: 2;
+  display: flex;
+  gap: 2rem;
 }
 
 .sobre-mim-imagem {
-    flex: 1;
+  flex: 1;
 }
 
 .sobre-mim-imagem img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .sobre-mim-texto {
-    flex: 2;
+  flex: 2;
 }
 
 .sobre-mim-paragrafo {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-color);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
 }
 
 .info-adicional-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    padding: 0 2rem;
-    font-size: 0.9rem;
-    color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding: 0 2rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
 }
 
 .info-esquerda,
 .info-direita {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
+.parallax-image {
+  overflow: hidden;
+  /* Essencial! Esconde a parte da imagem que "vaza" do contêiner */
+  border-radius: 8px;
+  /* Mantém o seu estilo arredondado */
+}
+
+.parallax-image img {
+  width: 100%;
+  height: 120%;
+  /* A imagem precisa ser maior que o contêiner para ter espaço para se mover */
+  object-fit: cover;
+}
+
+.letter {
+  display: inline-block;
+  /* Permite que transformações como 'yPercent' funcionem */
+}
+
+/* Efeito de hover em botões e links */
+.btn-premium {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  background-color: transparent;
+  text-decoration: none;
+  font-family: var(--font-body);
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease-out;
+  z-index: 1;
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-out;
+  z-index: -1;
+}
+
+.btn-premium:hover {
+  color: var(--color-light-text);
+  /* Texto claro no hover */
+}
+
+.btn-premium:hover::before {
+  transform: translateX(0);
+}
+
+/* Aplique a classe .btn-premium aos seus botões/links */
 
 /* Camadas de layout */
 @layer components {
@@ -209,10 +263,9 @@ html::-webkit-scrollbar {
     @apply relative overflow-hidden rounded-xl;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
+
   .card:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25);
   }
 }
-
