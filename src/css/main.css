@@ -76,12 +76,10 @@ html {
     
 }
 
-/* Esconde a barra de scroll padrão */
+
 html {
     scrollbar-width: none;
-    /* Para Firefox */
     -ms-overflow-style: none;
-    /* Para Internet Explorer e Edge */
 }
 
 html::-webkit-scrollbar {
@@ -102,7 +100,7 @@ html::-webkit-scrollbar {
   text-align: left;
   color: var(--secondary-color);
   position: relative;
-  padding: 0 0 80px 40px;
+  padding: 0 0 130px 40px;
 }
 
 .hero-content {
@@ -127,7 +125,7 @@ html::-webkit-scrollbar {
   }
   
   .hero-content h1 {
-    font-size: 5.3rem;
+    font-size: 5.8rem;
     margin: 0;
     font-family: var(--font-hero-title);
     font-weight: 400;
@@ -203,10 +201,6 @@ html::-webkit-scrollbar {
     display: flex;
     gap: 2rem;
 }
-
-
-
-
 
 
 /* Camadas de layout */
