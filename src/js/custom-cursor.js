@@ -1,93 +1,53 @@
 import gsap from 'gsap';
 
 export const initCustomCursor = () => {
-  // Verificar se não é dispositivo touch
+  // 1. VERIFICAÇÃO DE DISPOSITIVO TOUCH
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     document.body.style.cursor = 'auto';
     return;
   }
 
-  // Criar elementos do cursor
+  // 2. CRIAÇÃO E INJEÇÃO DO HTML
   const cursorHTML = `
     <div class="cursor">
-      <div class="cursor__ball cursor__ball--big">
-        <svg height="30" width="30">
-          <circle cx="10" cy="10" r="8" stroke-width="0"></circle>
-        </svg>
-      </div>
+      <div class="cursor__ring"></div>
+      <div class="cursor__dot"></div>
     </div>
   `;
-  
   document.body.insertAdjacentHTML('beforeend', cursorHTML);
 
-  // Elementos do DOM
-  const $bigBall = document.querySelector('.cursor__ball--big');
-  const $smallBall = document.querySelector('.cursor__ball--big');
-  const $hoverables = document.querySelectorAll(
-    'a, button, [data-hover], .gallery-list__card, .social-links a'
-  );
+  // 3. SELEÇÃO DOS ELEMENTOS
+  const cursor = document.querySelector('.cursor');
 
-  // Esconder cursor padrão
+  // Esconde o cursor padrão do sistema
   document.body.style.cursor = 'none';
 
-  // Posição do cursor
-  let mouseX = 0;
-  let mouseY = 0;
-  let ballX = 0;
-  let ballY = 0;
-  let scale = 1;
-  const speed = 0.2;
+  // 4. ESTADO DO CURSOR
+  const mouse = { x: 0, y: 0 };
+  const smoothed = { x: 0, y: 0 };
+  const speed = 1;
 
-  // Animação de movimento (otimizada)
-  const animate = () => {
-    // Distância entre posição atual e destino
-    const distX = mouseX - ballX;
-    const distY = mouseY - ballY;
-    
-    // Movimento suavizado
-    ballX += distX * speed;
-    ballY += distY * speed;
-    
-    // Aplicar transformações
-    gsap.set($bigBall, { x: ballX, y: ballY, scale });
-    gsap.set($smallBall, { x: mouseX, y: mouseY });
-    
-    requestAnimationFrame(animate);
-  };
-
-  // Iniciar animação
-  animate();
-
-  // Atualizar posição do mouse
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+  // 5. EVENTOS DO MOUSE
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
-  // Efeitos hover
-  const handleHover = () => {
-    scale = 1.5;
-    $bigBall.classList.add('hover');
-  };
-
-  const handleHoverOut = () => {
-    scale = 1;
-    $bigBall.classList.remove('hover');
-  };
-
-  // Aplicar eventos
-  $hoverables.forEach(item => {
-    item.addEventListener('mouseenter', handleHover);
-    item.addEventListener('mouseleave', handleHoverOut);
-    item.style.cursor = 'none';
-  });
-
-  // Esconder cursor ao sair da janela
-  document.addEventListener('mouseleave', () => {
-    gsap.to([$bigBall, $smallBall], { opacity: 0, duration: 0.5 });
-  });
+  // Esconde/mostra o cursor ao sair/entrar na janela
+  document.addEventListener('mouseleave', () => gsap.to(cursor, { opacity: 0, duration: 0.3 }));
+  document.addEventListener('mouseenter', () => gsap.to(cursor, { opacity: 1, duration: 0.3 }));
   
-  document.addEventListener('mouseenter', () => {
-    gsap.to([$bigBall, $smallBall], { opacity: 1, duration: 0.5 });
+  // A LÓGICA DE HOVER FOI COMPLETAMENTE REMOVIDA
+
+  // 6. LOOP DE ANIMAÇÃO
+  gsap.ticker.add(() => {
+    // Calcula a posição suavizada
+    smoothed.x += (mouse.x - smoothed.x) * speed;
+    smoothed.y += (mouse.y - smoothed.y) * speed;
+
+    // **A MUDANÇA PRINCIPAL ESTÁ AQUI**
+    // Move o contêiner principal do cursor para a posição suavizada.
+    // Como o anel e o ponto são filhos dele, ambos se moverão juntos.
+    gsap.set(cursor, { x: smoothed.x, y: smoothed.y });
   });
 };

@@ -1,4 +1,8 @@
-/* ================= CUSTOM CURSOR ================= */
+/* ================================================= */
+/* CURSOR CUSTOMIZADO - VERSÃO CONSISTENTE          */
+/* ================================================= */
+
+/* --- ESTRUTURA PRINCIPAL --- */
 .cursor {
   position: fixed;
   top: 0;
@@ -6,40 +10,39 @@
   z-index: 9999;
   pointer-events: none;
   mix-blend-mode: difference;
-  will-change: transform;
-
+  opacity: 0;
+  /* As dimensões são definidas pelos filhos para centralização */
 }
 
-.cursor__ball {
+/* --- O ANEL EXTERNO --- */
+.cursor__ring {
   position: absolute;
+  /* Centraliza o anel no ponto do cursor */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  will-change: transform;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
 }
 
-.cursor__ball--big {
-  width: 30px;
-  height: 30px;
+/* --- O PONTO INTERNO --- */
+.cursor__dot {
+  position: absolute;
+  /* Centraliza o ponto no ponto do cursor */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
 }
 
-.cursor__ball--big circle {
-  fill: #f7f8fa;
-}
+/* --- AS REGRAS DE HOVER FORAM REMOVIDAS --- */
 
-.cursor__ball--small {
-  width: 10px;
-  height: 10px;
-}
-
-.cursor__ball--small circle {
-  fill: #fff;
-}
-
-/* Hover effect */
-.cursor__ball--big.hover {
-  transform: translate(-50%, -50%) scale(1.5);
-}
-
-/* Disable on touch devices */
+/* --- DESABILITAR EM DISPOSITIVOS TOUCH --- */
 @media (pointer: coarse) {
   .cursor {
     display: none !important;
@@ -47,10 +50,4 @@
   body {
     cursor: auto !important;
   }
-}
-
-
-.cursor__ball--big circle {
-  /* Altere o preenchimento para branco para que o mix-blend-mode funcione corretamente */
-  fill: #ffffff; 
 }
