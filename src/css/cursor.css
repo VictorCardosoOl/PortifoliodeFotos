@@ -47,3 +47,18 @@
     cursor: auto !important;
   }
 }
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  /* ADICIONE ESTA LINHA */
+  mix-blend-mode: difference; /* Cria o efeito de inversão de cor */
+  will-change: transform;
+}
+
+.cursor__ball--big circle {
+  /* Altere o preenchimento para branco para que o mix-blend-mode funcione corretamente */
+  fill: #ffffff; 
+}
