@@ -1,8 +1,9 @@
-@import url(cursor.css);
+/*@import url(cursor.css);
 @import url(navbar.css);
 @import url(footer.css);
 @import url(galery.css);
-@import url(locomotive.css);
+@import url(locomotive.css);*/
+
 
 /* ================= VARIÁVEIS GLOBAIS ================= */
 :root {
@@ -250,3 +251,727 @@ html::-webkit-scrollbar {
     box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.25);
   }
 }
+
+/* ================= NAVBAR ================= */
+nav {
+    padding: 10px;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-bottom: none;
+    will-change: transform;
+}
+#navbar {
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Logo no lado esquerdo */
+.logo {
+    text-align: left;
+}
+
+.logo a {
+    color: var(--primary-color);
+    font-size: 2.3rem;
+    text-decoration: none;
+    font-weight: 800;
+    font-family: var(--font-primary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* Botão do menu hambúrguer (visível em desktop e mobile) */
+.hamburger-menu {
+    display: block; /* Sempre visível */
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: relative;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hamburger-icon::before {
+    top: -8px;
+}
+
+.hamburger-icon::after {
+    top: 8px;
+}
+
+/* Menu expansível (lado direito) */
+/* Menu Lateral */
+/* Menu Lateral */
+.nav-right {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    padding: 80px 30px 30px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-right.active {
+    transform: translateX(-100%);
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .nav-links li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 8px 0;
+  }
+  
+  .nav-links li a:hover {
+    color: var(--secondary-color);
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+  
+  .overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Animações do Hamburger quando o menu está aberto */
+  .hamburger-menu.active .hamburger-icon {
+    background: transparent;
+  }
+  
+  .hamburger-menu.active .hamburger-icon::before {
+    transform: rotate(45deg);
+  }
+  
+  .hamburger-menu.active .hamburger-icon::after {
+    transform: rotate(-45deg);
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 0 20px;
+    }
+    
+    .logo a {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* ================= FOOTER ================= */
+
+.footer {
+    width: 100%;
+    height: 70vh;
+    background-color: #1a1a1a;
+    color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    /* Aumentei o padding */
+}
+
+.portfolio-link {
+    font-size: 6.5em;
+    /* Aumentei o tamanho */
+    color: #fff;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.contact-info {
+    text-align: left;
+    /* Justificado à esquerda */
+    padding: 20px;
+}
+
+.contact-info a {
+    font-size: 1.1em;
+    /* Aumentei o tamanho */
+    margin-bottom: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    /* Aumentei o espaço */
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5rem;
+    /* Aumentei o tamanho */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+    /* Aumentei o tamanho */
+}
+
+/* ================= CUSTOM CURSOR ================= */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor__ball {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor__ball--big {
+  width: 30px;
+  height: 30px;
+}
+
+.cursor__ball--big circle {
+  fill: #f7f8fa;
+}
+
+.cursor__ball--small {
+  width: 10px;
+  height: 10px;
+}
+
+.cursor__ball--small circle {
+  fill: #fff;
+}
+
+/* Hover effect */
+.cursor__ball--big.hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* Disable on touch devices */
+@media (pointer: coarse) {
+  .cursor {
+    display: none !important;
+  }
+  body {
+    cursor: auto !important;
+  }
+}
+
+
+
+/* ================= ESTRUTURA PRINCIPAL ================= */
+.gallery-container {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: var(--section-padding);
+  background-color: var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+  margin: 40px auto;
+}
+
+/* Efeito de textura sutil */
+.gallery-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, 
+              rgba(255,255,255,0.9) 0%, 
+              rgba(255,255,255,0) 60%);
+  pointer-events: none;
+  z-index: 0;
+   padding: 6rem 5% 8rem;
+}
+
+/* ================= CABEÇALHO ELEGANTE ================= */
+.cabecalho-galeria {
+  text-align: center;
+  margin-bottom: var(--header-margin);
+  padding: 0 5%;
+}
+
+.titulo-galeria {
+  font-family: var(--font-primary);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+  margin: 0 0 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.titulo-galeria::after {
+  content: '';
+  position: absolute;
+  bottom: -1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: var(--primary-color);
+  transition: var(--transition-fast);
+}
+
+.titulo-galeria:hover::after {
+  width: 150px;
+}
+
+/* ================= FILTROS SOFISTICADOS ================= */
+.gallery-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--filters-gap);
+  margin-top: var(--filters-margin);
+  padding: 0 5%;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.7rem 2.2rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: var(--transition-fast);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  color: var(--primary-color);
+}
+
+.filter-btn:hover::after,
+.filter-btn.active::after {
+  width: 100%;
+}
+
+/* ================= GRID PERFEITAMENTE ALINHADO ================= */
+.gallery-list {
+  display: grid;
+  grid-template-columns: repeat(4, 350px); /* 4 colunas de 280px cada */
+  justify-content: center; /* Centraliza o grid na página */
+  grid-auto-rows: 320px;
+  gap: var(--grid-gap);
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Proporções Elegantes */
+.gallery-list__item[data-size="small"] {
+  /* Padrão 1x1 */
+}
+
+.gallery-list__item[data-size="medium"] {
+  grid-row: span 2;
+}
+
+.gallery-list__item[data-size="wide"] {
+  grid-column: span 2;
+}
+
+.gallery-list__item[data-size="large"] {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-list__item[data-size="extra-wide"] {
+  grid-column: span 3;
+}
+
+.gallery-list__item[data-size="portrait"] {
+  grid-row: span 1.5;
+}
+
+/* ================= ITENS DA GALERIA PREMIUM ================= */
+.gallery-list__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  transition: var(--transition-normal);
+  will-change: transform;
+  background-color: #f8f8f8;
+  box-shadow: var(--shadow-sm);
+}
+
+.gallery-list__item:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  z-index: 10;
+}
+
+.gallery-list__card {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.card-thumb {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-slow);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.gallery-list__item:hover .card-image {
+  transform: scale(1.08);
+  filter: brightness(0.92);
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.2rem;
+  background: var(--overlay-dark);
+  color: var(--text-light);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition-normal);
+  z-index: 2;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.gallery-list__item:hover .card-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.card-title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+}
+
+.card-category {
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  opacity: 0.9;
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+  backdrop-filter: blur(5px);
+}
+
+/* Efeito de brilho sutil */
+.gallery-list__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 30%,
+             var(--overlay-light) 0%,
+             transparent 70%);
+  opacity: 0;
+  transition: var(--transition-normal);
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.gallery-list__item:hover::before {
+  opacity: 1;
+}
+
+/* ================= RESPONSIVIDADE ELEGANTE ================= */
+@media (max-width: 1600px) {
+  :root {
+    --grid-base-size: 260px;
+    --grid-gap: 1.8rem;
+  }
+}
+
+@media (max-width: 1440px) {
+  :root {
+    --grid-base-size: 240px;
+    --section-padding: 7rem 5%;
+    --header-margin: 5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --grid-base-size: 220px;
+    --grid-gap: 1.5rem;
+    --filters-margin: 3.5rem;
+    --filters-gap: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --grid-base-size: 200px;
+    --grid-gap: 1.2rem;
+    --section-padding: 6rem 5%;
+    --header-margin: 4rem;
+  }
+  
+  .gallery-list__item[data-size="extra-wide"] {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --grid-base-size: 180px;
+    --grid-gap: 1rem;
+    --section-padding: 5rem 5%;
+    --header-margin: 3.5rem;
+    --filters-margin: 3rem;
+    --filters-gap: 1.5rem;
+  }
+  
+  .gallery-list__item[data-size="wide"],
+  .gallery-list__item[data-size="large"],
+  .gallery-list__item[data-size="extra-wide"] {
+    grid-column: span 1;
+  }
+  
+  .filter-btn {
+    padding: 0.6rem 1.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --grid-base-size: 160px;
+    --grid-gap: 0.8rem;
+    --section-padding: 4rem 5%;
+    --header-margin: 3rem;
+  }
+  
+  .gallery-filters {
+    gap: 1rem;
+  }
+  
+  .filter-btn {
+    padding: 0.5rem 1.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --grid-base-size: 140px;
+    --grid-gap: 0.6rem;
+    --section-padding: 3rem 5%;
+    --header-margin: 2.5rem;
+  }
+  
+  .gallery-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .filter-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .gallery-list {
+    grid-template-columns: repeat(3, 280px);
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery-list {
+    grid-template-columns: repeat(2, 280px);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-list {
+    grid-template-columns: 280px;
+  }
+}
+
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html.has-scroll-smooth {
+      overflow: hidden; }
+    
+    html.has-scroll-dragging {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
+    
+    .has-scroll-smooth body {
+      overflow: hidden; }
+    
+    .has-scroll-smooth [data-scroll-container] {
+      min-height: 100vh; }
+    
+      .c-scrollbar {
+        
+        position: fixed;
+        right: 24px;
+        bottom: 40px;
+        width: 2px;
+        background-color: #6e6e6e;
+        height: 20vh;
+        transform-origin: center center;
+        transition: transform 0.3s, opacity 0.3s;
+        opacity: .1;
+        z-index: 1000;
+      }
+      .c-scrollbar:hover {
+        transform: scaleX(1.45); }
+      .c-scrollbar:hover, .has-scroll-scrolling .c-scrollbar, .has-scroll-dragging .c-scrollbar {
+        opacity: 1; }
+    
+        .c-scrollbar_thumb {
+          position: absolute;
+          top: auto;
+          min-height: 30%;
+          background-color: #f8f8f8;
+          opacity: 1;
+          width: 2px;
+          cursor: -webkit-grab;
+          cursor: grab;
+        }
+    
+

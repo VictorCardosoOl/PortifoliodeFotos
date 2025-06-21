@@ -11,8 +11,8 @@ export const initCustomCursor = () => {
   const cursorHTML = `
     <div class="cursor">
       <div class="cursor__ball cursor__ball--big">
-        <svg height="50" width="50">
-          <circle cx="10" cy="10" r="10" stroke-width="0"></circle>
+        <svg height="30" width="30">
+          <circle cx="10" cy="10" r="8" stroke-width="0"></circle>
         </svg>
       </div>
     </div>
