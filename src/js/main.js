@@ -1,13 +1,13 @@
 import { initLocomotiveScroll, setupSectionAnimations, handleHashLinks } from './locomotive-scroll';
 import { initCustomCursor } from './custom-cursor';
 import { setupNavbarScrollBehavior, setupMobileMenu, setupSmoothLinks } from './navbar-menu';
-import { initGallery } from './gallery'; // Importa a nova função da galeria
+import { initGallery } from './gallery';
 import { initAnimations } from './animations.js';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa AOS (opcional, veja otimização abaixo)
+    // Initialize AOS animations
     AOS.init({
         duration: 800,
         easing: 'ease-out-quart',
@@ -15,29 +15,31 @@ document.addEventListener('DOMContentLoaded', () => {
         disable: window.innerWidth < 768
     });
 
-    // 1. INICIALIZA O LOCOMOTIVE SCROLL (APENAS UMA VEZ!)
+    // 1. Initialize Locomotive Scroll
     const scroll = initLocomotiveScroll();
 
-    // 2. INICIALIZA OS OUTROS MÓDULOS, PASSANDO A INSTÂNCIA DO SCROLL
-    initGallery(scroll); // Inicializa a galeria
-    initCustomCursor(); // Cursor não depende do scroll
-    setupSectionAnimations(); // Animações de seção
+    // 2. Initialize other modules
+    initGallery(scroll);
+    initCustomCursor();
+    setupSectionAnimations();
+    initAnimations(scroll); // Correctly invoke unused animation initializers (parallax/text reveal)
 
     const navbar = document.getElementById('navbar');
     if (navbar) {
-        // Unifica os estados do menu e do scroll da navbar
-        const menuAndScrollState = {
-            ...setupNavbarScrollBehavior(scroll, navbar),
-            ...setupMobileMenu()
+        // Shared state object to prevent copying primitive values by value
+        const navbarState = {
+            isMenuOpen: false,
+            isScrollingToSection: false
         };
-        setupSmoothLinks(scroll, navbar, menuAndScrollState);
+
+        setupNavbarScrollBehavior(scroll, navbar, navbarState);
+        const { toggleMenu } = setupMobileMenu(navbarState);
+        setupSmoothLinks(scroll, navbar, navbarState, toggleMenu);
     }
     
-    // 3. LIDAR COM EVENTOS GLOBAIS
+    // 3. Global window load handlers
     window.addEventListener('load', () => {
-        // O evento 'load' garante que todas as imagens foram carregadas.
-        // Uma atualização final aqui garante a altura perfeita.
         scroll.update(); 
         if (navbar) handleHashLinks(scroll, navbar);
-    });
+    }, { passive: true });
 });

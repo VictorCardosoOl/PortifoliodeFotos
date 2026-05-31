@@ -1,18 +1,23 @@
 import gsap from 'gsap';
 
 export const initCustomCursor = () => {
-  // Verificar se não é dispositivo touch
+  // Guard clause: disable on touch devices
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     document.body.style.cursor = 'auto';
     return;
   }
 
-  // Criar elementos do cursor
+  // Create markup for both big and small balls
   const cursorHTML = `
     <div class="cursor">
       <div class="cursor__ball cursor__ball--big">
         <svg height="30" width="30">
-          <circle cx="10" cy="10" r="8" stroke-width="0"></circle>
+          <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+        </svg>
+      </div>
+      <div class="cursor__ball cursor__ball--small">
+        <svg height="10" width="10">
+          <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
         </svg>
       </div>
     </div>
@@ -20,17 +25,19 @@ export const initCustomCursor = () => {
   
   document.body.insertAdjacentHTML('beforeend', cursorHTML);
 
-  // Elementos do DOM
+  // DOM Elements
   const $bigBall = document.querySelector('.cursor__ball--big');
-  const $smallBall = document.querySelector('.cursor__ball--big');
+  const $smallBall = document.querySelector('.cursor__ball--small');
+  
+  if (!$bigBall || !$smallBall) return;
+
   const $hoverables = document.querySelectorAll(
     'a, button, [data-hover], .gallery-list__card, .social-links a'
   );
 
-  // Esconder cursor padrão
+  // Hide default cursor
   document.body.style.cursor = 'none';
 
-  // Posição do cursor
   let mouseX = 0;
   let mouseY = 0;
   let ballX = 0;
@@ -38,33 +45,27 @@ export const initCustomCursor = () => {
   let scale = 1;
   const speed = 0.2;
 
-  // Animação de movimento (otimizada)
+  // Optimized animation loop using RAF
   const animate = () => {
-    // Distância entre posição atual e destino
     const distX = mouseX - ballX;
     const distY = mouseY - ballY;
     
-    // Movimento suavizado
     ballX += distX * speed;
     ballY += distY * speed;
     
-    // Aplicar transformações
     gsap.set($bigBall, { x: ballX, y: ballY, scale });
     gsap.set($smallBall, { x: mouseX, y: mouseY });
     
     requestAnimationFrame(animate);
   };
 
-  // Iniciar animação
   animate();
 
-  // Atualizar posição do mouse
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-  });
+  }, { passive: true });
 
-  // Efeitos hover
   const handleHover = () => {
     scale = 1.5;
     $bigBall.classList.add('hover');
@@ -75,14 +76,13 @@ export const initCustomCursor = () => {
     $bigBall.classList.remove('hover');
   };
 
-  // Aplicar eventos
   $hoverables.forEach(item => {
-    item.addEventListener('mouseenter', handleHover);
-    item.addEventListener('mouseleave', handleHoverOut);
+    item.addEventListener('mouseenter', handleHover, { passive: true });
+    item.addEventListener('mouseleave', handleHoverOut, { passive: true });
     item.style.cursor = 'none';
   });
 
-  // Esconder cursor ao sair da janela
+  // Fade out cursor when leaving window
   document.addEventListener('mouseleave', () => {
     gsap.to([$bigBall, $smallBall], { opacity: 0, duration: 0.5 });
   });
