@@ -1,23 +1,51 @@
-import { galleryData } from './data/gallery-data-home'; // Importa os dados
+import { galleryData } from './data/gallery-data-home';
 
 /**
- * Cria o HTML para um item da galeria.
- * @param {object} item - Objeto do item.
- * @returns {string} String de HTML do item.
+ * Sanitizes input string to prevent XSS (Cross-Site Scripting).
+ * @param {string} val - Unsafe string.
+ * @returns {string} Sanitized string.
+ */
+function sanitize(val) {
+    if (!val) return '';
+    return val
+        .toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+/**
+ * Creates the HTML markup for a gallery item securely.
+ * @param {object} item - Gallery item data.
+ * @returns {string} Safe HTML string.
  */
 function createGalleryItem(item) {
+    if (!item || !item.imageUrl || !item.title) {
+        console.warn("Skipping invalid gallery item rendering:", item);
+        return '';
+    }
+
+    const safeUrl = sanitize(item.imageUrl);
+    const safeTitle = sanitize(item.title);
+    const safeCategory = sanitize(item.category || 'all');
+    const safeSize = sanitize(item.size || 'small');
+    const safeLink = sanitize(item.link || '#');
+    const safePrice = sanitize(item.price || '');
+
     return `
       <li class="gallery-list__item" 
-          data-category="${item.category}" 
-          data-size="${item.size}">
-        <a href="${item.link}" class="gallery-list__card" aria-label="Ver álbum ${item.title}">
+          data-category="${safeCategory}" 
+          data-size="${safeSize}">
+        <a href="${safeLink}" class="gallery-list__card" aria-label="Ver álbum ${safeTitle}">
           <div class="card">
             <div class="card-thumb">
-              <img src="${item.imageUrl}" class="card-image" alt="${item.title}" loading="lazy">
+              <img src="${safeUrl}" class="card-image" alt="${safeTitle}" loading="lazy">
             </div>
             <div class="card-content">
-              <h3 class="card-title">${item.title}</h3>
-              <span class="card-price">${item.price}</span>
+              <h3 class="card-title">${safeTitle}</h3>
+              <span class="card-price">${safePrice}</span>
             </div>
           </div>
         </a>
@@ -26,20 +54,21 @@ function createGalleryItem(item) {
 }
 
 /**
- * Filtra os itens da galeria por categoria.
- * @param {string} category - A categoria para filtrar.
+ * Filters the gallery items visible in the DOM.
+ * @param {string} category - Category identifier to show.
  */
 function filterGallery(category) {
     const items = document.querySelectorAll('.gallery-list__item');
     items.forEach(item => {
-        const isVisible = category === 'all' || item.dataset.category === category;
+        const itemCategory = item.dataset.category;
+        const isVisible = category === 'all' || itemCategory === category;
         item.style.display = isVisible ? 'block' : 'none';
     });
 }
 
 /**
- * Inicializa toda a funcionalidade da galeria.
- * @param {object} scroll - A instância principal do Locomotive Scroll.
+ * Initializes the home page gallery component.
+ * @param {object} scroll - LocomotiveScroll instance.
  */
 export function initGallery(scroll) {
     const galleryContainer = document.getElementById('gallery-container');
@@ -47,29 +76,33 @@ export function initGallery(scroll) {
 
     if (!galleryContainer) return;
 
-    // 1. Renderiza a galeria
+    // Render gallery items sorted by featured status
     const sortedData = [...galleryData].sort((a, b) => (b.featured || false) - (a.featured || false));
     galleryContainer.innerHTML = sortedData.map(createGalleryItem).join('');
 
-    // 2. APLICA A ATUALIZAÇÃO DO SCROLL (CRÍTICO!)
-    // Aguarda um pequeno instante para o DOM ser atualizado antes de chamar o update.
+    // Trigger scroll update after DOM renders
     setTimeout(() => {
-        scroll.update();
+        if (scroll && typeof scroll.update === 'function') {
+            scroll.update();
+        }
     }, 100);
 
-    // 3. Configura os filtros
+    // Setup filter click interactions
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            const category = button.dataset.filter;
+            
+            const category = button.dataset.filter || 'all';
             filterGallery(category);
             
-            // Atualiza o scroll toda vez que o filtro muda a altura
-            setTimeout(() => scroll.update(), 100);
+            setTimeout(() => {
+                if (scroll && typeof scroll.update === 'function') {
+                    scroll.update();
+                }
+            }, 100);
         });
     });
 
-    // Inicia com o filtro 'all'
     filterGallery('all');
 }

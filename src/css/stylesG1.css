@@ -460,27 +460,24 @@ html.has-scroll-dragging {
 
 
 /* ========== LIGHTBOX ========== */
-/* Substitua a seção LIGHTBOX por: */
-
-/* ========== LIGHTBOX ========== */
+/* FIXED: visibility+opacity instead of display:none — allows GSAP to
+   animate the fade without the display-change snap. The GalleryLightbox
+   class sets initial state via gsap.set() and manages all transitions. */
 .lightbox {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Fundo mais claro */
-    display: none;
+    inset: 0;
+    display: flex;           /* Always flex — never toggles display */
     align-items: center;
     justify-content: center;
     z-index: 2000;
-    opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: rgba(8, 8, 8, 0.92);
+    /* Initial state (opacity:0, visibility:hidden) set by GSAP in gallery-lightbox.js */
 }
 
 .lightbox.active {
-    display: flex;
-    opacity: 1;
+    /* Only controls pointer-events and visibility — GSAP handles opacity */
+    pointer-events: auto;
+    visibility: visible;
 }
 
 .lightbox-container {
@@ -546,21 +543,17 @@ html.has-scroll-dragging {
 
 .main-image {
     max-width: 95%;
-    max-height: 95vh; /* Aumentando espaço da imagem */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-                transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-    will-change: opacity, transform;
+    max-height: 88vh;
     border-radius: 10px;
     cursor: pointer;
     object-fit: contain;
+    /* FIXED: No CSS transitions here — GSAP owns opacity and scale.
+       Mixing CSS transitions with GSAP on the same property causes the
+       animation to fight itself, producing the jank/slowness on open. */
 }
 
-.main-image.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* .main-image.active is kept for legacy compat but does no animation */
+.main-image.active { opacity: 1; }
 
 .thumbnails-container {
     padding: 20px;

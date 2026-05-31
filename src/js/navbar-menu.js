@@ -1,89 +1,98 @@
 import gsap from 'gsap';
 
 /**
- * Sets up navbar show/hide scroll behavior based on scroll direction.
- * @param {object} scroll - LocomotiveScroll instance.
- * @param {HTMLElement} navbar - Navbar element.
- * @param {object} state - Shared navbar state.
+ * Sets up navbar show/hide behavior based on scroll direction.
+ * @param {LocomotiveScroll} scroll
+ * @param {HTMLElement} navbar
+ * @param {object} state - Shared mutable state object.
  */
 export const setupNavbarScrollBehavior = (scroll, navbar, state) => {
   if (!scroll || !navbar || !state) return;
-  let lastScroll = 0;
 
-  const handleNavbarScroll = (instance) => {
-    // If mobile menu is open or we are animating scroll to a section, do not toggle navbar visibility.
+  let lastScroll = 0;
+  const SCROLL_THRESHOLD = 80;
+
+  scroll.on('scroll', (instance) => {
     if (state.isMenuOpen || state.isScrollingToSection) return;
 
     const currentScroll = instance.scroll.y;
-    const direction = instance.direction;
-    const navbarHeight = navbar.offsetHeight;
-    const scrollThreshold = 100;
+    const direction     = instance.direction;
+    const navbarHeight  = navbar.offsetHeight;
 
-    if (direction === 'down' && currentScroll > lastScroll && currentScroll > scrollThreshold) {
-      gsap.to(navbar, { 
-        y: -navbarHeight, 
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    } else if (direction === 'up' || currentScroll <= scrollThreshold) {
-      gsap.to(navbar, { 
-        y: 0, 
-        duration: 0.4,
-        ease: "power2.out"
-      });
+    if (direction === 'down' && currentScroll > lastScroll && currentScroll > SCROLL_THRESHOLD) {
+      gsap.to(navbar, { y: -navbarHeight, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
+    } else if (direction === 'up' || currentScroll <= SCROLL_THRESHOLD) {
+      gsap.to(navbar, { y: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
     }
 
     lastScroll = currentScroll;
-  };
-
-  scroll.on('scroll', handleNavbarScroll);
+  });
 };
 
 /**
- * Sets up mobile menu hamburger toggle behavior.
- * @param {object} state - Shared navbar state.
- * @returns {object} Object with toggle function.
+ * Sets up mobile menu hamburger interactions.
+ * Uses visibility/opacity for the overlay so GSAP can animate smoothly
+ * (previously used display:none/block which broke animation interpolation).
+ *
+ * @param {object} state - Shared mutable state object.
+ * @returns {{ toggleMenu: Function }}
  */
 export const setupMobileMenu = (state) => {
   if (!state) return { toggleMenu: () => {} };
 
   const hamburgerMenu = document.querySelector('.hamburger-menu');
-  const navRight = document.querySelector('.nav-right');
-  const overlay = document.createElement('div');
-  overlay.className = 'overlay';
-  document.body.appendChild(overlay);
+  const navRight      = document.querySelector('.nav-right');
+
+  // Reuse existing overlay if it exists in the DOM, create one only if not
+  let overlay = document.querySelector('.overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    document.body.appendChild(overlay);
+  }
+
+  // Ensure overlay starts hidden via GSAP (not CSS display:none)
+  gsap.set(overlay, { opacity: 0, visibility: 'hidden', pointerEvents: 'none' });
 
   const toggleMenu = (forcedState) => {
     state.isMenuOpen = forcedState !== undefined ? forcedState : !state.isMenuOpen;
-    
+
+    // Nav drawer
     gsap.to(navRight, {
-      right: state.isMenuOpen ? 0 : '-300px',
-      duration: state.isMenuOpen ? 0.5 : 0.4,
-      ease: state.isMenuOpen ? 'power3.out' : 'power2.in'
+      x: state.isMenuOpen ? 0 : '100%',
+      duration: state.isMenuOpen ? 0.55 : 0.45,
+      ease: state.isMenuOpen ? 'power3.out' : 'power2.in',
+      overwrite: 'auto',
     });
 
+    // Overlay — use visibility + opacity, NOT display (display breaks GSAP animation)
     gsap.to(overlay, {
-      opacity: state.isMenuOpen ? 1 : 0,
-      display: state.isMenuOpen ? 'block' : 'none',
-      duration: state.isMenuOpen ? 0.3 : 0.2,
-      onComplete: () => {
-        overlay.style.pointerEvents = state.isMenuOpen ? 'auto' : 'none';
-      }
+      opacity:    state.isMenuOpen ? 1 : 0,
+      visibility: state.isMenuOpen ? 'visible' : 'hidden',
+      duration:   state.isMenuOpen ? 0.4 : 0.3,
+      ease:       'power2.out',
+      pointerEvents: state.isMenuOpen ? 'auto' : 'none',
+      overwrite:  'auto',
     });
 
     document.body.style.overflow = state.isMenuOpen ? 'hidden' : '';
-    if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', state.isMenuOpen);
+    if (hamburgerMenu) {
+      hamburgerMenu.setAttribute('aria-expanded', String(state.isMenuOpen));
+    }
   };
 
-  // Close menu on overlay or external click
+  // Ensure nav-right starts off-screen (set via GSAP so it respects the animation state)
+  gsap.set(navRight, { x: '100%' });
+
+  // Close on outside click
   document.addEventListener('click', (e) => {
-    if (state.isMenuOpen && navRight && !navRight.contains(e.target) && 
-        hamburgerMenu && e.target !== hamburgerMenu && !hamburgerMenu.contains(e.target)) {
-      toggleMenu(false);
-    }
+    if (!state.isMenuOpen) return;
+    if (navRight && navRight.contains(e.target)) return;
+    if (hamburgerMenu && (e.target === hamburgerMenu || hamburgerMenu.contains(e.target))) return;
+    toggleMenu(false);
   });
 
-  // Close menu on Escape key
+  // Close on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && state.isMenuOpen) toggleMenu(false);
   });
@@ -99,42 +108,44 @@ export const setupMobileMenu = (state) => {
 };
 
 /**
- * Sets up smooth scrolling link transitions.
- * @param {object} scroll - LocomotiveScroll instance.
- * @param {HTMLElement} navbar - Navbar element.
- * @param {object} state - Shared navbar state.
- * @param {function} toggleMenu - Function to close mobile menu.
+ * Applies smooth scroll navigation to nav links.
+ * @param {LocomotiveScroll} scroll
+ * @param {HTMLElement} navbar
+ * @param {object} state
+ * @param {Function} toggleMenu
  */
 export const setupSmoothLinks = (scroll, navbar, state, toggleMenu) => {
   if (!scroll || !navbar || !state) return;
+
   const navLinks = document.querySelectorAll('.nav-links a');
 
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
-      if (!href || !href.startsWith('#')) return; // Allow normal links to navigate
+
+      // Only intercept hash links on the same page
+      if (!href || !href.startsWith('#')) return;
 
       e.preventDefault();
       const target = document.querySelector(href);
-      
-      if (target) {
-        if (state.isMenuOpen && typeof toggleMenu === 'function') {
-          toggleMenu(false);
-        }
-        
-        state.isScrollingToSection = true;
-        gsap.to(navbar, { y: 0, duration: 0.2 });
-        
-        scroll.scrollTo(target, {
-          offset: -navbar.offsetHeight,
-          duration: 1.2,
-          easing: [0.25, 0.0, 0.35, 1.0],
-          callback: () => {
-            state.isScrollingToSection = false;
-            history.pushState(null, null, link.href);
-          }
-        });
+      if (!target) return;
+
+      if (state.isMenuOpen && typeof toggleMenu === 'function') {
+        toggleMenu(false);
       }
+
+      state.isScrollingToSection = true;
+      gsap.to(navbar, { y: 0, duration: 0.2, overwrite: 'auto' });
+
+      scroll.scrollTo(target, {
+        offset: -navbar.offsetHeight,
+        duration: 1.2,
+        easing: [0.25, 0.0, 0.35, 1.0],
+        callback: () => {
+          state.isScrollingToSection = false;
+          history.pushState(null, null, href);
+        }
+      });
     });
   });
 };

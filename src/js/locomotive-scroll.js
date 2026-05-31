@@ -2,89 +2,96 @@ import LocomotiveScroll from 'locomotive-scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Registrar plugin
 gsap.registerPlugin(ScrollTrigger);
 
+// ─────────────────────────────────────────────
+// 120Hz: Set GSAP ticker before anything runs
+// ─────────────────────────────────────────────
+gsap.ticker.fps(120);
+gsap.ticker.lagSmoothing(0);
+
+/**
+ * Initializes Locomotive Scroll and creates a correct, zero-lag
+ * ScrollTrigger proxy. Eliminates the setTimeout debounce that
+ * caused the scroll jank between sections.
+ *
+ * @returns {LocomotiveScroll|null} scroll instance or null on failure.
+ */
 export const initLocomotiveScroll = () => {
+  const scrollContainer = document.querySelector('[data-scroll-container]');
+  if (!scrollContainer) {
+    console.error('[scroll] [data-scroll-container] element not found.');
+    return null;
+  }
+
   const scroll = new LocomotiveScroll({
-    el: document.querySelector('[data-scroll-container]'),
+    el: scrollContainer,
     smooth: true,
-    inertia: 0.8, // Reduzi de 1.1 para 0.8
-    smartphone: { 
-      smooth: false // Desativei para mobile
-    },
-    tablet: { 
-      smooth: false // Desativei para tablet
-    },
+    inertia: 0.65,
+    smartphone: { smooth: false },
+    tablet:     { smooth: false },
     getDirection: true,
-    multiplier: 0.8, // Adicionei para reduzir velocidade
-    scrollbar: {
-      el: document.querySelector('.c-scrollbar'),
-      draggable: false // Desativei arrastar para melhor performance
-    }
+    multiplier: 0.9,
   });
 
-  // Otimizei o scrollerProxy
-  ScrollTrigger.scrollerProxy('[data-scroll-container]', {
+  // ── Correct ScrollTrigger proxy ──────────────────────────────────
+  // NOTE: We do NOT use setTimeout here. The previous approach
+  // (debounced setTimeout) introduced 100ms of lag per scroll event,
+  // causing the "stutter" between sections. Instead, we call
+  // ScrollTrigger.update() synchronously on every scroll event via
+  // the direct reference — this is the idiomatic GSAP + Locomotive
+  // integration pattern.
+  ScrollTrigger.scrollerProxy(scrollContainer, {
     scrollTop(value) {
-      return arguments.length ? 
-        scroll.scrollTo(value, { duration: 0, disableLerp: true }) : 
-        scroll.scroll.instance.scroll.y;
+      if (arguments.length) {
+        scroll.scrollTo(value, { duration: 0, disableLerp: true });
+        return;
+      }
+      return scroll.scroll.instance.scroll.y;
     },
     getBoundingClientRect() {
-      return {
-        top: 0, 
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight
-      };
+      return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
     },
-    pinType: document.querySelector('[data-scroll-container]').style.transform ? "transform" : "fixed"
+    pinType: scrollContainer.style.transform ? 'transform' : 'fixed',
   });
 
-  // Atualização mais eficiente
-  let timeout;
-  scroll.on('scroll', (args) => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => ScrollTrigger.update(), 100);
-  });
+  // Direct sync — no timeout, no lag
+  scroll.on('scroll', ScrollTrigger.update);
 
-  // Atualização após imagens carregarem
-  const images = document.querySelectorAll('img');
-  images.forEach(img => {
-    img.addEventListener('load', () => scroll.update(), { once: true });
-  });
+  // When ScrollTrigger re-calculates positions, sync Locomotive
+  ScrollTrigger.addEventListener('refresh', () => scroll.update());
+
+  // Refresh after all images are fully loaded
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+    scroll.update();
+  }, { once: true, passive: true });
 
   return scroll;
 };
-export const setupSectionAnimations = () => {
-  gsap.utils.toArray('section').forEach(section => {
-    gsap.from(section, {
-      opacity: 0,
-      y: 80,
-      duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: section,
-        scroller: '[data-scroll-container]',
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      }
-    });
-  });
-};
 
+/**
+ * Section entrance animations moved to animations.js for centralized
+ * 120Hz control. This function is kept as a no-op for backwards compat.
+ */
+export const setupSectionAnimations = () => {};
+
+/**
+ * Scrolls to the URL hash target after page load.
+ * @param {LocomotiveScroll} scroll
+ * @param {HTMLElement} navbar
+ */
 export const handleHashLinks = (scroll, navbar) => {
-  if (window.location.hash) {
-    const target = document.querySelector(window.location.hash);
-    if (target) {
-      setTimeout(() => {
-        scroll.scrollTo(target, {
-          offset: -navbar.offsetHeight,
-          duration: 0
-        });
-      }, 100);
-    }
-  }
-};
+  if (!window.location.hash || !scroll || !navbar) return;
 
+  const target = document.querySelector(window.location.hash);
+  if (!target) return;
+
+  setTimeout(() => {
+    scroll.scrollTo(target, {
+      offset: -navbar.offsetHeight,
+      duration: 0,
+      disableLerp: true,
+    });
+  }, 200);
+};

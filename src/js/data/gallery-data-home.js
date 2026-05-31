@@ -31,7 +31,7 @@ export const galleryData = [
         link: "#"
     },
     {
-        id: 3,
+        id: 4,
         title: "Momentos Eternos",
         price: "18.000 DIRHAMS",
         category: "casamentos",
@@ -40,7 +40,7 @@ export const galleryData = [
         link: "#"
     },
     {
-        id: 4,
+        id: 5,
         title: "Expressões Únicas",
         price: "12.000 DIRHAMS",
         category: "retratos",
@@ -49,7 +49,7 @@ export const galleryData = [
         link: "#"
     },
     {
-        id: 5,
+        id: 6,
         title: "Celebração",
         price: "25.000 DIRHAMS",
         category: "eventos",
@@ -58,7 +58,7 @@ export const galleryData = [
         link: "#"
     },
     {
-        id: 6,
+        id: 7,
         title: "Olhares",
         price: "14.000 DIRHAMS",
         category: "retratos",
@@ -67,7 +67,7 @@ export const galleryData = [
         link: "#"
     },
     {
-        id: 4,
+        id: 8,
         title: "Expressões Únicas",
         price: "12.000 DIRHAMS",
         category: "retratos",
@@ -75,15 +75,13 @@ export const galleryData = [
         imageUrl: "/img/body/e (7).webp",
         link: "#"
     },
-  
     {
-        id: 5,
+        id: 9,
         title: "Expressões Únicas",
         price: "12.000 DIRHAMS",
         category: "retratos",
         size: "extra-wide",
         imageUrl: "/img/body/e (9).webp",
         link: "#"
- 
     }
 ];

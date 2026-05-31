@@ -1,13 +1,13 @@
 import gsap from 'gsap';
 
 /**
- * Escapes HTML characters to prevent XSS.
- * @param {string} str - Raw string.
- * @returns {string} Escaped string.
+ * Sanitizes a value to prevent XSS when used in HTML attributes or content.
+ * @param {string} val
+ * @returns {string}
  */
-function escapeHTML(str) {
-  if (!str) return '';
-  return str
+function sanitize(val) {
+  if (!val) return '';
+  return val.toString()
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -17,27 +17,28 @@ function escapeHTML(str) {
 
 export class GalleryLightbox {
   /**
-   * @param {Array} galleryData - Array of image objects.
+   * @param {Array<{id: number, imageUrl: string, title: string, size?: string}>} galleryData
    */
   constructor(galleryData) {
-    if (!Array.isArray(galleryData)) {
-      throw new Error("Invalid gallery data. Expected an array.");
+    if (!Array.isArray(galleryData) || galleryData.length === 0) {
+      throw new Error('[GalleryLightbox] galleryData must be a non-empty array.');
     }
+
     this.galleryData = galleryData;
     this.state = {
       currentIndex: 0,
       isOpen: false,
-      scrollDelay: 150,
-      scrollTimeout: null
+      scrollDelay: 120,
+      scrollTimeout: null,
     };
 
-    // Bind event handlers
-    this.handleImageClick = this.handleImageClick.bind(this);
-    this.handleImageKeyDown = this.handleImageKeyDown.bind(this);
-    this.handleGlobalKeyDown = this.handleGlobalKeyDown.bind(this);
-    this.handleLightboxScroll = this.handleLightboxScroll.bind(this);
-    this.handleThumbnailClick = this.handleThumbnailClick.bind(this);
-    this.closeLightbox = this.closeLightbox.bind(this);
+    // Bind event handlers once so we can add/remove them cleanly
+    this.handleImageClick      = this.handleImageClick.bind(this);
+    this.handleImageKeyDown    = this.handleImageKeyDown.bind(this);
+    this.handleGlobalKeyDown   = this.handleGlobalKeyDown.bind(this);
+    this.handleLightboxScroll  = this.handleLightboxScroll.bind(this);
+    this.handleThumbnailClick  = this.handleThumbnailClick.bind(this);
+    this.closeLightbox         = this.closeLightbox.bind(this);
   }
 
   init() {
@@ -47,6 +48,8 @@ export class GalleryLightbox {
     this.setupScrollBehavior();
   }
 
+  // ── Rendering ──────────────────────────────────────────────────────
+
   renderGallery() {
     const container = document.getElementById('gallery-grid');
     if (!container) return;
@@ -55,29 +58,28 @@ export class GalleryLightbox {
     const fragment = document.createDocumentFragment();
 
     this.galleryData.forEach((item, index) => {
-      const itemEl = this.createGalleryItem(item, index);
-      fragment.appendChild(itemEl);
+      fragment.appendChild(this.createGalleryItem(item, index));
     });
 
     container.appendChild(fragment);
   }
 
   createGalleryItem(item, index) {
-    const galleryItem = document.createElement('div');
-    galleryItem.className = 'gallery-item';
-    galleryItem.dataset.size = escapeHTML(item.size || 'small');
-    galleryItem.style.animationDelay = `${index * 0.1}s`;
+    const el = document.createElement('div');
+    el.className = 'gallery-item';
+    el.dataset.size = sanitize(item.size || 'small');
+    el.style.animationDelay = `${index * 0.08}s`;
 
     const link = document.createElement('div');
     link.className = 'gallery-link';
-    link.setAttribute('aria-label', `Ver ${escapeHTML(item.title)}`);
+    link.setAttribute('aria-label', `Ver foto: ${sanitize(item.title)}`);
     link.setAttribute('role', 'button');
     link.setAttribute('tabindex', '0');
 
     const img = new Image();
-    img.src = escapeHTML(item.imageUrl);
+    img.src = sanitize(item.imageUrl);
     img.className = 'gallery-image';
-    img.alt = escapeHTML(item.title);
+    img.alt = sanitize(item.title);
     img.loading = 'lazy';
     img.dataset.index = index;
 
@@ -86,25 +88,28 @@ export class GalleryLightbox {
     if (item.title) {
       const caption = document.createElement('div');
       caption.className = 'gallery-caption';
-      
       const title = document.createElement('h3');
       title.className = 'caption-title';
-      title.textContent = item.title; // Safe textContent
-      
+      title.textContent = item.title; // textContent is XSS-safe
       caption.appendChild(title);
       link.appendChild(caption);
     }
 
-    galleryItem.appendChild(link);
-    return galleryItem;
+    el.appendChild(link);
+    return el;
   }
+
+  // ── Lightbox setup ─────────────────────────────────────────────────
 
   setupLightbox() {
     const existing = document.getElementById('lightbox');
     if (existing) existing.remove();
 
+    // FIXED: Lightbox uses visibility+opacity instead of display:none.
+    // The previous display:none → display:flex jump made GSAP unable to
+    // interpolate the opacity, causing the jarring "snap in" animation.
     const lightboxHTML = `
-      <div class="lightbox" id="lightbox">
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagens">
         <div class="lightbox-overlay" id="lightboxOverlay"></div>
         <div class="lightbox-container">
           <section class="category-panel">
@@ -113,12 +118,16 @@ export class GalleryLightbox {
           <section class="main-viewer">
             <img class="main-image" id="mainImage" src="" alt="Visualização Principal">
           </section>
-          <section class="thumbnails-container" id="thumbnailsContainer"></section>
+          <section class="thumbnails-container" id="thumbnailsContainer" aria-label="Miniaturas"></section>
           <button class="lightbox-close" id="lightboxClose" aria-label="Fechar galeria">&times;</button>
         </div>
       </div>
     `;
     document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+
+    // Set initial state via GSAP (not CSS) for consistent animation baseline
+    gsap.set('#lightbox', { opacity: 0, visibility: 'hidden', pointerEvents: 'none' });
+
     this.populateThumbnails();
     this.setupLightboxElements();
   }
@@ -132,19 +141,19 @@ export class GalleryLightbox {
       const thumb = document.createElement('div');
       thumb.className = 'thumbnail-item';
       thumb.dataset.index = index;
-      
+
       const img = new Image();
-      img.src = escapeHTML(item.imageUrl);
+      img.src = sanitize(item.imageUrl);
       img.alt = `Miniatura ${index + 1}`;
-      
+      img.loading = 'lazy';
+
       thumb.appendChild(img);
       container.appendChild(thumb);
     });
   }
 
   setupLightboxElements() {
-    const images = document.querySelectorAll('.gallery-image');
-    images.forEach(img => {
+    document.querySelectorAll('.gallery-image').forEach(img => {
       img.addEventListener('click', this.handleImageClick);
       img.addEventListener('keydown', this.handleImageKeyDown);
     });
@@ -152,6 +161,7 @@ export class GalleryLightbox {
 
   setupEventListeners() {
     document.addEventListener('keydown', this.handleGlobalKeyDown);
+
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
       lightbox.addEventListener('wheel', this.handleLightboxScroll, { passive: false });
@@ -163,68 +173,64 @@ export class GalleryLightbox {
     if (!sidebar) return;
 
     let lastScroll = 0;
-    const scrollThreshold = 100;
+    const SCROLL_THRESHOLD = 100;
 
     window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScroll > scrollThreshold && currentScroll > lastScroll) {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > SCROLL_THRESHOLD && currentScroll > lastScroll) {
         sidebar.classList.add('scrolled');
-      } else if (currentScroll < lastScroll || currentScroll <= scrollThreshold) {
+      } else if (currentScroll < lastScroll || currentScroll <= SCROLL_THRESHOLD) {
         sidebar.classList.remove('scrolled');
       }
+
       lastScroll = currentScroll;
     }, { passive: true });
 
     const sidebarMinimized = document.querySelector('.sidebar-minimized');
     if (sidebarMinimized) {
-      sidebarMinimized.addEventListener('click', () => {
-        sidebar.classList.remove('scrolled');
-      });
+      sidebarMinimized.addEventListener('click', () => sidebar.classList.remove('scrolled'));
     }
   }
+
+  // ── Event handlers ─────────────────────────────────────────────────
 
   handleImageClick(e) {
     const index = parseInt(e.target.dataset.index, 10);
-    this.openLightbox(index);
+    if (!isNaN(index)) this.openLightbox(index);
   }
 
   handleImageKeyDown(e) {
-    if (e.key === 'Enter') {
-      const index = parseInt(e.target.dataset.index, 10);
-      this.openLightbox(index);
-    }
+    if (e.key !== 'Enter') return;
+    const index = parseInt(e.target.dataset.index, 10);
+    if (!isNaN(index)) this.openLightbox(index);
   }
 
   handleGlobalKeyDown(e) {
     if (!this.state.isOpen) return;
-
-    switch (e.key) {
-      case 'Escape':
-        this.closeLightbox();
-        break;
-      case 'ArrowLeft':
-        this.navigateLightbox(-1);
-        break;
-      case 'ArrowRight':
-        this.navigateLightbox(1);
-        break;
-    }
+    const actions = {
+      Escape:     () => this.closeLightbox(),
+      ArrowLeft:  () => this.navigateLightbox(-1),
+      ArrowRight: () => this.navigateLightbox(1),
+    };
+    actions[e.key]?.();
   }
 
   handleLightboxScroll(e) {
     e.preventDefault();
     clearTimeout(this.state.scrollTimeout);
     this.state.scrollTimeout = setTimeout(() => {
-      const direction = e.deltaY > 0 ? 1 : -1;
-      this.navigateLightbox(direction);
+      this.navigateLightbox(e.deltaY > 0 ? 1 : -1);
     }, this.state.scrollDelay);
   }
 
   handleThumbnailClick(e) {
     e.stopPropagation();
     const index = parseInt(e.currentTarget.dataset.index, 10);
-    this.updateMainImage(index);
+    if (!isNaN(index)) this.updateMainImage(index);
   }
+
+  // ── Lightbox controls ──────────────────────────────────────────────
 
   openLightbox(index) {
     if (this.state.isOpen) return;
@@ -232,60 +238,56 @@ export class GalleryLightbox {
     this.state.isOpen = true;
     this.state.currentIndex = index;
 
-    const lightbox = document.getElementById('lightbox');
+    const lightbox  = document.getElementById('lightbox');
     const mainImage = document.getElementById('mainImage');
-    const thumbnails = document.querySelectorAll('.thumbnail-item');
-
     if (!lightbox || !mainImage) return;
 
-    mainImage.src = escapeHTML(this.galleryData[index].imageUrl);
+    // GSAP sets initial image state before it becomes visible
+    gsap.set(mainImage, { opacity: 0, scale: 0.97 });
+    mainImage.src = sanitize(this.galleryData[index].imageUrl);
     document.body.style.overflow = 'hidden';
 
     this.updateActiveThumbnail(index);
-    lightbox.classList.add('active');
 
-    const overlay = document.getElementById('lightboxOverlay');
-    const closeBtn = document.getElementById('lightboxClose');
-
-    if (overlay) overlay.addEventListener('click', this.closeLightbox);
-    if (closeBtn) closeBtn.addEventListener('click', this.closeLightbox);
-
-    thumbnails.forEach(thumb => {
-      thumb.addEventListener('click', this.handleThumbnailClick);
+    // FIXED: visibility:visible + GSAP opacity fade — no display:none jump
+    gsap.to(lightbox, {
+      opacity: 1,
+      visibility: 'visible',
+      pointerEvents: 'auto',
+      duration: 0.45,
+      ease: 'power2.out',
+      onComplete: () => {
+        gsap.to(mainImage, { opacity: 1, scale: 1, duration: 0.55, ease: 'power3.out' });
+      }
     });
 
-    gsap.fromTo(mainImage,
-      { opacity: 0, scale: 0.95 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: 'power2.out',
-        onComplete: () => {
-          mainImage.classList.add('active');
-        }
-      }
-    );
+    const overlay  = document.getElementById('lightboxOverlay');
+    const closeBtn = document.getElementById('lightboxClose');
+    if (overlay)  overlay.addEventListener('click', this.closeLightbox);
+    if (closeBtn) closeBtn.addEventListener('click', this.closeLightbox);
+
+    document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+      thumb.addEventListener('click', this.handleThumbnailClick);
+    });
   }
 
   closeLightbox() {
     if (!this.state.isOpen) return;
 
-    const lightbox = document.getElementById('lightbox');
+    const lightbox  = document.getElementById('lightbox');
     const mainImage = document.getElementById('mainImage');
-
     if (!lightbox || !mainImage) return;
 
     this.state.isOpen = false;
-    mainImage.classList.remove('active');
 
+    gsap.to(mainImage, { opacity: 0, scale: 0.97, duration: 0.25, ease: 'power2.in' });
     gsap.to(lightbox, {
       opacity: 0,
-      duration: 0.3,
+      duration: 0.4,
       ease: 'power2.inOut',
+      delay: 0.1,
       onComplete: () => {
-        lightbox.classList.remove('active');
-        lightbox.style.opacity = ''; // Reset opacity style
+        gsap.set(lightbox, { visibility: 'hidden', pointerEvents: 'none' });
         document.body.style.overflow = '';
         this.cleanupLightboxListeners();
       }
@@ -293,14 +295,13 @@ export class GalleryLightbox {
   }
 
   cleanupLightboxListeners() {
-    const overlay = document.getElementById('lightboxOverlay');
+    const overlay  = document.getElementById('lightboxOverlay');
     const closeBtn = document.getElementById('lightboxClose');
-    const thumbnails = document.querySelectorAll('.thumbnail-item');
 
-    if (overlay) overlay.removeEventListener('click', this.closeLightbox);
+    if (overlay)  overlay.removeEventListener('click', this.closeLightbox);
     if (closeBtn) closeBtn.removeEventListener('click', this.closeLightbox);
 
-    thumbnails.forEach(thumb => {
+    document.querySelectorAll('.thumbnail-item').forEach(thumb => {
       thumb.removeEventListener('click', this.handleThumbnailClick);
     });
   }
@@ -313,26 +314,17 @@ export class GalleryLightbox {
 
   updateMainImage(index) {
     this.state.currentIndex = index;
-    const newSrc = this.galleryData[index].imageUrl;
     const mainImage = document.getElementById('mainImage');
     if (!mainImage) return;
 
     gsap.to(mainImage, {
       opacity: 0,
-      scale: 0.98,
-      duration: 0.3,
-      ease: 'power2.inOut',
+      scale: 0.97,
+      duration: 0.25,
+      ease: 'power2.in',
       onComplete: () => {
-        mainImage.src = escapeHTML(newSrc);
-        gsap.fromTo(mainImage,
-          { opacity: 0, scale: 1.02 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: 'power2.out'
-          }
-        );
+        mainImage.src = sanitize(this.galleryData[index].imageUrl);
+        gsap.to(mainImage, { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' });
         this.updateActiveThumbnail(index);
       }
     });
@@ -340,17 +332,11 @@ export class GalleryLightbox {
 
   updateActiveThumbnail(index) {
     const thumbnails = document.querySelectorAll('.thumbnail-item');
-    thumbnails.forEach((thumb, i) => {
-      thumb.classList.toggle('active', i === index);
-    });
+    thumbnails.forEach((thumb, i) => thumb.classList.toggle('active', i === index));
 
-    const activeThumb = thumbnails[index];
-    if (activeThumb) {
-      activeThumb.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-      });
+    const active = thumbnails[index];
+    if (active) {
+      active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   }
 }
