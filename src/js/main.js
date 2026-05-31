@@ -1,19 +1,14 @@
-import { initLocomotiveScroll, handleHashLinks } from './locomotive-scroll';
+import { initLenisScroll } from './lenis-scroll.js';
 import { setupNavbarScrollBehavior, setupMobileMenu, setupSmoothLinks } from './navbar-menu';
 import { initGallery } from './gallery';
 import { initAnimations } from './animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. ── Locomotive Scroll — must be first (scroll proxy source of truth)
-  const scroll = initLocomotiveScroll();
-
-  if (!scroll) {
-    console.error('[main] LocomotiveScroll failed to initialize. Aborting.');
-    return;
-  }
+  // 1. ── Lenis Scroll setup
+  const lenis = initLenisScroll();
 
   // 2. ── Gallery — render cards before animations register ScrollTriggers
-  initGallery(scroll);
+  initGallery();
 
   // 3. ── Navbar — shared state object prevents primitive copy-by-value bugs
   const navbar = document.getElementById('navbar');
@@ -28,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSmoothLinks(scroll, navbar, navbarState, toggleMenu);
   }
 
-  // 5. ── Animations — runs after gallery renders and scroll proxy is active
-  initAnimations(scroll);
+  // 4. ── Animations — attach GSAP timelines (Lenis syncs automatically)
+  initAnimations();
 
   // 6. ── Full page load (all images decoded) — final recalculation
   window.addEventListener('load', () => {

@@ -39,36 +39,9 @@
   <div class="container" data-scroll-container>
 
     <!-- ═══════════════════════════════════════════════ -->
-    <!-- NAVBAR                                         -->
+    <!-- NAVBAR (Injetado pelo Vite Plugin)             -->
     <!-- ═══════════════════════════════════════════════ -->
-    <nav id="navbar" role="navigation" aria-label="Navegação principal">
-      <div class="navbar-container">
-        <div class="logo">
-          <a href="#" aria-label="Ir ao topo — Victor Cardoso">VC</a>
-        </div>
-        <button
-          class="hamburger-menu"
-          aria-label="Abrir menu de navegação"
-          aria-expanded="false"
-          aria-controls="nav-drawer"
-        >
-          <span class="hamburger-icon" aria-hidden="true"></span>
-        </button>
-      </div>
-    </nav>
-
-    <!-- Nav Drawer (GSAP posiciona em x:100% via JS) -->
-    <div class="nav-right" id="nav-drawer">
-      <ul class="nav-links" role="list">
-        <li><a href="#hero">Início</a></li>
-        <li><a href="#albums">Álbuns</a></li>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="#footer">Contato</a></li>
-      </ul>
-    </div>
-
-    <!-- Overlay (estado gerenciado 100% via GSAP — sem display:none) -->
-    <div class="overlay" role="presentation" aria-hidden="true"></div>
+    <include src="./partials/_navbar.html"></include>
 
     <!-- ═══════════════════════════════════════════════ -->
     <!-- HERO — Cinematic Full-Viewport                 -->
@@ -231,62 +204,9 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════ -->
-    <!-- FOOTER                                         -->
+    <!-- FOOTER (Injetado pelo Vite Plugin)             -->
     <!-- ═══════════════════════════════════════════════ -->
-    <footer class="footer" id="footer" data-scroll-section>
-      <div class="footer-content">
-        <a href="#" class="portfolio-link" aria-label="Ir ao topo">Portfolio</a>
-
-        <div class="contact-info">
-          <p class="name">Victor Cardoso</p>
-          <p class="location">São Paulo — SP</p>
-          <a class="email" href="mailto:victorcardcunha@gmail.com">
-            victorcardcunha@gmail.com
-          </a>
-          <a class="phone" href="tel:+11977440146">(11) 97744-0146</a>
-
-          <div class="social-links">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/VictorCardosoOl"
-              aria-label="GitHub de Victor Cardoso"
-            >
-              <i class="fab fa-github" aria-hidden="true"></i>
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.instagram.com/hi.chicocdo/"
-              aria-label="Instagram de Victor Cardoso"
-            >
-              <i class="fab fa-instagram" aria-hidden="true"></i>
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.linkedin.com/in/victor-card-cunha/"
-              aria-label="LinkedIn de Victor Cardoso"
-            >
-              <i class="fab fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://wa.me/5511977440146"
-              aria-label="WhatsApp de Victor Cardoso"
-            >
-              <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="copyright">
-        <p>© 2024 Victor Cardoso</p>
-        <p>Design &amp; Desenvolvimento — Victor Cardoso</p>
-      </div>
-    </footer>
+    <include src="./partials/_footer.html"></include>
 
   </div><!-- /data-scroll-container -->
 

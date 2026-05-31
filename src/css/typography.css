@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap');
+
+:root {
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Cormorant Garamond', serif;
+  
+  /* Modular Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 2.25rem;
+  --text-display: 4.5rem;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .hero-title, .about-title, .titulo-galeria, .album-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.nav__link, .btn-buy, .photo-meta, .hero-meta-text, .about-label, .filter-btn {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+p, .about-bio {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}

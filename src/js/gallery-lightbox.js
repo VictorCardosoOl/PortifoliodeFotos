@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { cart } from './cart.js';
 
 /**
  * Sanitizes a value to prevent XSS when used in HTML attributes or content.
@@ -114,16 +115,28 @@ export class GalleryLightbox {
         <div class="lightbox-container">
           <section class="category-panel">
             <a href="/index.html" class="back-to-home">Galeria</a>
+            <button id="addToCartBtn" class="add-to-cart-btn" aria-label="Adicionar foto ao carrinho">
+              <i class="fas fa-shopping-bag"></i> <span id="cartBtnText">Adicionar</span>
+            </button>
           </section>
           <section class="main-viewer">
             <img class="main-image" id="mainImage" src="" alt="Visualização Principal">
           </section>
           <section class="thumbnails-container" id="thumbnailsContainer" aria-label="Miniaturas"></section>
-          <button class="lightbox-close" id="lightboxClose" aria-label="Fechar galeria">&times;</button>
+          <button class="lightbox-close" id="lightboxClose" aria-label="Fechar visualização">&times;</button>
         </div>
       </div>
     `;
     document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+
+    this.cartBtn = document.getElementById('addToCartBtn');
+    if (this.cartBtn) {
+      this.cartBtn.addEventListener('click', () => {
+        const item = this.galleryData[this.state.currentIndex];
+        const isAdded = cart.togglePhoto(item);
+        this.updateCartBtnUI(isAdded);
+      });
+    }
 
     // Set initial state via GSAP (not CSS) for consistent animation baseline
     gsap.set('#lightbox', { opacity: 0, visibility: 'hidden', pointerEvents: 'none' });
@@ -323,9 +336,13 @@ export class GalleryLightbox {
       duration: 0.25,
       ease: 'power2.in',
       onComplete: () => {
-        mainImage.src = sanitize(this.galleryData[index].imageUrl);
+        const item = this.galleryData[index];
+        mainImage.src = sanitize(item.imageUrl);
         gsap.to(mainImage, { opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out' });
         this.updateActiveThumbnail(index);
+        
+        const isAdded = cart.isPhotoSelected(item.id);
+        this.updateCartBtnUI(isAdded);
       }
     });
   }
@@ -337,6 +354,18 @@ export class GalleryLightbox {
     const active = thumbnails[index];
     if (active) {
       active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+
+  updateCartBtnUI(isAdded) {
+    if (!this.cartBtn) return;
+    const textSpan = this.cartBtn.querySelector('#cartBtnText');
+    if (isAdded) {
+      this.cartBtn.classList.add('added');
+      textSpan.textContent = 'Adicionada';
+    } else {
+      this.cartBtn.classList.remove('added');
+      textSpan.textContent = 'Adicionar';
     }
   }
 }

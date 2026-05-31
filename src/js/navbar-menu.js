@@ -2,7 +2,7 @@ import gsap from 'gsap';
 
 /**
  * Sets up navbar show/hide behavior based on scroll direction.
- * @param {LocomotiveScroll} scroll
+ * @param {Lenis} scroll
  * @param {HTMLElement} navbar
  * @param {object} state - Shared mutable state object.
  */
@@ -12,16 +12,16 @@ export const setupNavbarScrollBehavior = (scroll, navbar, state) => {
   let lastScroll = 0;
   const SCROLL_THRESHOLD = 80;
 
-  scroll.on('scroll', (instance) => {
+  scroll.on('scroll', (e) => {
     if (state.isMenuOpen || state.isScrollingToSection) return;
 
-    const currentScroll = instance.scroll.y;
-    const direction     = instance.direction;
+    const currentScroll = e.scroll;
+    const direction     = e.direction;
     const navbarHeight  = navbar.offsetHeight;
 
-    if (direction === 'down' && currentScroll > lastScroll && currentScroll > SCROLL_THRESHOLD) {
+    if (direction === 1 && currentScroll > lastScroll && currentScroll > SCROLL_THRESHOLD) {
       gsap.to(navbar, { y: -navbarHeight, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
-    } else if (direction === 'up' || currentScroll <= SCROLL_THRESHOLD) {
+    } else if (direction === -1 || currentScroll <= SCROLL_THRESHOLD) {
       gsap.to(navbar, { y: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
     }
 
@@ -108,8 +108,8 @@ export const setupMobileMenu = (state) => {
 };
 
 /**
- * Applies smooth scroll navigation to nav links.
- * @param {LocomotiveScroll} scroll
+ * Applies smooth scroll navigation to nav links using Lenis.
+ * @param {Lenis} scroll
  * @param {HTMLElement} navbar
  * @param {object} state
  * @param {Function} toggleMenu
@@ -123,12 +123,13 @@ export const setupSmoothLinks = (scroll, navbar, state, toggleMenu) => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
 
-      // Only intercept hash links on the same page
-      if (!href || !href.startsWith('#')) return;
+      if (!href || !href.includes('#')) return;
+      
+      const targetId = href.substring(href.indexOf('#'));
+      const target = document.querySelector(targetId);
+      if (!target) return;
 
       e.preventDefault();
-      const target = document.querySelector(href);
-      if (!target) return;
 
       if (state.isMenuOpen && typeof toggleMenu === 'function') {
         toggleMenu(false);
@@ -140,8 +141,7 @@ export const setupSmoothLinks = (scroll, navbar, state, toggleMenu) => {
       scroll.scrollTo(target, {
         offset: -navbar.offsetHeight,
         duration: 1.2,
-        easing: [0.25, 0.0, 0.35, 1.0],
-        callback: () => {
+        onComplete: () => {
           state.isScrollingToSection = false;
           history.pushState(null, null, href);
         }

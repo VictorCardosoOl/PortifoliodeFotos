@@ -3,22 +3,24 @@
 /* Awards-Grade · Mobile-First · 120Hz Ready                          */
 /* ================================================================== */
 
+@import url('./typography.css');
+
 /* ── Design Tokens ─────────────────────────────────────────────────── */
 :root {
-  /* Palette */
-  --c-bg:           #f4f1ec;
-  --c-bg-dark:      #0b0b0b;
+  /* Palette (Dark Mode) */
+  --c-bg:           #0a0a0a;
+  --c-bg-dark:      #050505;
   --c-surface:      #141414;
-  --c-text:         #141414;
-  --c-text-inv:     #f0ede8;
-  --c-muted:        #888;
+  --c-text:         #f4f4f5;
+  --c-text-inv:     #0a0a0a;
+  --c-muted:        #888888;
   --c-accent:       #c9a96e;
-  --c-border:       rgba(20, 20, 20, 0.09);
-  --c-border-dark:  rgba(255, 255, 255, 0.06);
+  --c-border:       rgba(255, 255, 255, 0.09);
+  --c-border-dark:  rgba(255, 255, 255, 0.15);
 
-  /* Typography */
-  --f-display: 'Playfair Display', Georgia, serif;
-  --f-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography tokens are now managed in typography.css, keeping aliases here for legacy support */
+  --f-display: var(--font-display, 'Playfair Display', Georgia, serif);
+  --f-body:    var(--font-primary, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
 
   /* Fluid type scale */
   --t-xs:   clamp(0.65rem,  0.75vw, 0.72rem);
@@ -984,6 +986,86 @@ html.has-scroll-dragging { user-select: none; }
     gap: var(--sp-8);
   }
   .contact-info { align-items: flex-start; }
+}
+/* ================================================================== */
+/* SHOPPING CART (SaaS Features)                                      */
+/* ================================================================== */
+.floating-cart {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--c-accent);
+  color: var(--c-bg-dark);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: var(--sh-lg);
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s var(--ease-expo);
+}
+
+.floating-cart.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.floating-cart:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #fff;
+  color: var(--c-bg-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--c-bg-dark);
+}
+
+.add-to-cart-btn {
+  background: transparent;
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 2rem;
+}
+
+.add-to-cart-btn:hover {
+  background: var(--c-surface);
+  border-color: var(--c-accent);
+}
+
+.add-to-cart-btn.added {
+  background: var(--c-accent);
+  color: var(--c-bg-dark);
+  border-color: var(--c-accent);
 }
 
 @media (max-width: 480px) {

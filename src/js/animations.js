@@ -19,8 +19,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
  * @param {Function} onEnter
  * @param {string} [start='top 78%']
  */
-function onScrollEnter(trigger, scroller, onEnter, start = 'top 78%') {
-  ScrollTrigger.create({ trigger, scroller, start, once: true, onEnter });
+function onScrollEnter(trigger, onEnter, start = 'top 78%') {
+  ScrollTrigger.create({ trigger, start, once: true, onEnter });
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -66,7 +66,7 @@ export function animateHeroEntrance() {
 // 2. HERO PARALLAX — Image moves at 60% scroll speed
 // ─────────────────────────────────────────────────────────────────
 
-function setupHeroParallax(scroller) {
+function setupHeroParallax() {
   const heroBg = document.querySelector('.hero-bg-img');
   if (!heroBg || prefersReducedMotion) return;
 
@@ -78,7 +78,6 @@ function setupHeroParallax(scroller) {
       ease: 'none',
       scrollTrigger: {
         trigger: '#hero',
-        scroller,
         start: 'top top',
         end:   'bottom top',
         scrub: 0.5,
@@ -91,12 +90,12 @@ function setupHeroParallax(scroller) {
 // 3. SCROLL-TRIGGERED SECTION ENTRANCES
 // ─────────────────────────────────────────────────────────────────
 
-function setupSectionEntrances(scroller) {
+function setupSectionEntrances() {
   if (prefersReducedMotion) return;
 
   // Gallery heading
   gsap.set('.titulo-galeria', { opacity: 0, y: 36 });
-  onScrollEnter('.titulo-galeria', scroller, () => {
+  onScrollEnter('.titulo-galeria', () => {
     gsap.to('.titulo-galeria', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
   });
 
@@ -104,7 +103,7 @@ function setupSectionEntrances(scroller) {
   const filterBtns = document.querySelectorAll('.filter-btn');
   if (filterBtns.length) {
     gsap.set(filterBtns, { opacity: 0, y: 16 });
-    onScrollEnter('.gallery-filters', scroller, () => {
+    onScrollEnter('.gallery-filters', () => {
       gsap.to(filterBtns, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' });
     });
   }
@@ -112,7 +111,6 @@ function setupSectionEntrances(scroller) {
   // Gallery cards stagger (deferred until cards are rendered by JS)
   ScrollTrigger.create({
     trigger: '.gallery-list',
-    scroller,
     start: 'top 85%',
     once: true,
     onEnter() {
@@ -124,19 +122,19 @@ function setupSectionEntrances(scroller) {
 
   // About label
   gsap.set('.about-label', { opacity: 0, x: -16 });
-  onScrollEnter('#about', scroller, () => {
+  onScrollEnter('#about', () => {
     gsap.to('.about-label', { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' });
   }, 'top 72%');
 
   // About title
   gsap.set('.about-title', { opacity: 0, y: 60 });
-  onScrollEnter('.about-title', scroller, () => {
+  onScrollEnter('.about-title', () => {
     gsap.to('.about-title', { opacity: 1, y: 0, duration: 1.3, ease: 'power4.out' });
   });
 
   // About bio
   gsap.set('.about-bio', { opacity: 0, y: 28 });
-  onScrollEnter('.about-bio', scroller, () => {
+  onScrollEnter('.about-bio', () => {
     gsap.to('.about-bio', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
   });
 
@@ -148,7 +146,6 @@ function setupSectionEntrances(scroller) {
       ease: 'none',
       scrollTrigger: {
         trigger: '#about',
-        scroller,
         start: 'top bottom',
         end: 'bottom top',
         scrub: 1.2,
@@ -158,7 +155,7 @@ function setupSectionEntrances(scroller) {
 
   // About CTA
   gsap.set('.about-cta', { opacity: 0, y: 16 });
-  onScrollEnter('.about-cta', scroller, () => {
+  onScrollEnter('.about-cta', () => {
     gsap.to('.about-cta', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.2 });
   });
 }
@@ -167,7 +164,7 @@ function setupSectionEntrances(scroller) {
 // 4. COUNTER ANIMATION — Number odometer effect
 // ─────────────────────────────────────────────────────────────────
 
-function setupCounters(scroller) {
+function setupCounters() {
   const counters = document.querySelectorAll('.about-stat-number[data-count]');
   if (!counters.length) return;
 
@@ -179,7 +176,6 @@ function setupCounters(scroller) {
 
     ScrollTrigger.create({
       trigger: counter,
-      scroller,
       start: 'top 88%',
       once:  true,
       onEnter() {
@@ -208,11 +204,9 @@ function setupCounters(scroller) {
  * Initializes the full animation system.
  * @param {LocomotiveScroll} scroll - The scroll instance.
  */
-export function initAnimations(scroll) {
-  const scroller = '[data-scroll-container]';
-
+export function initAnimations() {
   animateHeroEntrance();
-  setupHeroParallax(scroller);
-  setupSectionEntrances(scroller);
-  setupCounters(scroller);
+  setupHeroParallax();
+  setupSectionEntrances();
+  setupCounters();
 }
